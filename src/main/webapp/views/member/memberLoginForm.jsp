@@ -109,23 +109,23 @@
 
         <div class="wrap">
           <div align="center">
-          <img src="assets/img/ONlogo-yellow.png" width="200px" height="200px">
+          <img src="<%= contextPath %>/resources/img/ONlogo-yellow.png" width="200px" height="200px">
           </div>
             <div class="loginForm">
                 
                 <div class="loginForm_2">
-                    <form action="login.me" method="post">
+                    <form action="<%= contextPath %>/login.me" method="post">
                         <table>
                             <tr>
                                 <td>
                                     <input type="text" 
-                                            name="userId" placeholder="아이디">
+                                            name="memberId" placeholder="아이디">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <input type="password"
-                                            name="userPwd" placeholder="비밀번호">
+                                            name="memberPwd" placeholder="비밀번호">
                                 </td>
                             </tr>
                             <tr align="left">
@@ -145,7 +145,7 @@
                             <tr>
                                 <td>
                                     <div class="etc">
-                                        <a href="join.html">회원가입</a> | <a href="find-id.html">아이디 찾기</a> | <a href="find-pwd.html">비밀번호 찾기</a>
+                                        <a href="<%= contextPath %>/enrollForm.me">회원가입</a> | <a href="find-id.html">아이디 찾기</a> | <a href="find-pwd.html">비밀번호 찾기</a>
                                     </div>
                                 </td>
                             </tr>

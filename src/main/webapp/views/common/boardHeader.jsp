@@ -88,23 +88,19 @@
           </li>
           <li><a href="contact.html">오시는길</a></li>
 
-          <!--
-
-             로그인 후 
-          
-        
-          <li class="dropdown"><a href="#"><span>홍길동님 환영합니다.</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <% if(loginUser != null ){ %>
+          <li class="dropdown"><a href="#"><span><%=loginUser.getMemberName() %>님 환영합니다.</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="mypage.html">마이페이지</a></li>
               <li><a href="">로그아웃</a></li>
             </ul>
           </li>
 
-           -->
+     <% }else{ %>
 
-          <li class="dropdown"><a href="#"><span>로그인</span></i></a>                       
+          <li class="dropdown"><a href="<%=contextPath%>/loginForm.me"><span>로그인</span></i></a>                       
           </li>
-
+	<% } %>
         </ul>
       </nav><!-- .navbar -->
 

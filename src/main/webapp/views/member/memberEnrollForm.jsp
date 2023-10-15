@@ -101,38 +101,47 @@ button[type="submit"] {
         <div class="wrap"
              aria-colspan="3">
              <div align="center">
-              <img src="../../resources/img/ONlogo-yellow.png" width="200px" height="200px">
+              <img src="<%= contextPath %>/resources/img/ONlogo-yellow.png" width="200px" height="200px">
               </div>
             <div class="joinForm">
 
                 <div class="joinForm_2">
-                  <form action="/action_page.php" method="post">
+                  <form action="<%= contextPath %>/insert.me" method="post">
                     <div class="form-group">
                       <label for="userId">* 아이디:</label>
                       <input type="text" class="form-control" 
-                                    id="userId" name="userId">
+                                    id="memberId" name="memberId">
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="pwd">* 비밀번호:</label>
                       <input type="password" class="form-control" 
-                                    id="pwd" name="userPwd">
+                                    id="pwd" name="memberPwd">
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="repwd">* 비밀번호 확인:</label>
                       <input type="password" class="form-control" 
-                                    id="repwd" name="reuserPwd">
+                                    id="repwd" name="rememberPwd">
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="name">* 이름:</label>
                       <input type="text" class="form-control" 
-                                    id="name" name="name">
+                                    id="name" name="memberName">
                     </div>
                     <br>
                     <div class="form-group">
-                      <label for="address">* 동-호수:</label>
+                      <label for="address1">* 단지:</label>
+                      <select class="form-control" name="address2" id="address2">
+                        <option value=1>1단지</option>
+                        <option value=2>2단지</option>
+                        <option value=3>3단지</option>
+                      </select>
+                    </div>
+                     <br>
+                    <div class="form-group">
+                      <label for="address2">* 동-호수:</label>
                       <input type="text" class="form-control" 
                                    id="address" name="address" placeholder="-포함 입력">
                     </div>
@@ -146,16 +155,20 @@ button[type="submit"] {
                     <div class="form-group">
                       <label for="phone">* 핸드폰 번호:</label>
                       <input type="text" class="form-control" 
-                                    id="phone" name="phone" placeholder="-없이 입력">
+                                    id="phone" name="phone" placeholder="-포함 입력">
                     </div>
                     <br><br>
                     <div class="form-group">
-                          <button type="submit">회원가입</button>
+                          <button type="submit" onclick="enrollPage();">회원가입</button>
                     </div>
                   </form>
+                  <script>
+                  	function enrollPage(){
+                  		location.href = "<%= contextPath%>/enrollForm.me";
+                  	}
+                  </script>
                 </div>
                 
-    
             </div>
     
         </div>
