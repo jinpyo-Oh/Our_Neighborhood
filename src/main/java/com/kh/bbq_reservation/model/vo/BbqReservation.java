@@ -38,6 +38,18 @@ public class BbqReservation {
 		this.resMsg = resMsg;
 		this.resMemberNo = resMemberNo;
 	}
+	
+	
+
+	public BbqReservation(int resPlace, String resDate, String resName, int resPeople,  String resMsg, int resMemberNo) {
+		super();
+		this.resPlace = resPlace;
+		this.resDate = resDate;
+		this.resPeople = resPeople;
+		this.resName = resName;
+		this.resMsg = resMsg;
+		this.resMemberNo = resMemberNo;
+	}
 
 	public int getResNo() {
 		return resNo;

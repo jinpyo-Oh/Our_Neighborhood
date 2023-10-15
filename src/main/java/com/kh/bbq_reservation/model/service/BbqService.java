@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.bbq_reservation.model.dao.BbqDao;
+import com.kh.bbq_reservation.model.vo.BbqReservation;
+
 import static com.kh.common.JDBCTemplate.*;
 
 
@@ -21,5 +23,19 @@ public class BbqService {
 		
 		return list;
 	}
+	
+//	public int bbqInsert(BbqReservation bbq) {
+//		Connection conn = getConnection();
+//		
+//		int result = new BbqDao().bbqInsert(conn, bbq);
+//		
+//		if(result > 0) {
+//			
+//		}else {
+//			
+//		}
+//		
+//		return result;
+//	}
 
 }

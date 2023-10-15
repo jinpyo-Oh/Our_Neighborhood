@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.bbq_reservation.model.vo.BbqReservation;
+
 import static com.kh.common.JDBCTemplate.*;
 
 public class BbqDao {
@@ -54,6 +56,13 @@ public class BbqDao {
 		
 		
 	}
+	
+//	public int bbqInsert(Connection conn, BbqReservation bbq) {
+//		
+//		
+//		
+//		
+//	}
 	
 	
 

@@ -61,7 +61,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.jsp">Home</a></li>
           <li><a href="">공지사항</a></li>
           <li class="dropdown"><a href="#"><span>통합 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>

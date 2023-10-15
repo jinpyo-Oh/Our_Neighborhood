@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.bbq_reservation.model.service.BbqService;
 import com.kh.bbq_reservation.model.vo.BbqReservation;
 import com.kh.member.model.vo.Member;
 
@@ -39,8 +40,11 @@ public class BbqReservationController extends HttpServlet {
 		String resName = request.getParameter("resName");
 		int resPeople = Integer.parseInt(request.getParameter("resPeople"));
 		String resMsg = request.getParameter("resMsg");
-				
+		int resMemberNo = loginUser.getMemberNo();		
  		
+		BbqReservation bbq = new BbqReservation(resPlace, resDate, resName, resPeople, resMsg, resMemberNo);
+		
+//		int result = new BbqService().bbqInsert(bbq);
 		
 		
 		
