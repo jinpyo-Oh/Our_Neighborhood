@@ -24,18 +24,21 @@ public class BbqService {
 		return list;
 	}
 	
-//	public int bbqInsert(BbqReservation bbq) {
-//		Connection conn = getConnection();
-//		
-//		int result = new BbqDao().bbqInsert(conn, bbq);
-//		
-//		if(result > 0) {
-//			
-//		}else {
-//			
-//		}
-//		
-//		return result;
-//	}
+	public int bbqResInsert(BbqReservation bbq) {
+		Connection conn = getConnection();
+		
+		int result = new BbqDao().bbqResInsert(conn, bbq);
+		
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
 }

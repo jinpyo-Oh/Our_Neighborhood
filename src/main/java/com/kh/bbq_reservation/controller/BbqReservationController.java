@@ -32,19 +32,35 @@ public class BbqReservationController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session =request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
 		int resPlace = Integer.parseInt(request.getParameter("resPlace"));
+		
 		String resDate = request.getParameter("resDate");
+		
 		String resName = request.getParameter("resName");
+		
 		int resPeople = Integer.parseInt(request.getParameter("resPeople"));
+		
 		String resMsg = request.getParameter("resMsg");
+		
 		int resMemberNo = loginUser.getMemberNo();		
+		
  		
 		BbqReservation bbq = new BbqReservation(resPlace, resDate, resName, resPeople, resMsg, resMemberNo);
 		
-//		int result = new BbqService().bbqInsert(bbq);
+		int result = new BbqService().bbqResInsert(bbq);
+		
+		if(result > 0) {
+			
+			request.getSession().setAttribute("alertMsg", "예약에 성공했습니다.");
+			response.sendRedirect(request.getContextPath()+"/resEnrollForm.bq");
+		}else {
+			System.out.println("fail");
+		}
+		
 		
 		
 		

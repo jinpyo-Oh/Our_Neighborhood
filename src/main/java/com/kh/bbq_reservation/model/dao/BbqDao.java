@@ -57,12 +57,34 @@ public class BbqDao {
 		
 	}
 	
-//	public int bbqInsert(Connection conn, BbqReservation bbq) {
-//		
-//		
-//		
-//		
-//	}
+	public int bbqResInsert(Connection conn, BbqReservation bbq) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("bbqResInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bbq.getResPlace());
+			pstmt.setString(2,bbq.getResDate());
+			pstmt.setInt(3,bbq.getResPeople());
+			pstmt.setString(4, bbq.getResName());
+			pstmt.setString(5, bbq.getResMsg());
+			pstmt.setInt(6, bbq.getResMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+		
+	}
 	
 	
 

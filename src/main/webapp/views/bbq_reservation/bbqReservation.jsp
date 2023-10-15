@@ -263,17 +263,13 @@ pageEncoding="UTF-8"%>
                     class="seat allSeat"
                     colspan="2"
                     onclick="change_seat(event);"
-                  >
-                    6
-                  </td>
+                  >6</td>
                   <td></td>
                   <td
                     class="seat allSeat"
                     colspan="2"
                     onclick="change_seat(event);"
-                  >
-                    7
-                  </td>
+                  >7</td>
                 </tr>
                 <tr>
                   <td></td>
@@ -287,17 +283,13 @@ pageEncoding="UTF-8"%>
                     class="seat allSeat"
                     colspan="2"
                     onclick="change_seat(event);"
-                  >
-                    8
-                  </td>
+                  >8</td>
                   <td></td>
                   <td
                     class="seat allSeat"
                     colspan="2"
                     onclick="change_seat(event);"
-                  >
-                    9
-                  </td>
+                  >9</td>
                 </tr>
               </tbody>
             </table>
@@ -346,11 +338,11 @@ pageEncoding="UTF-8"%>
 
         <p>* 예약 인원</p>
         <select name="resPeople" id="reservation_person" required>
-          <option value="">==선택==</option>
-          <option value="">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-          <option value="">4</option>
+          <option>==선택==</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
         </select>
         명<br />
 
@@ -403,7 +395,7 @@ pageEncoding="UTF-8"%>
         btns.forEach(function (btn, i) {
           if (e.currentTarget == btn) {
             btn.classList.add("selectedSeat");
-            formName.value = e.target.innerHTML + "번 자리";
+            formName.value = e.target.innerHTML;
           } else {
             btn.classList.remove("selectedSeat");
           }

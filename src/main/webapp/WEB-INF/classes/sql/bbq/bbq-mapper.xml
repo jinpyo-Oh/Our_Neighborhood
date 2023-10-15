@@ -8,6 +8,23 @@
 		WHERE RES_DATE = ?
 		AND RES_STATEMENT = 'Y'
 	</entry>
+	
+	<entry key="bbqResInsert">
+		INSERT INTO BBQ_RV(RES_NO
+	                  ,RES_PLACE
+	                  ,RES_DATE
+	                  ,RES_PEOPLE
+	                  ,RES_NAME
+	                  ,RES_MSG
+	                  ,MEMBER_NO)
+	            VALUES(BBQ_RV_SEQ.NEXTVAL
+	                  , ?
+	                  , ?
+	                  , ?
+	                  , ?
+	                  , ?
+	                  , ?)	
+	</entry>
 
 
 </properties>
