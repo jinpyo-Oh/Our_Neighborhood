@@ -189,7 +189,7 @@
     
     <!-- boardHeader 인클루드-->
     
-    <%@ include file="../common/boardHeader.jsp" %>
+    <%@ include file="/views/common/boardHeader.jsp" %>
       
 
 

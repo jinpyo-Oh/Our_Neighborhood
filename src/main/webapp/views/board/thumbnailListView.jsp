@@ -11,7 +11,7 @@
 
   <!-- boardHeader 인클루드-->
 
-  <%@ include file="../common/boardHeader.jsp" %>
+  <%@ include file="/views/common/boardHeader.jsp" %>
   
 
   <main id="main">
@@ -172,7 +172,7 @@
 
   
   <!-- 푸터 인클루드-->
-  <%@ include file="../common/boardFooter.jsp" %>
+  <%@ include file="/views/common/boardFooter.jsp" %>
 </body>
 
 </html>

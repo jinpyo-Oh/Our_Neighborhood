@@ -27,7 +27,7 @@
     
     <body>
     
-      <%@ include file="../common/boardHeader.jsp" %> 
+      <%@ include file="/views/common/boardHeader.jsp" %> 
       <main id="main">
     
         <!-- ======= Breadcrumbs ======= -->
@@ -88,7 +88,7 @@
           </div>
         </section><!-- End Services Section -->
       </main><!-- End #main -->
-      <%@ include file="../common/boardFooter.jsp" %>  
+      <%@ include file="/views/common/boardFooter.jsp" %>  
     </body>
     
     </html>
