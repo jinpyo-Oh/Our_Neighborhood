@@ -19,8 +19,9 @@
     <meta name="author" content="" />
     <title>관리자메인페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="../../resources/css/styles.css" rel="stylesheet" />
+    <link href="<%=contextPath %>/resources/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    
 </head>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -53,19 +54,19 @@
     
                     <div class="sb-sidenav-menu-heading">Dashboard</div>
                     <a class="nav-link" href="1_관리자메인페이지.html">
-                        <div class="sb-nav-link-icon"><img src="../../resources/img/admin/homeic2.jpg" style="margin-left: 2px;" width="13px" height="13px" style="color: lightgray;"></div>
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/homeic2.jpg" style="margin-left: 2px;" width="13px" height="13px" style="color: lightgray;"></div>
                         <b style="margin-left: 6px;">HOME</b>
                     </a>
 
                     <div class="sb-sidenav-menu-heading">USER</div>
                     <a class="nav-link" href="2_유저관리.html">
-                        <div class="sb-nav-link-icon"><img src="../../resources/img/admin/유저관리2.png" style="margin-bottom: 3px;" width="20px" height="14px" alt=""></i></div>
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/유저관리2.png" style="margin-bottom: 3px;" width="20px" height="14px" alt=""></i></div>
                             <b>유저 관리</b>
                     </a>
 
                     <div class="sb-sidenav-menu-heading">Board</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><img src="../../resources/img/admin/공지사항2.png" width="20px" height="14px" alt=""></i></div>
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/공지사항2.png" width="20px" height="14px" alt=""></i></div>
                             <b>공지사항</b>
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
@@ -114,7 +115,7 @@
 
 
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages2" aria-expanded="false" aria-controls="collapsePages2">
-                        <div class="sb-nav-link-icon"><img src="../../resources/img/admin/단지게시판2.png" width="20px" height="20px" alt=""></div>
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/단지게시판2.png" width="20px" height="20px" alt=""></div>
                             <b>단지게시판</b>
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
@@ -140,7 +141,7 @@
                     <div class="sb-sidenav-menu-heading">Registration / Reservation</div>
                     
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#car-park" aria-expanded="false" aria-controls="car-park">
-                        <div class="sb-nav-link-icon"><img src="../../resources/img/admin/caric3.png" width="20px" height="20px" style="color: lightgray;"></div>
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/caric3.png" width="20px" height="20px" style="color: lightgray;"></div>
                         <b>차량</b>
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
@@ -161,7 +162,7 @@
 
                     
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#bbq" aria-expanded="false" aria-controls="bbq">
-                        <div class="sb-nav-link-icon"><img src="../../resources/img/admin/바베큐장2.png" width="20px" height="20px" alt=""></div>
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/바베큐장2.png" width="20px" height="20px" alt=""></div>
                             <b>바베큐장</b>
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>

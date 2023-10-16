@@ -33,11 +33,7 @@ public class BbqResSelectController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String resDate = request.getParameter("resDate");
-		response.setContentType("text/html; charset=UTF-8");
-		
-		
-		
-//		 
+		response.setContentType("text/html; charset=UTF-8"); 
 		
 		ArrayList<String> list = new BbqService().bbqResSelect(resDate);
 		

@@ -13,7 +13,7 @@
 
 
 
-<%@ include file="../common/adminHeader.jsp" %>
+<%@ include file="/views/common/adminHeader.jsp" %>
 
 
 <!--<div id="layoutSidenav_content">
@@ -558,6 +558,6 @@
         </div>     
         
             
-           <%@ include file="../common/adminFooter.jsp" %>
+           <%@ include file="/views/common/adminFooter.jsp" %>
        </body>
     </html>
