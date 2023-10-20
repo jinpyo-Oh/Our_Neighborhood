@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.time.LocalDate"%>
 
-<%
-	
+<%	
 	String contextPath = request.getContextPath();
-
-%>
+    LocalDate today = LocalDate.now();    String alertMsg = (String)session.getAttribute("alertMsg");%>
 
 <!DOCTYPE html>
 <html>
@@ -18,15 +16,37 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>관리자메인페이지</title>
+
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="<%=contextPath %>/resources/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    
-</head>
+    <script src="<%=contextPath %>/resources/assets/demo/chart-area-demo.js"></script>    
 
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	
+    <!-- jQuery 라이브러리 연동 : 온라인 방식 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<script>
+let msg = "<%=alertMsg%>";
+if(msg != "null"){
+	alert(msg);		
+	<%
+		session.removeAttribute("alertMsg");
+	%>
+}
+</script>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="1_관리자메인페이지.html">관리자 페이지</a>
+    <a class="navbar-brand ps-3" href="<%=contextPath %>/views/admin/adminMainView.jsp">관리자 페이지</a>
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
         <div class="input-group">
@@ -53,15 +73,19 @@
                 <div class="nav">
     
                     <div class="sb-sidenav-menu-heading">Dashboard</div>
-                    <a class="nav-link" href="1_관리자메인페이지.html">
+                    <a class="nav-link" href="<%=contextPath%>/main.ad">
                         <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/homeic2.jpg" style="margin-left: 2px;" width="13px" height="13px" style="color: lightgray;"></div>
-                        <b style="margin-left: 6px;">HOME</b>
+                        <b style="margin-left: 6px;">ADMIN HOME</b>
+                    </a>
+                    <a class="nav-link" href="<%=contextPath%>/index.jsp">
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/homeic2.jpg" style="margin-left: 2px;" width="13px" height="13px" style="color: lightgray;"></div>
+                        <b style="margin-left: 6px;">COMMUNITY HOME</b>
                     </a>
 
                     <div class="sb-sidenav-menu-heading">USER</div>
-                    <a class="nav-link" href="2_유저관리.html">
+                    <a class="nav-link" href="<%= contextPath %>/adminMemberList.ad">
                         <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/유저관리2.png" style="margin-bottom: 3px;" width="20px" height="14px" alt=""></i></div>
-                            <b>유저 관리</b>
+                            <b>회원 관리</b>
                     </a>
 
                     <div class="sb-sidenav-menu-heading">Board</div>
@@ -72,13 +96,13 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="3_공지사항전체조회.html">공지사항 조회</a>
-                            <a class="nav-link" href="4_공지사항작성.html">공지사항 등록</a>
+                            <a class="nav-link" href="../admin/adminNoticeListView.jsp">공지사항 조회</a>
+                            <a class="nav-link" href="../admin/adminNoticeForm.jsp">공지사항 등록</a>
                         </nav>
                     </div>
                     
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages1" aria-expanded="false" aria-controls="collapsePages1">
-                        <div class="sb-nav-link-icon"><img src="../../resources/img/admin/통합게시판2.png" width="20px" height="20px" alt=""></div>
+                        <div class="sb-nav-link-icon"><img src="<%=contextPath %>/resources/img/admin/통합게시판2.png" width="20px" height="20px" alt=""></div>
                             <b>통합게시판</b>
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>      
@@ -149,11 +173,11 @@
                     <div class="collapse" id="car-park" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                            <a class="nav-link collapsed" href="#"  data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                 등록
                             </a>
                            
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                            <a class="nav-link collapsed" href="#"  data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                 삭제
                             </a>
                             
@@ -169,7 +193,7 @@
                     <div class="collapse" id="bbq" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                            <a class="nav-link collapsed" href="<%=contextPath%>/resSelect.ad?today=<%=today%>"  data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                 예약현황
                             </a>
                             

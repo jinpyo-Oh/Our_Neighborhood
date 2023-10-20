@@ -64,7 +64,7 @@ public class LoginController extends HttpServlet {
 		Member m = new Member();		
 		m.setMemberId(memberId);
 		m.setMemberPwd(memberPwd);
-				
+		
 		Member loginUser = new MemberService().loginMember(m);
 
 		
@@ -83,8 +83,6 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);
-			
-			session.setAttribute("alertMsg", "성공적으로 로그인 되었습니다.");
 					
 			response.sendRedirect(request.getContextPath());		
 			

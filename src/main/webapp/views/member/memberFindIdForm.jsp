@@ -9,54 +9,54 @@
   <style>
     .wrap {
     width : 1200px;
-    height : 800px;
+    height : 600px;
     margin : auto;
     border : 1px solid lightgray;
 }
 
-.joinForm {
+.findForm {
     width : 800px;
     margin : auto;
     margin-top : 0px;
     padding-top : 30px;
 }
 
-.joinForm_1 {
+.findForm_1 {
     text-align : center;
 }
 
-.joinForm_2>form {
+.findForm_2>form {
     width : 350px;
     height : 200px;
     margin : auto;
 }
 
-.joinForm_2 table {
+.findForm_2 table {
     width : 100%;
 }
 
-.joinForm_2 table input,
-.joinForm_2 table button {
+.findForm_2 table input,
+.findForm_2 table button {
     width : 100%;
     height : 40px;
     box-sizing : border-box;
     border-radius : 5px;
 }
 
-.joinForm_2 table input {
+.findForm_2 table input {
     border : 1px solid lightgray;
     padding : 10px;
     font-size : 16px;
 }
 
 
-.joinForm_2 .etc {
+.findForm_2 .etc {
     padding-top : 10px;
     text-align : center;
     color : gray;
 }
 
-.joinForm_2 .etc>a {
+.findForm_2 .etc>a {
     color : gray;
     text-decoration : none;
 }
@@ -90,7 +90,7 @@ button[type="submit"] {
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>아이디 찾기</h2>
         <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.jsp">Home</a></li>
         </ol>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -103,10 +103,10 @@ button[type="submit"] {
           <div align="center">
             <img src="../../resources/img/ONlogo-yellow.png" width="200px" height="200px">
             </div>
-            <div class="joinForm">
+            <div class="findForm">
 
-                <div class="joinForm_2">
-                  <form action="/action_page.php" method="post">
+                <div class="findForm_2">
+                  <form action="<%= contextPath %>/findid.me" method="post">
                     
                     <div class="form-group">
                       <label for="name">* 이름:</label>
@@ -114,18 +114,7 @@ button[type="submit"] {
                                     id="name" name="name">
                     </div>
                     <br>
-                    <div class="form-group">
-                      <label for="address">* 동-호수:</label>
-                      <input type="text" class="form-control" 
-                                   id="address" name="address" placeholder="-포함 입력">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                      <label for="email">* 이메일:</label>
-                      <input type="text" class="form-control" 
-                                    id="email" name="email">
-                    </div>
-                    <br>
+                    
                     <div class="form-group">
                       <label for="phone">* 핸드폰 번호:</label>
                       <input type="text" class="form-control" 

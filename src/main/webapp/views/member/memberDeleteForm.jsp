@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,7 +110,7 @@
 
 <!-- boardHeader 인클루드-->
 
-<%@ include file="../common/boardHeader.jsp" %>
+ <%@ include file="../common/boardHeader.jsp" %>
   
 
   <main id="main">
@@ -130,26 +131,26 @@
       
         <div class="wrap">
           <div class="nav-area" align="auto">
-            <div class="menu"><a href="mypage.html">회원정보수정</a></div>
+            <div class="menu"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
             <div class="menu"><a href="cost.html">관리비 조회</a></div>
             <div class="menu"><a href="bbq.html">바베큐 예약/취소</a></div>
-            <div class="menu"><a href="member-delete.html">회원탈퇴</a></div>
-        </div>
+            <div class="menu"><a href="<%= contextPath %>/views/member/memberDeleteForm.jsp">회원탈퇴</a></div>
+          </div>
         <div align="center">
-          <img src="../../resources/img/ONlogo-yellow.png" width="200px" height="200px">
+          <img src="<%= contextPath %>/resources/img/ONlogo-yellow.png" width="200px" height="200px">
           </div>
           <div class="container" data-aos="fade-up" data-aos-delay="100">
             
             <div class="joinForm">
 
                 <div class="joinForm_2">
-                  <form action="" method="post">
+                  <form action="<%= contextPath %>/delete.me" method="post">
                     <div class="joinForm_2">
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>탈퇴 후 복구가 불가능합니다.</b><br>
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>정말로 탈퇴 하시겠습니까?</b><br><br><br><br>
-                      <label for="userId">비밀번호: </label>
-                      <input type="text" class="form-control" 
-                             id="userPwd" name="userPwd">
+                      <label for="memberPwd">비밀번호: </label>
+                      <input type="password" class="form-control" 
+                             id="memberPwd" name="memberPwd">
                     <br>
                    
                     <br><br>

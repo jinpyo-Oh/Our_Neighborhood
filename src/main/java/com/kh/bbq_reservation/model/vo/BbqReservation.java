@@ -51,6 +51,17 @@ public class BbqReservation {
 		this.resMemberNo = resMemberNo;
 	}
 
+	
+	public BbqReservation(int resNo, int resPlace, String resDate, int resPeople, String resName, String resMsg) {
+		super();
+		this.resNo = resNo;
+		this.resPlace = resPlace;
+		this.resDate = resDate;
+		this.resPeople = resPeople;
+		this.resName = resName;
+		this.resMsg = resMsg;
+	}
+
 	public int getResNo() {
 		return resNo;
 	}

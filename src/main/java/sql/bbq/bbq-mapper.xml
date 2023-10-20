@@ -3,16 +3,13 @@
 <properties>
 	
 	<entry key="bbqResSelect">
-		SELECT RES_PLACE
-			 , RES_DATE
-			 , RES_PEOPLE
-			 , RES_NAME
-			 , RES_MSG
-			 , MEMBER_NO
+		SELECT 
+			 RES_PLACE
 		FROM BBQ_RV
 		WHERE RES_DATE = ?
 		AND RES_STATEMENT = 'Y'
 	</entry>
+		
 	
 	<entry key="bbqResInsert">
 		INSERT INTO BBQ_RV(RES_NO
@@ -30,6 +27,8 @@
 	                  , ?
 	                  , ?)	
 	</entry>
+	
+	
 
-
+	
 </properties>

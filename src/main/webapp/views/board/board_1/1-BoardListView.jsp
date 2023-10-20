@@ -106,8 +106,6 @@ section.notice {
   text-align: center;
 }
 
-
-
 .board-table th, .board-table td {
   padding: 14px 0;
 }
@@ -128,11 +126,13 @@ section.notice {
   display: none;
 }
 
-.btn {
+.paging-btn,  .paging-dis {
   display: inline-block;
-  padding: 0 30px;
+  padding: 0 15px;
+  width : 50px;
+  height : 50px;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
   background: transparent;
   text-align: center;
   white-space: nowrap;
@@ -144,11 +144,11 @@ section.notice {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border: 1px solid transparent;
+  border: 1px solid lightgray;
   text-transform: uppercase;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  border-radius: 0;
+  border-radius: 10px;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -ms-transition: all 0.3s;
@@ -156,26 +156,20 @@ section.notice {
   transition: all 0.3s;
 }
 
-.btn-dark {
-  background: #555;
-  color: #fff;
+.paging-arrow {
+  border : 0px;
+  font-weight : 900;
+  font-size:25px;
 }
 
-.btn-dark:hover, .btn-dark:focus {
-  background: #F4C005;
-  border-color: #F4C005;
-  color: #fff;
+.paging-btn {
+  
+	color : #F4C005;
 }
 
-.btn-dark {
-  background: #555;
-  color: #fff;
-}
-
-.btn-dark:hover, .btn-dark:focus {
-  background: #F4C005;
-  border-color: #F4C005;
-  color: #fff;
+.paging-dis {
+  color: lightgray;
+  cursor : auto;
 }
 
 /* reset */
@@ -213,14 +207,16 @@ section.notice {
 	width : 120px;
 }
 
+tbody tr:hover{
+	background-color : lightgray;
+	cursor: pointer;
+}
   </style>
 </head>
 <body>
-  
-
 <!-- boardHeader 인클루드-->
 
-<%@ include file="../common/boardHeader.jsp" %>
+<%@ include file="../../common/boardHeader.jsp" %>
   
 
   <main id="main">
@@ -231,7 +227,7 @@ section.notice {
 
         <h2>게시글 조회</h2>
         <ol>
-          <li><a href="index.html">메인 페이지</a></li>
+          <li><a href="<%= contextPath %>">메인 페이지</a></li>
           <li>1단지게시판</li>
         </ol>
 
@@ -255,7 +251,6 @@ section.notice {
                       <thead>
                       <tr>
 							<% if(loginUser != null && loginUser.getMemberId().equals("admin")){ %>
-	                         	<th><input type="checkbox"></th>
 	               			<% } %>
 
                           <th scope="col" class="th-num"> 번호</th>
@@ -276,12 +271,9 @@ section.notice {
 						<% } else { %>
 	                      	<% for(Board b : list) {%>
 	                      		<tr>
-	                      			<% if(loginUser != null && loginUser.getMemberId().equals("admin")){ %>
-	                      			<td><input type="checkbox"></td>
-	                      			<% } %>
 	                      			<td><%= b.getBoardNo() %></td>
 	                      			<td style="text-align : left; padding-left : 100px; padding-right : 100px">
-	                      				<a href=""><%= b.getBoardTitle() %></a>
+	                      				<%= b.getBoardTitle() %>
 	                      			</td>
 	                      			<td><%= b.getMemberNo() %></td>
 	                      			<td><%= b.getCreateDate() %></td>
@@ -294,38 +286,35 @@ section.notice {
                   </table>
                   <script>
 		              $(function() {
+	                	  $(".board-table>tbody>tr").click(function() {
+	                		  let bno = $(this).children().eq(0).text();
+	                		  console.log(bno);
+	                		  location.href = "<%= contextPath %>/detail.bo_1?bno=" + bno;
+	                	  });
+			           });
 		              
-		              $(".list-area>tbody>tr").click(function() {
-		                
-		                let bno = $(this).children().eq(0).text();
-		                
-		                location.href = "<%= contextPath %>/detail.bo?bno=" + bno;
-		              });
-		            });
 		            </script>
+		            
                   <br><br>
                   <div align="right">
                   	<% if(loginUser != null) { %>
                    		<a href="<%= contextPath %>/enrollForm.bo_1">글 작성</a>
                    	<% } %>
-                   	<% if(loginUser != null && loginUser.getMemberId().equals("admin")){ %>
-                    	<button class="btn btn-emargency">삭제하기</button>
-                    <% } %>
                 	</div>
                 <!-- 페이징바 -->
                 <div class="pageing-area" align="center">
                 <% if(currentPage != 1) { %>
-					<button class="btn btn-warning" onclick="location.href = '<%= contextPath %>/list.bo_1?currentPage=<%= currentPage - 1 %>';">&lt;</button>
+					<button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo_1?currentPage=<%= currentPage - 1 %>';">&lt;</button>
 				<% } %>
                   <% for(int p = startPage; p <= endPage; p++) { %>
                   	<% if(p != currentPage) { %>
-                  		<button class="btn btn-warning" onclick="location.href ='<%= contextPath %>/list.bo_1?currentPage=<%= p %>'"><%= p %></button>
+                  		<button class="paging-btn" onclick="location.href ='<%= contextPath %>/list.bo_1?currentPage=<%= p %>'"><%= p %></button>
                   	<% } else { %>
-                  		<button class="btn btn-secondary" disabled><%= p %></button>
+                  		<button class="paging-dis" disabled><%= p %></button>
                   	<% } %>
                   <% } %>
                 <% if(currentPage != maxPage) { %>  
-					<button class="btn btn-warning" onclick="location.href = '<%= contextPath %>/list.bo_1?currentPage=<%= currentPage + 1 %>';">&gt;</button>
+					<button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo_1?currentPage=<%= currentPage + 1 %>';">&gt;</button>
 				<% } %>
                 </div>
               </div>
@@ -342,7 +331,7 @@ section.notice {
 
 
   <!-- 푸터 인클루드-->
-  <%@ include file="../common/boardFooter.jsp" %>
+  <%@ include file="../../common/boardFooter.jsp" %>
 
 </body>
 

@@ -1,14 +1,15 @@
 package com.kh.bbq_reservation.model.service;
 
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.bbq_reservation.model.dao.BbqDao;
 import com.kh.bbq_reservation.model.vo.BbqReservation;
-
-import static com.kh.common.JDBCTemplate.*;
 
 
 public class BbqService {
@@ -40,5 +41,8 @@ public class BbqService {
 		
 		return result;
 	}
+	
+	
+	
 
 }

@@ -2,4 +2,106 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+<entry key="selectMemberList">
+		SELECT MEMBER_NO
+     		 , MEMBER_ID
+     		 , MEMBER_NAME
+		     , MEMBER_ADDRESS
+		     , MEMBER_ADDRESS2
+		     , MEMBER_EMAIL
+		     , MEMBER_PHONE
+		     , MEMBER_ENROLLDATE
+  		  FROM MEMBER
+ 		 WHERE MEMBER_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectMember">
+		SELECT MEMBER_NO
+			 , MEMBER_ID
+			 , MEMBER_PWD
+     		 , MEMBER_NAME
+		     , MEMBER_ADDRESS
+		     , MEMBER_ADDRESS2
+		     , MEMBER_EMAIL
+		     , MEMBER_PHONE
+		     , MEMBER_ENROLLDATE
+  		  FROM MEMBER
+ 		 WHERE MEMBER_STATUS = 'Y'
+ 		   AND MEMBER_NO = ?
+	</entry>
+	
+	<entry key="updateMember">
+		UPDATE MEMBER
+		   SET MEMBER_ID = ?
+		     , MEMBER_PWD = ?
+		     , MEMBER_NAME =?
+		     , MEMBER_ADDRESS = ?
+		     , MEMBER_ADDRESS2 = ?
+		     , MEMBER_EMAIL = ?
+		     , MEMBER_PHONE = ?
+		 WHERE MEMBER_STATUS = 'Y'
+		   AND MEMBER_NO = ?
+	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE MEMBER
+		   SET MEMBER_STATUS = 'N'
+		 WHERE MEMBER_NO = ?
+	</entry>
+	
+	<entry key="selectBoardChart">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 WHERE FLOOR(MONTHS_BETWEEN(SYSDATE, CREATE_DATE)) &lt; = ?
+		 GROUP BY TO_CHAR(CREATE_DATE, 'YYYY-MM')
+		 ORDER BY TO_CHAR(CREATE_DATE, 'YYYY-MM') ASC		 
+	</entry>
+	
+	<entry key="selectBoardList">
+		SELECT BOARD_NO
+		     , BOARD_TITLE
+		     , BOARD_CONTENT
+		     , CREATE_DATE
+		     , COUNT
+		     , M.MEMBER_NAME
+             , CG_NAME
+		  FROM BOARD B
+		  JOIN MEMBER M USING (MEMBER_NO)
+          JOIN CATEGORY C USING (CG_NO)
+		 WHERE BOARD_STATUS = 'Y'
+		 ORDER BY CREATE_DATE DESC
+	</entry>
+
+	<entry key="adminBbqResSelect">
+		SELECT RES_NO 
+			 , RES_PLACE
+			 , RES_DATE
+			 , RES_PEOPLE
+			 , RES_NAME
+			 , RES_MSG
+		FROM BBQ_RV
+		WHERE RES_DATE = ?
+		AND RES_STATEMENT = 'Y'
+	</entry>
+	
+	<entry key="adminBbqResSelectAll">
+		SELECT RES_NO 
+				 , RES_PLACE
+				 , RES_DATE
+				 , RES_PEOPLE
+				 , RES_NAME
+				 , RES_MSG
+			FROM BBQ_RV
+			WHERE RES_STATEMENT = 'Y'
+	        ORDER BY RES_DATE
+	</entry>
+	
+	<entry key="adminBbqResDelete">
+		UPDATE BBQ_RV
+		   SET RES_STATEMENT = 'N'
+		 WHERE RES_NO = ?	
+	</entry>
+	
+
+
 </properties>

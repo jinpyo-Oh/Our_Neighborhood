@@ -18,7 +18,8 @@
 	                 , MEMBER_ADDRESS
 	                 , MEMBER_ADDRESS2
 	                 , MEMBER_EMAIL
-	                 , MEMBER_PHONE)
+	                 , MEMBER_PHONE
+	                 )
 	                 VALUES(
 	                 MEMBER_SEQ.NEXTVAL
 	                 , ?
@@ -34,8 +35,8 @@
 	UPDATE MEMBER
 	   SET MEMBER_PWD = ?
 	     , MEMBER_NAME = ?
-	     , EMAIL = ?
-	     , PHONE = ?
+	     , MEMBER_EMAIL = ?
+	     , MEMBER_PHONE = ?
 	 WHERE MEMBER_ID = ?
 	</entry>
 	
@@ -50,21 +51,32 @@
 	<entry key="selectMember">
 	SELECT *
 	  FROM MEMBER
-	 WHERE USER_ID = ?
-	   AND STATUS = 'Y'
+	 WHERE MEMBER_ID = ?
+	   AND MEMBER_STATUS = 'Y'
 	</entry>
 	
 	<entry key="deleteMember">
 		UPDATE MEMBER
-		   SET STATUS = 'N'
-		     , MODIFY_DATE = SYSDATE
-		 WHERE MEMBER_ID = ?
-		   AND MEMBER_PWD = ?
+		   SET MEMBER_STATUS = 'N'
+		 WHERE MEMBER_PWD = ?
 	</entry>
 	
 	<entry key="idCheck">
 		SELECT COUNT(*)
 		  FROM MEMBER
 		 WHERE MEMBER_ID = ?
+	</entry>
+	
+	<entry key="findId">
+		SELECT MEMBER_ID
+		  FROM MEMBER
+		 WHERE MEMBER_NAME = ? 
+		   AND MEMBER_PHONE = ?
+	</entry>
+	
+	<entry key="findPwd">
+		SELECT MEMBER_PWD
+		  FROM MEMBER
+		 WHERE MEMBER_ID = ? 
 	</entry>
 </properties>

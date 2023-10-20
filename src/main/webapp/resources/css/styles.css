@@ -11076,7 +11076,7 @@ body {
   background-color: #e9ecef;
 }
 
-.datatable-wrapper .datatable-container {  
+.datatable-wrapper .datatable-container {
   font-size: 0.875rem;
 }
 
@@ -11187,9 +11187,48 @@ body {
   color: inherit;
 }
 
+.datatable-sorter {
+  display: inline-block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  padding-right: 1rem;
+}
+
+.datatable-sorter::before,
+.datatable-sorter::after {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  right: 4px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  opacity: 0.2;
+}
+
+.datatable-sorter::before {
+  bottom: 4px;
+}
+
+.datatable-sorter::after {
+  top: 0px;
+}
+
+.asc .datatable-sorter::after,
+.desc .datatable-sorter::before {
+  opacity: 0.6;
+}
 
 .datatables-empty {
   text-align: center;
+}
+
+.datatable-top::after,
+.datatable-bottom::after {
+  clear: both;
+  content: " ";
+  display: table;
 }
 
 .datatable-pagination li.datatable-hidden {

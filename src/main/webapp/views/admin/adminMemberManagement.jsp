@@ -34,7 +34,7 @@
                             
                             <div class="col-xl-3 col-md-6" style="margin-left: 300px;">
                                 
-                                <div class="card bg-primary text-white mb-4" onclick="location.href='5_회원전체조회.html'" >
+                                <div class="card bg-primary text-white mb-4" onclick="location.href='<%= contextPath %>/adminMemberList.me'" >
                                     <div class="card-body">회원 전체 조회</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
@@ -46,7 +46,7 @@
                             </div>
                             
                             <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4" onclick="location.href='6_회원상세조회.html'">
+                                <div class="card bg-warning text-white mb-4" onclick="location.href='../admin/adminMemberDetailView.jsp'">
                                     <div class="card-body">회원 상세 조회</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
@@ -60,7 +60,7 @@
                         <div class="row" align="center">
                             
                             <div class="col-xl-3 col-md-6" style="margin-left: 300px;">
-                                <div class="card bg-success text-white mb-4" onclick="location.href='7_회원정보수정.html'">
+                                <div class="card bg-success text-white mb-4" onclick="location.href='../admin/adminMemberUpdateForm.jsp'">
                                     <div class="card-body">회원 정보 수정</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4" onclick="location.href='8_회원강제탈퇴.html'">
+                                <div class="card bg-danger text-white mb-4" onclick="location.href='../admin/adminMemberDeleteForm.jsp'">
                                     <div class="card-body">회원 강제 탈퇴</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>

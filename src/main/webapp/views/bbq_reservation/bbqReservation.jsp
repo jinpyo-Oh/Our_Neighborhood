@@ -450,9 +450,10 @@ pageEncoding="UTF-8"%>
             url: "<%=contextPath%>/selectRes.bq",
             type: "get",
             data: {
-              resDate: $("#resDate").val(),
+              resDate: $("#resDate").val()
             },
             success: function (result) {
+           
               for (let i = 0; i < seat.length; i++) {
                 //  전체 테이블 1 2 3 4 5 6 7 8 9
 
@@ -462,7 +463,7 @@ pageEncoding="UTF-8"%>
 
                 for (let j = 0; j < result.length; j++) {
                   //사용중인 테이블
-
+					
                   if (seat[i].innerText == result[j]) {
                     $(seat[i]).addClass("occupiedSeat");
                     $(seat[i]).removeClass("seat");

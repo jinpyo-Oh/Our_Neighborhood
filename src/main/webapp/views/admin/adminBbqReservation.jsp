@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.bbq_reservation.model.vo.BbqReservation"%>
+<% 
+ArrayList<BbqReservation> list =  (ArrayList<BbqReservation>)request.getAttribute("list"); 
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -192,115 +196,132 @@
   </style>
 </head>
 <body>
-    
 
 
 
 
-<%@ include file="/views/common/adminHeader.jsp" %>
+
+  <%@ include file="/views/common/adminHeader.jsp" %>
 
 
-<!--<div id="layoutSidenav_content">
+    <!--<div id="layoutSidenav_content">
 
         관리자 페이지는 무조건 이 태그를 감싸 사용
 
     </div>-->
 
 
-        <div id="layoutSidenav_content">
-            <div style="height: 20px;"></div>
-            <main>
-                <div class="container-fluid px-4">
-                             
-                    
-                    <h1 class="mt-4">바베큐장 예약</h1>
-                    <div style="height: 50px;"></div>
-                    
-                    <div class="row">
-                        <div class="col-xl-6">
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="card mb-4">
-            <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-                            금일 예약 내역
-          </div>
+    <div id="layoutSidenav_content">
+      <div style="height: 20px;"></div>
+      <main>
+        <div class="container-fluid px-4">
+
+
+          <h1 class="mt-4">바베큐장 예약</h1>
+          <div style="height: 50px;"></div>    
           
-          <div  align="left">                  	                
-                    	<button class="btn btn-emargency">삭제하기</button>                   
-                 </div>
-     <div class="card-body">
-                                
-     <section id="services" class="section-bg">     
-      <section class="notice">
-        
-        
-        <!-- board list area -->
-          <div id="board-list">
-              <div class="container">
-                  <table class="board-table">
-                      <thead>
-                      <tr>							
-	                   <th><input type="checkbox"></th>	               		
-                          <th scope="col" class="th-num">예약번호</th>
-                          <th scope="col" class="th-count">예약 좌석</th>                          
-                          <th scope="col" class="th-writer">예약인 성함</th>
-                          <th scope="col" class="th-date">등록일</th>
-                          <th scope="col" class="th-title">예약 메세지</th>
-                          <th scope="col" class="th-recommend">인원</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                 		<tr>
-                 			<td><input type="checkbox"></td>                 			
-                 			<td>1</td>
-                 			<td>2</td>
-                 			<td>김인엽</td>
-                 			<td>2023-10-16</td>
-                 			<td style="text-align : left; padding-left : 100px; padding-right : 100px">하이</td>
-                 			<td>2</td>
-                 		</tr>	  
-                 		<tr>
-                 			<td><input type="checkbox"></td>                 			
-                 			<td>2</td>
-                 			<td>3</td>
-                 			<td>김인엽</td>
-                 			<td>2023-10-16</td>
-                 			<td style="text-align : left; padding-left : 100px; padding-right : 100px">하이</td>
-                 			<td>2</td>
-                 		</tr>	                     						
-                      </tbody>
-                  </table>                  
-                  <br>                                                  
-              </div>
-          </div>
-      </section>
-    </section><!-- End Services Section -->
-                                
-                                
-              
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+      
+          <button onClick="location.href='<%=contextPath%>/resSelect.ad?today=<%=today%>'">금일 예약 목록</button>
+          <button onClick="location.href='<%=contextPath%>/resSelect.ad'">전체 예약 목록</button>
+
+          <div class="card mb-4">  
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                최신 게시글
             </div>
-        </div>     
+            <div class="card-body">
+              
+                <form action="<%=contextPath%>/resDelete.ad" method="post">
+                  <button type="submit">선택 삭제</button>
+                  
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>예약번호</th>
+                            <th>예약 좌석</th>
+                            <th>예약인 성함</th>
+                            <th>예약 메세지</th>
+                            <th>예약 일</th>
+                            <th>예약 인수</th>
+                        </tr>
+                    </thead>                   
+                    <tbody>
+
+                    	<%if(list != null){ %>
+	                        <%for(int i=0;i<list.size();i++){ %>	
+	                        <%BbqReservation bbq = list.get(i); %>	                                                
+	                       	 <tr>
+	                            <td><input type="checkbox" name="check" class="del_check" value=<%=bbq.getResNo() %>></td>
+	                            <td><%= bbq.getResNo() %></td>
+	                            <td><%= bbq.getResPlace() %></td>
+	                            <td><%= bbq.getResName() %></td>
+	                            <td><%= bbq.getResMsg() %></td>
+	                            <td><%= bbq.getResDate() %></td>
+	                            <td><%= bbq.getResPeople() %></td>  
+	                        </tr>
+	                        <%} %>
+                        <%} %>
+                        
+                  
+                    </tbody>
+                </table>
+              </form>
+              <script>
+
+                $(function(){
+
+                          
+                          // <---- checkbox 관련---->
+                          $("#datatablesSimple th").eq(0).empty();
+                          $("#datatablesSimple th").eq(0).html("<input type='checkbox' name='selectall'>");
+
+                  
+                          $("input[name='selectall']").change(function () {
+                                  $("input[class='del_check']").prop('checked', $("input[name='selectall']").is(":checked"));
+                          });
+
+                          $("input[class='del_check']").change(function () {
+                                  $("input[name=' nall']").prop('checked', false);
+                           });
+
+                           $(".datatable-selector").attr('name','pageLength');
+                                                              
+                      });
+                 
+
+                 
+              </script>                    
+            </div>
+        </div>
+      </div>
+      
+          
+          
         
-            
-           <%@ include file="/views/common/adminFooter.jsp" %>
-       </body>
+        
+      </main>
+      
+      
+      
+      <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+          <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+            <div>
+              <a href="#">Privacy Policy</a>
+              &middot;
+              <a href="#">Terms &amp; Conditions</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    
+    
+
+
+    <%@ include file="/views/common/adminFooter.jsp" %>
+</body>
     </html>

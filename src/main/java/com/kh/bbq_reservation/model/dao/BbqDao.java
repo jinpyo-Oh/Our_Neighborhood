@@ -1,5 +1,7 @@
 package com.kh.bbq_reservation.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.bbq_reservation.model.vo.BbqReservation;
-
-import static com.kh.common.JDBCTemplate.*;
 
 public class BbqDao {
 	
@@ -32,15 +32,16 @@ public class BbqDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("bbqResSelect");
-		
+		BbqReservation bbq = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, resDate);
 			
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				 list.add(String.valueOf(rset.getInt("RES_PLACE")));
+			while(rset.next()) {																															
+				
+				list.add(String.valueOf(rset.getInt("RES_PLACE")));				 
 			}
 		
 			
@@ -81,10 +82,9 @@ public class BbqDao {
 		}
 		
 		return result;
-		
-		
-		
+			
 	}
+	
 	
 	
 

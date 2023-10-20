@@ -16,7 +16,7 @@
     }
 
     .loginForm {
-        width : 800px;
+        width : 1000px;
         margin : auto;
         margin-top : 0px;
         padding-top : 30px;
@@ -145,7 +145,7 @@
                             <tr>
                                 <td>
                                     <div class="etc">
-                                        <a href="<%= contextPath %>/enrollForm.me">회원가입</a> | <a href="find-id.html">아이디 찾기</a> | <a href="find-pwd.html">비밀번호 찾기</a>
+                                        <a href="<%= contextPath %>/enrollForm.me">회원가입</a> | <a href="<%= contextPath %>/views/member/memberFindIdForm.jsp">아이디 찾기</a> | <a href="<%= contextPath %>/views/member/memberFindPwdForm.jsp">비밀번호 찾기</a>
                                     </div>
                                 </td>
                             </tr>

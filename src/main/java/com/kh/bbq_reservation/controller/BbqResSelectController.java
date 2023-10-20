@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.kh.bbq_reservation.model.service.BbqService;
+import com.kh.bbq_reservation.model.vo.BbqReservation;
 
 /**
  * Servlet implementation class BbqResSelectController

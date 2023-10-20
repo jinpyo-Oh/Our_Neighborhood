@@ -39,6 +39,7 @@
 .eidtForm_2 table input,
 .eidtForm_2 table button {
     width : 100%;
+    height : 40px;
     box-sizing : border-box;
     border-radius : 5px;
 }
@@ -89,8 +90,8 @@ button[type="submit"] {
   width: 1200px;
   height:15px;
   display : inline;
-  padding-left: 200px;
-  padding-right: 30px;
+  padding-left: 100px;
+  padding-right: 50px;
 }
 .menu a {
   text-decoration : none;
@@ -113,6 +114,17 @@ button[type="submit"] {
  <!-- boardHeader 인클루드-->
 
   <%@ include file="../common/boardHeader.jsp" %>
+  
+  <%
+		String memberId   =  loginUser.getMemberId();
+  		String memberPwd  = (loginUser.getMemberPwd() == null)  ? "" : loginUser.getMemberPwd();
+		String memberName =  (loginUser.getMemberName() == null)  ? "" : loginUser.getMemberName();
+		int address2  = loginUser.getAddress2();
+		String address  = loginUser.getAddress();
+		String email    = (loginUser.getEmail() == null)    ? "" : loginUser.getEmail();
+		String phone    = (loginUser.getPhone() == null)    ? "" : loginUser.getPhone();
+		
+	%>
 
   <main id="main">
 
@@ -121,7 +133,7 @@ button[type="submit"] {
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>마이페이지</h2>
         <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.jsp">Home</a></li>
         </ol>
         </div>
     </div><!-- End Breadcrumbs -->
@@ -130,56 +142,57 @@ button[type="submit"] {
     <section id="contact" class="contact">
         <div class="wrap">
           <div class="nav-area" align="auto">
-            <div class="menu"><a href="mypage.html">회원정보수정</a></div>
-            <div class="menu"><a href="cost.html">관리비 조회</a></div>
-            <div class="menu"><a href="member-delete.html">회원탈퇴</a></div>
+            <div class="menu"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
+            <div class="menu"><a href="<%= contextPath %>/views/member/memberCostView.jsp?">관리비 조회</a></div>
+            <div class="menu"><a href="bbq.html">바베큐 예약/취소</a></div>
+            <div class="menu"><a href="<%= contextPath %>/views/member/memberDeleteForm.jsp">회원탈퇴</a></div>
           </div>
 
           <div class="container" data-aos="fade-up" data-aos-delay="100">
             
           <div class="eidtForm">
             <div class="eidtForm_2">
-             <form action="" method="post">
+             <form action="<%= contextPath %>/update.me" method="post">
                     <div class="eidtForm_2">
-                      <label for="userId">* 아이디:</label>
+                      <label for="memberId">* 아이디:</label>
                       <input type="text" class="form-control" 
-                             id="userId" name="user" placeholder="user01" disabled>
+                             id="memberId" name="memberId" disabled value="<%= memberId %>">
                     <br>
                     </div>
                     <div class="eidtForm_2">
                       <label for="pwd">* 비밀번호:</label>
                       <input type="password" class="form-control" 
-                                    id="pwd" name="userPwd" placeholder="*********">
+                                    id="memberPwd" name="memberPwd" value="<%= memberPwd %>">
                     <br>
                     </div>
-                    <div class="eidtForm_2">
-                      <label for="repwd">* 비밀번호 확인:</label>
-                      <input type="password" class="form-control" 
-                                    id="repwd" name="reuserPwd" placeholder="*********">
-                    <br>
-                    </div>
-                    <div class="eidtForm_2">
-                      <label for="name">* 이름:</label>
+                     <div class="eidtForm_2">
+                      <label for="address2">* 단지:</label>
                       <input type="text" class="form-control" 
-                                    id="name" name="name" placeholder="홍길동">
-                      <br>
+                             id="address2" name="address2" disabled value="<%= address2 %>">
                     </div>
+                    <br>
                     <div class="eidtForm_2">
                       <label for="address">* 동-호수:</label>
                       <input type="text" class="form-control" 
-                             id="userId" name="user" placeholder="103-101" disabled>
+                             id="address" name="address" disabled value="<%= address %>">
+                    </div>
+                    <br>
+                    <div class="eidtForm_2">
+                      <label for="name">* 이름:</label>
+                      <input type="text" class="form-control" 
+                                    id="memberName" name="memberName" value="<%= memberName %>">
                     </div>
                     <br>
                     <div class="eidtForm_2">
                       <label for="email">* 이메일:</label>
                       <input type="text" class="form-control" 
-                                    id="email" name="email" placeholder="user01@gmail.com">
+                                    id="email" name="email" value="<%= email %>">
                     </div>
                     <br>
                     <div class="eidtForm_2">
                       <label for="phone">* 핸드폰 번호:</label>
                       <input type="text" class="form-control" 
-                                    id="phone" name="phone" placeholder="01099887744">
+                                    id="phone" name="phone" value="<%= phone %>">
                     </div>
                     <br><br>
                     <div class="eidtForm_2">

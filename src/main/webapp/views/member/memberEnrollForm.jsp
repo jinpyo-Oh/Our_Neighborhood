@@ -9,7 +9,7 @@
   <style>
     .wrap {
     width : 1200px;
-    height : 1000px;
+    height : 1100px;
     margin : auto;
     border : 1px solid lightgray;
 }
@@ -74,6 +74,31 @@ button[type="submit"] {
       border-radius: 8px;
       background-color: #f4c005;
       }
+
+button[type="button"] {
+       border: 0px;
+       color: white;
+       font-size: 18px;
+       font-weight: 500;
+       width : 100px;
+       height : 35px;
+       float: right;
+       border-radius: 8px;
+       background-color: gray;
+       }
+
+.input-button-container {
+	  display: flex; 
+	  align-items: center;
+}
+
+.input-button-container input {
+  	  flex: 1;
+}
+
+.input-button-container button {
+ 	  margin-left: 10px;
+}
 </style>
 </head>
 <body>
@@ -106,33 +131,35 @@ button[type="submit"] {
             <div class="joinForm">
 
                 <div class="joinForm_2">
-                  <form action="<%= contextPath %>/insert.me" method="post">
-                    <div class="form-group">
-                      <label for="userId">* 아이디:</label>
-                      <input type="text" class="form-control" 
-                                    id="memberId" name="memberId">
-                    </div>
+                  <form id="enroll-form" action="<%= contextPath %>/insert.me" method="post">
+					  <div class="form-group">
+					  <label for="memberId">* 아이디:</label>
+					  <div class="input-button-container">
+					    <input type="text" class="form-control" id="memberId" name="memberId">
+					    <button type="button" onclick="idCheck();">중복확인</button>
+					  </div>
+					</div>
                     <br>
                     <div class="form-group">
-                      <label for="pwd">* 비밀번호:</label>
+                      <label for="memberpwd">* 비밀번호:</label>
                       <input type="password" class="form-control" 
-                                    id="pwd" name="memberPwd">
+                                    id="memberpwd" name="memberPwd">
                     </div>
                     <br>
                     <div class="form-group">
-                      <label for="repwd">* 비밀번호 확인:</label>
+                      <label for="rememberpwd">* 비밀번호 확인:</label>
                       <input type="password" class="form-control" 
-                                    id="repwd" name="rememberPwd">
+                                    id="rememberpwd" name="rememberPwd">
                     </div>
                     <br>
                     <div class="form-group">
-                      <label for="name">* 이름:</label>
+                      <label for="membername">* 이름:</label>
                       <input type="text" class="form-control" 
-                                    id="name" name="memberName">
+                                    id="membername" name="memberName">
                     </div>
                     <br>
                     <div class="form-group">
-                      <label for="address1">* 단지:</label>
+                      <label for="address2">* 단지:</label>
                       <select class="form-control" name="address2" id="address2">
                         <option value=1>1단지</option>
                         <option value=2>2단지</option>
@@ -141,7 +168,7 @@ button[type="submit"] {
                     </div>
                      <br>
                     <div class="form-group">
-                      <label for="address2">* 동-호수:</label>
+                      <label for="address">* 동-호수:</label>
                       <input type="text" class="form-control" 
                                    id="address" name="address" placeholder="-포함 입력">
                     </div>
@@ -159,25 +186,54 @@ button[type="submit"] {
                     </div>
                     <br><br>
                     <div class="form-group">
-                          <button type="submit" onclick="enrollPage();">회원가입</button>
+                          <button type="submit" disabled>회원가입</button>
                     </div>
                   </form>
                   <script>
-                  	function enrollPage(){
-                  		location.href = "<%= contextPath%>/enrollForm.me";
-                  	}
+                  function idCheck() {
+                	    let $memberId = $("#enroll-form input[name=memberId]");
+                	    
+                	    console.log($memberId.val())
+
+                	    $.ajax({
+                	      url: "idCheck.me",
+                	      type: "get",
+                	      data: { checkId: $memberId.val() },
+                	      success: function (result) {
+                	       
+                	    	  if (result == "NNNNN") { // 사용 불가
+                	          
+                	    		  alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+                	          
+                	    	  $memberId.focus(); // 재입력 유도
+                	        
+                	    	  } else { // 사용 가능
+                	          
+                	    		  if (confirm("사용 가능한 아이디입니다. 사용하시겠습니까?")) {
+                	            
+                	    			  $("#enroll-form button[type=submit]").prop("disabled", false);
+                	            
+                	    			  $memberId.prop("readonly", true); 
+                	          
+                	    		  } else { // 재입력 유도
+                	            
+                	    			  $memberId.focus();
+                	          }
+                	        }
+                	      },
+                	      error: function () {
+                	        console.log("아이디 중복체크용 ajax 통신 실패!");
+                	      }
+                	    });
+                	  }
                   </script>
                 </div>
-                
+		          
             </div>
     
         </div>
-            </form>
           </div><!-- End Contact Form -->
 
-        </div>
-
-      </div>
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->

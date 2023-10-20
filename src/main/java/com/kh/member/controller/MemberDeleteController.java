@@ -35,11 +35,8 @@ public class MemberDeleteController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		// 비밀번호 : memberPwd
 		String memberPwd = request.getParameter("memberPwd");
 		
-		
-		// 로그인한 회원의 아이디를 얻어오기
 		HttpSession session = request.getSession();
 		
 		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();

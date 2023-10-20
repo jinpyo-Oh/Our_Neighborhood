@@ -12,10 +12,11 @@
   <meta charset="utf-8">
   <title>header</title>
 
-
+  <!-- jQuery 라이브러리 연동 : 온라인 방식 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <!-- Favicons -->
-  <link href="../../resources/img/favicon.png" rel="icon">
-  <link href="../../resources/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="<%=contextPath%>/resources/img/favicon.png" rel="icon">
+  <link href="<%=contextPath%>/resources/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +55,7 @@ if(msg != "null"){
 		session.removeAttribute("alertMsg");
 	%>
 }
+
 </script>
   
   <!-- ======= Header ======= -->
@@ -84,7 +86,7 @@ if(msg != "null"){
           </li>
           <li class="dropdown"><a href="#"><span>단지 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">1단지</a></li>
+              <li><a href="<%=contextPath%>/list.bo_1?currentPage=1">1단지</a></li>
               <li><a href="#">2단지</a></li>
               <li><a href="#">3단지</a></li>
             </ul>
@@ -98,14 +100,23 @@ if(msg != "null"){
           <li><a href="contact.html">오시는길</a></li>
 
         <% if(loginUser != null ){ %>
-          <li class="dropdown"><a href="#"><span><%=loginUser.getMemberName() %>님 환영합니다.</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="mypage.html">마이페이지</a></li>
-              <li><a href="">로그아웃</a></li>
-            </ul>
-          </li>
-
-     <% }else{ %>
+          
+          	  <% if(loginUser.getMemberNo()==1){ %>
+          	  <li class="dropdown"><a href="#"><span><%=loginUser.getMemberName() %>님 환영합니다.</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+	            <ul>
+	              <li><a href="main.ad">관리자 페이지</a></li>
+	              <li><a href="<%=contextPath%>/logout.me">로그아웃</a></li>
+	            </ul>
+	          </li>    
+	          <%}else{ %>
+	          <li class="dropdown"><a href="#"><span><%=loginUser.getMemberName() %>님 환영합니다.</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+	            <ul>
+	              <li><a href="<%= contextPath%>/myPage.me">마이페이지</a></li>
+	              <li><a href="<%=contextPath%>/logout.me">로그아웃</a></li>
+	            </ul>
+	          </li>
+	  		 <%} %>
+     	<% }else{ %>
 
           <li class="dropdown"><a href="<%=contextPath%>/loginForm.me"><span>로그인</span></i></a>                       
           </li>

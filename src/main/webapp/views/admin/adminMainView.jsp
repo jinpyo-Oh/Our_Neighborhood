@@ -1,19 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.admin.model.vo.Chart, 
+    java.time.LocalDate, com.kh.admin.model.vo.Board, java.util.ArrayList"%>
+<%
+	Chart chart = (Chart)request.getAttribute("chart");
+	
+	LocalDate currentDate = LocalDate.now();
+	
+	// 현재 월을 가져옴
+	int currentMonth = currentDate.getMonthValue();
+	
+	ArrayList<Board> board = (ArrayList<Board>)request.getAttribute("list");
+%>    
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<!-- Resources -->
+	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    
+<style>
+	 #chartdiv {
+	  width: 100%;
+	  height: 250px;
+	} 
+</style>
+
+	
 </head>
 <body>
     
 
-
-
-
-<%@ include file="/views/common/adminHeader.jsp" %>
+<%@ include file="../common/adminHeader.jsp" %>
 
 
 <!--<div id="layoutSidenav_content">
@@ -24,522 +46,265 @@
 
 
             <div id="layoutSidenav_content">
+               
                 <div style="height: 20px;"></div>
+              
                 <main>
+               
                     <div class="container-fluid px-4">
-                                 
                         
                         <h1 class="mt-4">HOME</h1>
                         <div style="height: 50px;"></div>
+                      
                         
                         <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        작성 게시글 수
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
+							<div class="col-xl-6" style="width:100%;">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar me-1"></i>
-                                        회원 수
+                                        월별 게시글 수(최근 6개월)
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                    <!-- Chart code -->
+                                    <script>
+                                    am5.ready(function() {
+                                    
+                                    // Create root element
+                                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                                    var root = am5.Root.new("chartdiv");
+                                    
+                                    
+                                    // Set themes
+                                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                                    root.setThemes([
+                                      am5themes_Animated.new(root)
+                                    ]);
+                                    
+                                    
+                                    // Create chart
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                                    var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                                      panX: true,
+                                      panY: true,
+                                      wheelX: "panX",
+                                      wheelY: "zoomX",
+                                      pinchZoomX: true
+                                    }));
+                                    
+                                    // Add cursor
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                                    var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+                                    cursor.lineY.set("visible", false);
+                                    
+                                    
+                                    // Create axes
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                                    var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+                                    xRenderer.labels.template.setAll({
+                                      rotation: -90,
+                                      centerY: am5.p50,
+                                      centerX: am5.p100,
+                                      paddingRight: 15
+                                    });
+                                    
+                                    xRenderer.grid.template.setAll({
+                                      location: 1
+                                    })
+                                    
+                                    var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                                      maxDeviation: 0.3,
+                                      categoryField: "country",
+                                      renderer: xRenderer,
+                                      tooltip: am5.Tooltip.new(root, {})
+                                    }));
+                                    
+                                    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                                      maxDeviation: 0.3,
+                                      renderer: am5xy.AxisRendererY.new(root, {
+                                        strokeOpacity: 0.1
+                                      })
+                                    }));
+                                    
+                                    
+                                    // Create series
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                                    var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                                      name: "Series 1",
+                                      xAxis: xAxis,
+                                      yAxis: yAxis,
+                                      valueYField: "value",
+                                      sequencedInterpolation: true,
+                                      categoryXField: "country",
+                                      tooltip: am5.Tooltip.new(root, {
+                                        labelText: "{valueY}"
+                                      })
+                                    }));
+                                    
+                                    series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
+                                    series.columns.template.adapters.add("fill", function(fill, target) {
+                                      return chart.get("colors").getIndex(series.columns.indexOf(target));
+                                    });
+                                    
+                                    series.columns.template.adapters.add("stroke", function(stroke, target) {
+                                      return chart.get("colors").getIndex(series.columns.indexOf(target));
+                                    });
+                                    
+                                    
+                                    // Set data
+                                    var data = [{
+                                      country: <%= (currentMonth - 5) %> + "월",
+                                      value: <%= chart.getChart1() %>
+                                    }, {
+                                      country: <%= (currentMonth - 4) %> + "월",
+                                      value: <%= chart.getChart2() %>
+                                    }, {
+                                      country: <%= (currentMonth - 3) %> + "월",
+                                      value: <%= chart.getChart3() %>
+                                    }, {
+                                      country: <%= (currentMonth - 2) %> + "월",
+                                      value: <%= chart.getChart4() %>
+                                    }, {
+                                      country: <%= (currentMonth - 1) %> + "월",
+                                      value: <%= chart.getChart5() %>
+                                    }, {
+                                      country: <%= currentMonth %> + "월",
+                                      value: <%= chart.getChart6() %>
+                                    }];
+                                    
+                                    xAxis.data.setAll(data);
+                                    series.data.setAll(data);
+                                    
+                                    
+                                    // Make stuff animate on load
+                                    // https://www.amcharts.com/docs/v5/concepts/animations/
+                                    series.appear(1000);
+                                    chart.appear(1000, 100);
+                                    
+                                    }); // end am5.ready()
+                                    </script>
+        
+                                    <div style="height: 30px;"></div>
+                                    
+                                    <!-- HTML -->
+                                    <div id="chartdiv"></div>
+            
                                 </div>
+    
                             </div>
-                        </div>
+
+                            <div class="col-xl-6" style="width:100%;">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        커뮤니티 현황
+                                    </div>
+                                    <div class="card-body">
+                                    	
+                                    	<div style="text-align:center;">
+                                    		<h3>KH 아파트 입주민 커뮤니티</h3>
+                                    	</div>
+                                    
+                                   		<table align="center" style="text-align:center; height:200px;">
+                                   			<tbody>
+                                   				<tr>
+													<td style="width:160px;">현재 회원 수 : </td>
+													<td> 1300 명</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td colspan="2" style="height:5px;"></td>
+                                   				</tr>
+                                   				<tr>
+													<td style="width:160px;">이번 달 가입회원 수 : </td>
+													<td> 30 명</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td colspan="2" style="height:5px;"></td>
+                                   				</tr>
+                                   				<tr>
+													<td style="width:160px;">전체 게시글 수 : </td>
+													<td> 1300 개</td>
+                                   				</tr>
+                                   				<tr>
+                                   					<td colspan="2" style="height:5px;"></td>
+                                   				</tr>
+                                   				<tr>
+													<td style="width:160px;">이번 달 게시글 수 : </td>
+													<td> 200 개</td>
+                                   				</tr>
+                                   			</tbody>
+                                   		</table>
+                                    </div>
+                                    
+                                </div>
+    
+                            </div>
+                            
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 최신 게시글
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table id="datatablesSimple" class="newest-area">
                                     <thead>
                                         <tr>
+                                            <th>작성일</th>
                                             <th>작성자</th>
                                             <th>제목</th>
                                             <th>카테고리</th>
                                             <th>게시글 번호</th>
-                                            <th>작성일</th>
                                             <th>조회수</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>alex</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2001/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>San Francisco</td>
-                                            <td>59</td>
-                                            <td>2012/08/06</td>
-                                            <td>$137,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Tokyo</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>$327,900</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>Edinburgh</td>
-                                            <td>23</td>
-                                            <td>2008/12/13</td>
-                                            <td>$103,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jena Gaines</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>30</td>
-                                            <td>2008/12/19</td>
-                                            <td>$90,560</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Support Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2013/03/03</td>
-                                            <td>$342,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Charde Marshall</td>
-                                            <td>Regional Director</td>
-                                            <td>San Francisco</td>
-                                            <td>36</td>
-                                            <td>2008/10/16</td>
-                                            <td>$470,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Haley Kennedy</td>
-                                            <td>Senior Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>43</td>
-                                            <td>2012/12/18</td>
-                                            <td>$313,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>19</td>
-                                            <td>2010/03/17</td>
-                                            <td>$385,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Silva</td>
-                                            <td>Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>66</td>
-                                            <td>2012/11/27</td>
-                                            <td>$198,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Paul Byrd</td>
-                                            <td>Chief Financial Officer (CFO)</td>
-                                            <td>New York</td>
-                                            <td>64</td>
-                                            <td>2010/06/09</td>
-                                            <td>$725,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gloria Little</td>
-                                            <td>Systems Administrator</td>
-                                            <td>New York</td>
-                                            <td>59</td>
-                                            <td>2009/04/10</td>
-                                            <td>$237,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>41</td>
-                                            <td>2012/10/13</td>
-                                            <td>$132,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dai Rios</td>
-                                            <td>Personnel Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>35</td>
-                                            <td>2012/09/26</td>
-                                            <td>$217,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jenette Caldwell</td>
-                                            <td>Development Lead</td>
-                                            <td>New York</td>
-                                            <td>30</td>
-                                            <td>2011/09/03</td>
-                                            <td>$345,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Yuri Berry</td>
-                                            <td>Chief Marketing Officer (CMO)</td>
-                                            <td>New York</td>
-                                            <td>40</td>
-                                            <td>2009/06/25</td>
-                                            <td>$675,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>New York</td>
-                                            <td>21</td>
-                                            <td>2011/12/12</td>
-                                            <td>$106,450</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Doris Wilder</td>
-                                            <td>Sales Assistant</td>
-                                            <td>Sidney</td>
-                                            <td>23</td>
-                                            <td>2010/09/20</td>
-                                            <td>$85,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer (CEO)</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2009/10/09</td>
-                                            <td>$1,200,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Joyce</td>
-                                            <td>Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>42</td>
-                                            <td>2010/12/22</td>
-                                            <td>$92,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Chang</td>
-                                            <td>Regional Director</td>
-                                            <td>Singapore</td>
-                                            <td>28</td>
-                                            <td>2010/11/14</td>
-                                            <td>$357,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>28</td>
-                                            <td>2011/06/07</td>
-                                            <td>$206,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiona Green</td>
-                                            <td>Chief Operating Officer (COO)</td>
-                                            <td>San Francisco</td>
-                                            <td>48</td>
-                                            <td>2010/03/11</td>
-                                            <td>$850,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shou Itou</td>
-                                            <td>Regional Marketing</td>
-                                            <td>Tokyo</td>
-                                            <td>20</td>
-                                            <td>2011/08/14</td>
-                                            <td>$163,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michelle House</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Sidney</td>
-                                            <td>37</td>
-                                            <td>2011/06/02</td>
-                                            <td>$95,400</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suki Burks</td>
-                                            <td>Developer</td>
-                                            <td>London</td>
-                                            <td>53</td>
-                                            <td>2009/10/22</td>
-                                            <td>$114,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Prescott Bartlett</td>
-                                            <td>Technical Author</td>
-                                            <td>London</td>
-                                            <td>27</td>
-                                            <td>2011/05/07</td>
-                                            <td>$145,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Cortez</td>
-                                            <td>Team Leader</td>
-                                            <td>San Francisco</td>
-                                            <td>22</td>
-                                            <td>2008/10/26</td>
-                                            <td>$235,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Martena Mccray</td>
-                                            <td>Post-Sales support</td>
-                                            <td>Edinburgh</td>
-                                            <td>46</td>
-                                            <td>2011/03/09</td>
-                                            <td>$324,050</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Unity Butler</td>
-                                            <td>Marketing Designer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/12/09</td>
-                                            <td>$85,675</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Howard Hatfield</td>
-                                            <td>Office Manager</td>
-                                            <td>San Francisco</td>
-                                            <td>51</td>
-                                            <td>2008/12/16</td>
-                                            <td>$164,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hope Fuentes</td>
-                                            <td>Secretary</td>
-                                            <td>San Francisco</td>
-                                            <td>41</td>
-                                            <td>2010/02/12</td>
-                                            <td>$109,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vivian Harrell</td>
-                                            <td>Financial Controller</td>
-                                            <td>San Francisco</td>
-                                            <td>62</td>
-                                            <td>2009/02/14</td>
-                                            <td>$452,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>37</td>
-                                            <td>2008/12/11</td>
-                                            <td>$136,200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jackson Bradshaw</td>
-                                            <td>Director</td>
-                                            <td>New York</td>
-                                            <td>65</td>
-                                            <td>2008/09/26</td>
-                                            <td>$645,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Olivia Liang</td>
-                                            <td>Support Engineer</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2011/02/03</td>
-                                            <td>$234,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bruno Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>38</td>
-                                            <td>2011/05/03</td>
-                                            <td>$163,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sakura Yamamoto</td>
-                                            <td>Support Engineer</td>
-                                            <td>Tokyo</td>
-                                            <td>37</td>
-                                            <td>2009/08/19</td>
-                                            <td>$139,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thor Walton</td>
-                                            <td>Developer</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2013/08/11</td>
-                                            <td>$98,540</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finn Camacho</td>
-                                            <td>Support Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/07/07</td>
-                                            <td>$87,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Serge Baldwin</td>
-                                            <td>Data Coordinator</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2012/04/09</td>
-                                            <td>$138,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>$125,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>$115,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>$356,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>$103,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>$86,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>$112,000</td>
-                                        </tr>
+                                    	
+                                    	 
+                                    	<% if(board.isEmpty()) { %>
+                                    	
+                                    		<tr>
+                                    			<td colspan="6">
+                                    				조회된 게시글이 없습니다.
+                                    			</td>
+                                    		</tr>
+                                    	
+                                    	<% } else { %>
+            							
+            								<% for(Board b : board){ %>                        
+		                                        <tr>
+		                                            <td><%= b.getCreateDate() %></td>
+		                                            <td><%= b.getMemberName() %></td>
+		                                            <td><%= b.getBoardTitle() %></td>
+		                                            <td><%= b.getCgName() %></td>
+		                                            <td><%= b.getBoardNo() %></td>
+		                                            <td><%= b.getCount() %></td>
+		                                        </tr>
+	                                        <% } %>
+                                        <% } %> 
+                                        
                                     </tbody>
                                 </table>
+                                
+                                <script>
+	                            	
+	                            	$(function(){
+	                            		
+	                            		$(".newest-area>tbody>tr").click(function(){
+	                            			
+	                            			let bno = $(this).children().eq(0).text();
+	                            			
+	                            			// console.log(mno);
+	                            			
+	                            			location.href = "<%= contextPath %>/detail.bo?bno=" + bno;           
+	                            			
+	                            		});
+	                            		 
+	                            	});
+	                            
+	                            </script>
+                                
                             </div>
                         </div>
+                        
+                        
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -558,6 +323,6 @@
         </div>     
         
             
-           <%@ include file="/views/common/adminFooter.jsp" %>
+           <%@ include file="../common/adminFooter.jsp" %>
        </body>
     </html>

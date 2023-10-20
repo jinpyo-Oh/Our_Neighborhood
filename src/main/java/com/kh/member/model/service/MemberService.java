@@ -45,36 +45,26 @@ public class MemberService {
 	
 	
 	public Member updateMember(Member m) {
-	    
+		
 		Connection conn = JDBCTemplate.getConnection();
-	    
-		int result = 0;
-	    
-	    if (m.getMemberPwd() != null && !m.getMemberPwd().isEmpty()) {
-	     
-	    	result = new MemberDao().updatePwdMember(conn, m.getMemberId(), m.getMemberPwd());
-	   
-	    } else {
-	    
-	    	result = new MemberDao().updateMember(conn, m);
-	    }
-
-	    Member updateMem = null;
-
-	    if (result > 0) {
-	       
-	    	JDBCTemplate.commit(conn);
-	       
-	    	updateMem = new MemberDao().selectMember(conn, m.getMemberId());
-	   
-	    } else {
-	   
-	    	JDBCTemplate.rollback(conn);
-	    }
-	    
-	    JDBCTemplate.close(conn);
-	   
-	    return updateMem;
+		
+		int result = new MemberDao().updateMember(conn, m);
+		
+		Member updateMem = null;
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+			
+			updateMem = new MemberDao().selectMember(conn, m.getMemberId());
+			
+		} else {
+			
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return updateMem;
 	}
 	
 	
@@ -111,5 +101,29 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return count;
+	}
+	
+	
+	public String findId(Member m) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String foundId = new MemberDao().findId(conn, m);
+		
+		JDBCTemplate.close(conn);
+		
+		return foundId;
+		
+	}
+	
+	public String findPwd(Member m) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String foundPwd = new MemberDao().findPwd(conn, m);
+		
+		JDBCTemplate.close(conn);
+		
+		return foundPwd;
 	}
 }

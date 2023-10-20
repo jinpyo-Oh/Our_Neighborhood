@@ -51,7 +51,9 @@ public class MemberDao {
 									   rset.getInt("MEMBER_ADDRESS2"),
 									   rset.getString("MEMBER_EMAIL"),
 									   rset.getString("MEMBER_PHONE"),
-									   rset.getString("MEMBER_STATUS"));
+									   rset.getString("MEMBER_STATUS"),
+									   rset.getDate("MEMBER_ENROLLDATE")
+									   );
 									   }
 			
 		
@@ -98,39 +100,37 @@ public class MemberDao {
 			return result;
 		}
 	
+ 
 	
 	public int updateMember(Connection conn, Member m) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("updateMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-		
-			pstmt.setString(1, m.getMemberPwd());
-			pstmt.setString(2, m.getMemberName());
-			pstmt.setString(3, m.getEmail());
-			pstmt.setString(4, m.getPhone());
-			pstmt.setString(5, m.getMemberId());
-			
-			result = pstmt.executeUpdate();
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
+	    int result = 0;
+	    PreparedStatement pstmt = null;
+	    
+	    String sql = prop.getProperty("updateMember");
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+
+	        pstmt.setString(1, m.getMemberPwd());	        
+	        pstmt.setString(2, m.getMemberName());
+	        pstmt.setString(3, m.getEmail());
+	        pstmt.setString(4, m.getPhone());
+	        pstmt.setString(5, m.getMemberId());
+	        
+	        result = pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        JDBCTemplate.close(pstmt);
+	    }
+	    
+	    return result;
 	}
 	
-	
+
 	
 	public int updatePwdMember(Connection conn, String memberId, String memberPwd) {
-	  
+		  
 		int result = 0;
 	   
 		PreparedStatement pstmt = null;
@@ -154,6 +154,8 @@ public class MemberDao {
 
 	    return result;
 	}
+	
+	
 
 	public Member selectMember(Connection conn, String memberId) {
 		
@@ -177,11 +179,11 @@ public class MemberDao {
 				updateMem.setMemberId(rset.getString("MEMBER_ID"));
 				updateMem.setMemberPwd(rset.getString("MEMBER_PWD"));
 				updateMem.setMemberName(rset.getString("MEMBER_NAME"));
-				updateMem.setPhone(rset.getString("PHONE"));
-				updateMem.setEmail(rset.getString("EMAIL"));
-				updateMem.setAddress(rset.getString("ADDRESS"));
-				updateMem.setAddress2(rset.getInt("ADDRESS2"));
-				updateMem.setStatus(rset.getString("STATUS"));
+				updateMem.setPhone(rset.getString("MEMBER_PHONE"));
+				updateMem.setEmail(rset.getString("MEMBER_EMAIL"));
+				updateMem.setAddress(rset.getString("MEMBER_ADDRESS"));
+				updateMem.setAddress2(rset.getInt("MEMBER_ADDRESS2"));
+				updateMem.setStatus(rset.getString("MEMBER_STATUS"));
 			}
 		
 		} catch (SQLException e) {
@@ -208,8 +210,7 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 		
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPwd());
+			pstmt.setString(1, m.getMemberPwd());
 			
 			result = pstmt.executeUpdate();
 		
@@ -256,6 +257,85 @@ public class MemberDao {
 		
 		return count;
 	}
+	
+	
+	
+	public String findId(Connection conn, Member m) {
+		
+		String foundId = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findId");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, m.getMemberName());
+			pstmt.setString(2, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				foundId = rset.getString("MEMBER_ID");
+				
+			}
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		
+		} finally {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+			
+		}
+		
+		return foundId;
+		
+	}
+	
+	
+	public String findPwd(Connection conn, Member m) {
+		
+		String foundPwd = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findPwd");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, m.getMemberId());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				foundPwd = rset.getString("MEMBER_PWD");
+				
+			}
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		
+		} finally {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+			
+		}
+		
+		return foundPwd;
+		
+	}
+	
 }	
 	
 

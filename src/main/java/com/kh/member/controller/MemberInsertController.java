@@ -50,7 +50,7 @@ public class MemberInsertController extends HttpServlet {
 		String phone = request.getParameter("phone");
 		
 	
-		Member m = new Member(memberId, memberPwd, memberName, address, address2,
+		Member m = new Member(memberId, memberPwd, memberName, address2, address,
 								email, phone);		
 		
 		int result = new MemberService().insertMember(m);
@@ -58,9 +58,8 @@ public class MemberInsertController extends HttpServlet {
 		if(result > 0) { // 회원가입 성공 
 
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
+			session.setAttribute("alertMsg", "회원가입에 성공했습니다. 로그인 해주세요.");
 			
-			// url 재요청방식
 			response.sendRedirect(request.getContextPath());
 			
 		} else { // 회원가입 실패 
