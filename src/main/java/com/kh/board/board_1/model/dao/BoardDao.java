@@ -102,13 +102,12 @@ public class BoardDao {
 				
 				list.add(new Board(
 						   rset.getInt("BOARD_NO"),
-						   rset.getString("CG_NAME"),
+						   String.valueOf(rset.getInt("CG_NO")),
 						   rset.getString("BOARD_TITLE"),
 						   rset.getString("MEMBER_ID"),
 						   rset.getInt("COUNT"),
-						   rset.getDate("CREATE_DATE"),
 						   rset.getInt("RECOMMEND"),
-						   String.valueOf(rset.getInt("CG_NO"))
+						   rset.getDate("CREATE_DATE")					   
 						   ));
 			}
 		} catch (SQLException e) {
@@ -141,7 +140,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			// SQL문 완성시키기
-			pstmt.setInt(1, 1);
+			pstmt.setInt(1, Integer.parseInt(b.getCgNo()));
 			pstmt.setString(2, b.getBoardTitle());
 			pstmt.setString(3, b.getBoardContent());
 			pstmt.setInt(4, (Integer.parseInt(b.getMemberNo())));
@@ -224,7 +223,7 @@ public class BoardDao {
 		return result;
 	}
 	
-	public Board selectBoard(Connection conn, int boardNo) {
+	public Board selectBoard(Connection conn, int boardNo, int cgNo) {
 		
 		// 변수 셋팅
 		Board b = null;
@@ -240,7 +239,7 @@ public class BoardDao {
 			
 			// 쿼리문 완성
 			pstmt.setInt(1, boardNo);
-			pstmt.setInt(2, 1);
+			pstmt.setInt(2, cgNo);
 			
 			// 쿼리문 실행후 결과받기
 			rset = pstmt.executeQuery();

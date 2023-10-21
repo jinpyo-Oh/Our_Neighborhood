@@ -286,8 +286,7 @@ tbody tr:hover{
 	                      		<tr>
 	                      			<td><%= b.getBoardNo() %></td>
 	                      			<td style="text-align : left; padding-left : 100px; padding-right : 100px">
-	                      				<%= b.getBoardTitle() %>
-	                      			</td>
+	                      				<%= b.getBoardTitle() %> </td>	               
 	                      			<td><%= b.getMemberNo() %></td>
 	                      			<td><%= b.getCreateDate() %></td>
 	                      			<td><%= b.getCount() %></td>
@@ -302,7 +301,7 @@ tbody tr:hover{
 	                	  $(".board-table>tbody>tr").click(function() {
 	                		  let bno = $(this).children().eq(0).text();
 	                		  console.log(bno);
-	                		  location.href = "<%= contextPath %>/detail.bo?bno=" + bno;
+	                		  location.href = "<%= contextPath %>/detail.bo?cg=<%=cgNo%>&bno=" + bno;
 	                	  });
 			           });
 		              
@@ -311,7 +310,7 @@ tbody tr:hover{
                   <br><br>
                   <div align="right">
                   	<% if(loginUser != null) { %>
-                   		<a href="<%= contextPath %>/enrollForm.bo_1">글 작성</a>
+                   		<a href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
                    	<% } %>
                 	</div>
                 <!-- 페이징바 -->

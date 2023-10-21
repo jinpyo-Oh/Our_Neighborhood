@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String cgNo = (String)request.getAttribute("cgNo");
+%>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -124,6 +127,7 @@
 	          <div class="outer">
 	          <!-- 작성자의 회원번호도 같이 넘길 것 -->
 	    	  <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo() %>">
+	    	  <input type="hidden" name="cgNo" value="<%=cgNo %>">
 	           <h3>게시글 작성</h3>
 	       		 <div class="card-write">
 	           		<div class="myinfo">

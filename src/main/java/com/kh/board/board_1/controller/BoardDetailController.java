@@ -34,6 +34,7 @@ public class BoardDetailController extends HttpServlet {
 		
 		// 글번호 뽑기
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		int cgNo = Integer.parseInt(request.getParameter("cg"));
 		
 		// BoardService 객체 생성
 		BoardService bService = new BoardService();
@@ -45,7 +46,7 @@ public class BoardDetailController extends HttpServlet {
 		if(result > 0) {
 			
 			// 게시글 조회
-			Board b = bService.selectBoard(boardNo);
+			Board b = bService.selectBoard(boardNo, cgNo);
 			
 			// 첨부파일 조회
 			Image img = bService.selectImage(boardNo);

@@ -109,13 +109,13 @@ public class BoardService {
 		return result;
 	}
 	
-	public Board selectBoard(int boardNo) {
+	public Board selectBoard(int boardNo, int cgNo) {
 		
 		// 1) Connection 객체 생ㅅ어
 		Connection conn = getConnection();
 		
 		// 2) Connection 과 전달값 넘기고 결과 받기
-		Board b = new BoardDao().selectBoard(conn, boardNo);
+		Board b = new BoardDao().selectBoard(conn, boardNo, cgNo);
 		
 		// 3) 트랜잭션 처리 => 패스
 		
@@ -151,7 +151,7 @@ public class BoardService {
 		// 2) Connection 과 전달값 넘기고 결과 받기
 		ArrayList<Integer> list = new BoardDao().selectRecommend(conn, boardNo, memberNo);
 		
-		System.out.println(list);
+		
 		
 		int num = 0;
 		for(int i = 0; i < list.size(); i++) {

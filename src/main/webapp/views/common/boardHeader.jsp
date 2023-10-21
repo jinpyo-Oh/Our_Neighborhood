@@ -76,10 +76,10 @@ if(msg != "null"){
           <li><a href="">공지사항</a></li>
           <li class="dropdown"><a href="#"><span>통합 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">자유게시판</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=4&currentPage=1">자유게시판</a></li>
               <li><a href="#">사진게시판</a></li>
               <li><a href="#">중고거래 게시판</a></li>
-              <li><a href="#">건의사항 게시판</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=7&currentPage=1">건의사항 게시판</a></li>
               <li><a href="#">홍보 게시판</a></li>
               <li><a href="#">분실물 게시판</a></li>
             </ul>

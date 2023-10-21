@@ -130,7 +130,7 @@
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Services Section ======= -->
-    <form action="<%= contextPath %>/update.bo" method="post" id="update-Form" enctype="multipart/form-data">
+    <form action="<%= contextPath %>/update.bo?cg=<%=b.getCgNo() %>" method="post" id="update-Form" enctype="multipart/form-data">
         	<section id="services" class="section-bg">
 	        <div class="container" data-aos="fade-up">
 	          <div class="outer">

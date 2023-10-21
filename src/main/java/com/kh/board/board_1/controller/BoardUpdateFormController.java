@@ -35,8 +35,10 @@ public class BoardUpdateFormController extends HttpServlet {
 		// 게시글 정보 불러오기
 		BoardService bService = new BoardService();
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		int cgNo = Integer.parseInt(request.getParameter("cg"));
 		
-		Board b = bService.selectBoard(boardNo);
+		
+		Board b = bService.selectBoard(boardNo,cgNo);
 		// 글번호, 제목, 내용 ,작성자아이디, 작성일
 		
 		Image img = bService.selectImage(boardNo);

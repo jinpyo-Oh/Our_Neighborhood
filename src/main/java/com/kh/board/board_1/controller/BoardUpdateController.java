@@ -72,11 +72,13 @@ public class BoardUpdateController extends HttpServlet {
 			int boardNo = Integer.parseInt(multiRequest.getParameter("boardNo"));
 			String boardTitle = multiRequest.getParameter("title");
 			String boatdContent = multiRequest.getParameter("content");
+			String cgNo = multiRequest.getParameter("cg") ;
 			
 			Board b = new Board();
 			b.setBoardNo(boardNo);
 			b.setBoardTitle(boardTitle);
 			b.setBoardContent(boatdContent);
+			b.setCgNo(cgNo);
 			
 			// 새 첨부파일 o 공통
 			Image img = null;
@@ -122,7 +124,7 @@ public class BoardUpdateController extends HttpServlet {
 				// 해당 게시글의 상조회 페이지로 재요청
 				request.getSession().setAttribute("alertMsg", "게시글이 수정되었습니다.");
 				
-				response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo);
+				response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo+"&cg="+cgNo);
 			} else {
 				
 				// 에러문구

@@ -32,6 +32,7 @@ public class BoardDeleteController extends HttpServlet {
 		
 		// 글번호 뽑기
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		int cgNo = Integer.parseInt(request.getParameter("cg"));
 		
 		int result = new BoardService().deleteBoard(boardNo);
 		
@@ -41,7 +42,7 @@ public class BoardDeleteController extends HttpServlet {
 		if(result > 0) {
 			// 일회성 알람문구
 			request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/list.bo?currentPage=1");
+			response.sendRedirect(request.getContextPath()+"/list.bo?currentPage=1&cg="+cgNo);
 			
 		} else {
 			

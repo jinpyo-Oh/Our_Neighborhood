@@ -159,7 +159,7 @@ a {
 				  	$(function() {
 	                	  $("#reco").click(function() {
 	                		  
-	                		  location.href = "<%= contextPath %>/recommend.bo?bno=<%= b.getBoardNo() %>";
+	                		  location.href = "<%= contextPath %>/recommend.bo?bno=<%= b.getBoardNo() %>&cg=<%=b.getCgNo()%>";
 	                	  });
 			           });
 				  	
@@ -183,8 +183,8 @@ a {
             <a href="<%= contextPath %>/list.bo?cg=<%=b.getCgNo() %>&currentPage=1" class="btn btn-sm">목록가기</a>
             <% if((loginUser != null && loginUser.getMemberId().equals(b.getMemberNo())) || (loginUser.getMemberNo() == 1)){%>
 	            <!-- 로그인한 사용자가 게시글 작성자일 경우에만 보여지게끔 -->
-	            <a href="<%= contextPath %>/updateForm.bo?bno=<%= b.getBoardNo() %>" class="btn btn-sm">수정하기</a>
-	            <a href="<%= contextPath %>/delete.bo?bno=<%= b.getBoardNo() %>" class="btn btn-sm">삭제하기</a>
+	            <a href="<%= contextPath %>/updateForm.bo?bno=<%= b.getBoardNo() %>&cg=<%=b.getCgNo() %>" class="btn btn-sm">수정하기</a>
+	            <a href="<%= contextPath %>/delete.bo?bno=<%= b.getBoardNo() %>&cg=<%=b.getCgNo() %>" class="btn btn-sm">삭제하기</a>
             <% } %>
             <br><br>
           </div>

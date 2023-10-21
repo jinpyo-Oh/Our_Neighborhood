@@ -39,18 +39,18 @@ public class BoardRecommendController extends HttpServlet {
 		
 		// 게시글 번호 받기
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
-		System.out.println(boardNo);
+		int cgNo = Integer.parseInt(request.getParameter("cg"));
+		
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int memberNo = loginUser.getMemberNo();
 		
 		int result = new BoardService().increaseRecommend(boardNo, memberNo);
 		
-		BoardService bService = new BoardService();
 		if(result > 0) {			// 응답데이터로 각각 넘기고 포워딩
 			
 			request.getSession().setAttribute("alertMsg", "추천되었습니다. 다시는 취소할수없습니다. 감사합니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo+"&cg="+cgNo);
 			
 		} else {
 			
@@ -58,7 +58,7 @@ public class BoardRecommendController extends HttpServlet {
 			
 			// 에러문구를 담아서 에러페이지로 포워딩
 			request.getSession().setAttribute("alertMsg", "이미 추천한 게시글입니다..");
-			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo+"&cg="+cgNo);
 			
 		}
 

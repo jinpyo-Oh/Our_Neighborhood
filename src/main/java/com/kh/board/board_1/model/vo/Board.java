@@ -48,7 +48,7 @@ public class Board {
 	}
 	
 	
-
+	// select board
 	public Board(int boardNo, String boardTitle, String boardContent, String memberNo, int count, Date createDate,
 			int recommend, String cgNo) {
 		super();

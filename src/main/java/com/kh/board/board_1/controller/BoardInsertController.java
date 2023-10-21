@@ -20,7 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class BoardInsertController
  */
-@WebServlet("/insert.bo_1")
+@WebServlet("/insert.bo")
 public class BoardInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,11 +56,15 @@ public class BoardInsertController extends HttpServlet {
 			String boardWriter = multiRequest.getParameter("userNo");
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
+			String cgNo = multiRequest.getParameter("cgNo") ;
+			
 			// Board VO 로 가공
 			Board b = new Board();
 			b.setMemberNo(boardWriter);
 			b.setBoardTitle(title);
 			b.setBoardContent(content);
+			b.setCgNo(cgNo);
+			
 			
 			Image img = null;
 			
@@ -88,7 +92,7 @@ public class BoardInsertController extends HttpServlet {
 				
 				request.getSession().setAttribute("alertMsg", "게시글 작성에 성공했습니다.");
 				
-				response.sendRedirect(request.getContextPath() + "/list.bo?currentPage=1");
+				response.sendRedirect(request.getContextPath() + "/list.bo?currentPage=1&cg="+cgNo);
 				
 			} else { // 실패
 				

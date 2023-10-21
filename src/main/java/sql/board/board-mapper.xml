@@ -72,7 +72,7 @@
 		     , COUNT
 		     , RECOMMEND
 		     , MEMBER_ID
-		     , CG_No
+		     , CG_NO
 		  FROM BOARD B
 		  LEFT JOIN CATEGORY USING (CG_NO)
 		  	   JOIN MEMBER USING (MEMBER_NO)
