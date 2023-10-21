@@ -13,7 +13,7 @@ import com.kh.board.board_1.model.service.BoardService;
 /**
  * Servlet implementation class BoardDeleteController
  */
-@WebServlet("/delete.bo_1")
+@WebServlet("/delete.bo")
 public class BoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,7 +41,7 @@ public class BoardDeleteController extends HttpServlet {
 		if(result > 0) {
 			// 일회성 알람문구
 			request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/list.bo_1?currentPage=1");
+			response.sendRedirect(request.getContextPath()+"/list.bo?currentPage=1");
 			
 		} else {
 			

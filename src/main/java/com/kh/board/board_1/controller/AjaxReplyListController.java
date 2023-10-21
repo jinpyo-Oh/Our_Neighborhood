@@ -16,7 +16,7 @@ import com.kh.board.board_1.model.vo.Reply;
 /**
  * Servlet implementation class AjaxReplyListController
  */
-@WebServlet("/rlist.bo_1")
+@WebServlet("/rlist.bo")
 public class AjaxReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

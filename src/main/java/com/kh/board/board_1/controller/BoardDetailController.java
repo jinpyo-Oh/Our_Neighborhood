@@ -15,7 +15,7 @@ import com.kh.board.board_1.model.vo.Image;
 /**
  * Servlet implementation class BoardDetailController
  */
-@WebServlet("/detail.bo_1")
+@WebServlet("/detail.bo")
 public class BoardDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -55,7 +55,7 @@ public class BoardDetailController extends HttpServlet {
 			request.setAttribute("b", b);
 			request.setAttribute("img", img);
 			
-			request.getRequestDispatcher("views/board/board_1/1-BoardDetailView.jsp").forward(request, response);
+			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 			
 		} else {
 			

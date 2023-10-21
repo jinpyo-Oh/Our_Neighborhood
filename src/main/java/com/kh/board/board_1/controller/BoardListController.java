@@ -17,7 +17,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class BoardListController
  */
-@WebServlet("/list.bo_1")
+@WebServlet("/list.bo")
 public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +35,8 @@ public class BoardListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		
+		String cgNo = request.getParameter("cg");
+				
 		// 페이징 처리
 		int listCount;	 // 현재 총 게시글의 갯수
 		int currentPage; // 현재 페이지 (즉, 사용자가 요청한 페이지)
@@ -76,7 +77,7 @@ public class BoardListController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		// PageInfo 객체를 Service 로 넘기면서 요청 후 결과 받기
-		ArrayList<Board> list = new BoardService().selectList(pi);
+		ArrayList<Board> list = new BoardService().selectList(pi,cgNo);
 		
 		// 화면에 뿌려줄 데이터
 		/*
@@ -90,16 +91,16 @@ public class BoardListController extends HttpServlet {
 		// 응답데이터를 request 에 담기
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("cgNo", cgNo);
 		
 		
-		
-		if(m != null && (m.getAddress2() == 1 || m.getMemberNo() == 1)) {
+//		if(m != null && (m.getAddress2() == 1 || m.getMemberNo() == 1)) {
 			// 포워딩
-			request.getRequestDispatcher("views/board/board_1/1-BoardListView.jsp").forward(request, response);
-		} else {
-			request.getSession().setAttribute("alertMsg", "1단지 주민이 아닙니다.");
-			response.sendRedirect(request.getContextPath());
-		}
+			request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
+//		} else {
+//			request.getSession().setAttribute("alertMsg", "1단지 주민이 아닙니다.");
+//			response.sendRedirect(request.getContextPath());
+//		}
 	}
 
 	/**

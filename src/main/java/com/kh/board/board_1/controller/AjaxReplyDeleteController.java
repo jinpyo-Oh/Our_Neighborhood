@@ -15,7 +15,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class AjaxReplyDeleteController
  */
-@WebServlet("/rdelete.bo_1")
+@WebServlet("/rdelete.bo")
 public class AjaxReplyDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

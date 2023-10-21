@@ -88,7 +88,7 @@ public class BoardInsertController extends HttpServlet {
 				
 				request.getSession().setAttribute("alertMsg", "게시글 작성에 성공했습니다.");
 				
-				response.sendRedirect(request.getContextPath() + "/list.bo_1?currentPage=1");
+				response.sendRedirect(request.getContextPath() + "/list.bo?currentPage=1");
 				
 			} else { // 실패
 				

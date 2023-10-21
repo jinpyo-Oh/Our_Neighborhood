@@ -20,7 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class BoardUpdateController
  */
-@WebServlet("/update.bo_1")
+@WebServlet("/update.bo")
 public class BoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -122,7 +122,7 @@ public class BoardUpdateController extends HttpServlet {
 				// 해당 게시글의 상조회 페이지로 재요청
 				request.getSession().setAttribute("alertMsg", "게시글이 수정되었습니다.");
 				
-				response.sendRedirect(request.getContextPath() + "/detail.bo_1?bno=" + boardNo);
+				response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo);
 			} else {
 				
 				// 에러문구

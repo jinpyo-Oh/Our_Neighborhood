@@ -16,7 +16,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class AjaxReplyInsertController
  */
-@WebServlet("/rinsert.bo_1")
+@WebServlet("/rinsert.bo")
 public class AjaxReplyInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

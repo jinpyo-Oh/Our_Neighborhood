@@ -18,7 +18,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class BoardRecommendController
  */
-@WebServlet("/recommend.bo_1")
+@WebServlet("/recommend.bo")
 public class BoardRecommendController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -50,7 +50,7 @@ public class BoardRecommendController extends HttpServlet {
 		if(result > 0) {			// 응답데이터로 각각 넘기고 포워딩
 			
 			request.getSession().setAttribute("alertMsg", "추천되었습니다. 다시는 취소할수없습니다. 감사합니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.bo_1?bno=" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo);
 			
 		} else {
 			
@@ -58,7 +58,7 @@ public class BoardRecommendController extends HttpServlet {
 			
 			// 에러문구를 담아서 에러페이지로 포워딩
 			request.getSession().setAttribute("alertMsg", "이미 추천한 게시글입니다..");
-			response.sendRedirect(request.getContextPath() + "/detail.bo_1?bno=" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo);
 			
 		}
 

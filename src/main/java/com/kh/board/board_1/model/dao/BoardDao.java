@@ -71,7 +71,7 @@ public class BoardDao {
 		
 	}
 	
-	public ArrayList<Board> selectList(Connection conn, PageInfo pi){
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi, String cgNo){
 		
 		// 변수 생성
 		ArrayList<Board> list = new ArrayList<>();
@@ -90,22 +90,26 @@ public class BoardDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow  + pi.getBoardLimit() - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			
+			pstmt.setString(1, cgNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+		
 			// SQL 문 실행 후 결과 받기
 			rset = pstmt.executeQuery();
 			
 			// 데이터 뽑아서 VO로 가공후 ArrayList 에 담기
 			while(rset.next()) {
 				
-				list.add(new Board(rset.getInt("BOARD_NO"),
-								   rset.getInt("CG_NO"),
-								   rset.getString("BOARD_TITLE"),
-								   rset.getString("MEMBER_ID"),
-								   rset.getInt("COUNT"),
-								   rset.getDate("CREATE_DATE"),
-								   rset.getInt("RECOMMEND")));
+				list.add(new Board(
+						   rset.getInt("BOARD_NO"),
+						   rset.getString("CG_NAME"),
+						   rset.getString("BOARD_TITLE"),
+						   rset.getString("MEMBER_ID"),
+						   rset.getInt("COUNT"),
+						   rset.getDate("CREATE_DATE"),
+						   rset.getInt("RECOMMEND"),
+						   String.valueOf(rset.getInt("CG_NO"))
+						   ));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -250,8 +254,8 @@ public class BoardDao {
 							  rset.getString("MEMBER_ID"),
 							  rset.getInt("COUNT"),
 							  rset.getDate("CREATE_DATE"),
-							  rset.getInt("RECOMMEND"));
-				
+							  rset.getInt("RECOMMEND"),
+							  String.valueOf(rset.getInt("CG_NO")));
 			}
 			
 		} catch (SQLException e) {

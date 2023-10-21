@@ -86,9 +86,9 @@ if(msg != "null"){
           </li>
           <li class="dropdown"><a href="#"><span>단지 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="<%=contextPath%>/list.bo_1?currentPage=1">1단지</a></li>
-              <li><a href="#">2단지</a></li>
-              <li><a href="#">3단지</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=1&currentPage=1">1단지</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=2&currentPage=1">2단지</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=3&currentPage=1">3단지</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>등록/예약</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>

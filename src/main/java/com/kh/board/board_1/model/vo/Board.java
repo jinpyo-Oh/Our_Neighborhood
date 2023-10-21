@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Board {
 	private int boardNo; 			//	BOARD_NO	NUMBER
 	private int boardType;			//	BOARD_TYPE	NUMBER
-	private int cgNo; 				//	CG_NO	NUMBER
+	private String cgNo; 				//	CG_NO	NUMBER
 	
 	private String boardTitle; 		//	BOARD_TITLE	VARCHAR2(60 BYTE)
 	private String boardContent;  	//	BOARD_CONTENT	VARCHAR2(3000 BYTE)
@@ -21,7 +21,7 @@ public class Board {
 	public Board() {	}
 
 	public Board(int boardNo, String boardTitle, String boardContent, Date createDate, int count, String boardStatus,
-			int boardType, String memberNo, int cgNo, int recommend) {
+			int boardType, String memberNo, String cgNo, int recommend) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -36,7 +36,7 @@ public class Board {
 	}
 	
 	// 전체 조회용 생성자
-	public Board(int boardNo, int cgNo, String boardTitle, String memberNo, int count, Date createDate, int recommend) {
+	public Board(int boardNo, String cgNo, String boardTitle, String memberNo, int count, int recommend,Date createDate) {
 		super();
 		this.boardNo = boardNo;
 		this.cgNo = cgNo;
@@ -50,7 +50,7 @@ public class Board {
 	
 
 	public Board(int boardNo, String boardTitle, String boardContent, String memberNo, int count, Date createDate,
-			int recommend) {
+			int recommend, String cgNo) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -59,6 +59,7 @@ public class Board {
 		this.count = count;
 		this.createDate = createDate;
 		this.recommend = recommend;
+		this.cgNo = cgNo;
 	}
 
 	public int getRecommend() {
@@ -133,11 +134,11 @@ public class Board {
 		this.memberNo = memberNo;
 	}
 
-	public int getCgNo() {
+	public String getCgNo() {
 		return cgNo;
 	}
 
-	public void setCgNo(int cgNo) {
+	public void setCgNo(String cgNo) {
 		this.cgNo = cgNo;
 	}
 

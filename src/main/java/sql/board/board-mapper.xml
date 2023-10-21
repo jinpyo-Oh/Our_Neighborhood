@@ -14,17 +14,19 @@
 		    SELECT ROWNUM RNUM, A.*
 		      FROM (
 		        SELECT BOARD_NO
-		             , CG_NO
+		             , CG_NAME
 		             , BOARD_TITLE
 		             , MEMBER_ID
 		             , COUNT
 		             , CREATE_DATE
 		             , RECOMMEND
+		             , CG_NO
 		          FROM BOARD B
 		          JOIN CATEGORY USING (CG_NO)
 		          JOIN MEMBER USING (MEMBER_NO)
 		         WHERE B.BOARD_STATUS = 'Y'
 		           AND BOARD_TYPE = 1
+		           AND CG_NO = ?
 		         ORDER BY BOARD_NO DESC
 		      ) A
 		  )
@@ -70,6 +72,7 @@
 		     , COUNT
 		     , RECOMMEND
 		     , MEMBER_ID
+		     , CG_No
 		  FROM BOARD B
 		  LEFT JOIN CATEGORY USING (CG_NO)
 		  	   JOIN MEMBER USING (MEMBER_NO)

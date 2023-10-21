@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardEnrollFormController
  */
-@WebServlet("/enrollForm.bo_1")
+@WebServlet("/enrollForm.bo")
 public class BoardEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,7 +29,7 @@ public class BoardEnrollFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 포워딩
-		request.getRequestDispatcher("views/board/board_1/1-BoardEnrollForm.jsp").forward(request, response);
+		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
 		
 	}
 

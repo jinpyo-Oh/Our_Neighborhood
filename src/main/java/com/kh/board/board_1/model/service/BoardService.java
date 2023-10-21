@@ -33,14 +33,14 @@ public class BoardService {
 		return listCount;
 	}
 	
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Board> selectList(PageInfo pi, String cgNo) {
 		
 		// 1) Connection 객체 생성
 		Connection conn = getConnection();
 		
 		// 2) Connection 객체와 전달값을 넘기면서
 		// DAO로 요청 후 결과 받기
-		ArrayList<Board> list = new BoardDao().selectList(conn, pi);
+		ArrayList<Board> list = new BoardDao().selectList(conn, pi, cgNo);
 		
 		// 3) 트랜잭션 처리
 		

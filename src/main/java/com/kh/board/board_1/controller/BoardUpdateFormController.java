@@ -15,7 +15,7 @@ import com.kh.board.board_1.model.vo.Image;
 /**
  * Servlet implementation class BoardUpdateFormController
  */
-@WebServlet("/updateForm.bo_1")
+@WebServlet("/updateForm.bo")
 public class BoardUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,7 +48,7 @@ public class BoardUpdateFormController extends HttpServlet {
 		request.setAttribute("img", img);
 		
 		// 포워딩
-		request.getRequestDispatcher("views/board/board_1/1-BoardUpdateForm.jsp").forward(request, response);
+		request.getRequestDispatcher("views/board/boardUpdateForm.jsp").forward(request, response);
 		}
 
 	/**
