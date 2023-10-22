@@ -1,18 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.board.board_1.model.vo.*"%>
+    pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.kh.imageBoard.model.vo.*, com.kh.board.board_1.model.vo.Reply" %>
 <%
+	// 조회한 게시글, 첨부파일 정보 뽑기
 	Board b = (Board)request.getAttribute("b");
-	Image img  = (Image)request.getAttribute("img");
+	ArrayList<Image> list = (ArrayList<Image>)request.getAttribute("list");
 	Reply r = (Reply)request.getAttribute("r");
-%>
+	String cgNo = null;
+	
+	switch(b.getCgNo()){
+	case "사진" : cgNo = "5"; break;
+	case "중고거래" : cgNo = "6"; break;
+	case "홍보" : cgNo = "8"; break;
+	case "분실물" : cgNo = "9"; break;
+	}
+		
+%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="utf-8">
-  <title>boardDetailView</title>
-
- 
-  <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+      <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+   	 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <style>
   body {
   background: #f5f5f5
 }
@@ -21,7 +33,7 @@ table {
   border: 1px #a39485 solid;
   font-size: .9em;
   box-shadow: 0 2px 5px rgba(0,0,0,.25);
-  width: 100%;
+  width: 1000px;
   border-collapse: collapse;
   border-radius: 5px;
   overflow: hidden;
@@ -36,15 +48,13 @@ thead {
   color: black;
   background: #73685d;
 }
-thead th {
-  color : #fff;
-}
+
 
 thead th, thead td {
   border-bottom: 1px dotted lightgray;
 }
   
- td, th {
+ thead td, thead th {
   padding: 1em .5em;
   vertical-align: middle;
   
@@ -58,18 +68,21 @@ thead th, thead td {
 a {
   color: #73685d;
 }
-  .like-container{filter: url('#filter');
-  position: absolute; 
-  left: 50%; 
-  top: 50%; 
-  transform: translate(50%, -50%);
+  .like-container{
+    filter: url('#filter');
+    position: absolute; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(50%, -50%);
 }
 .like-cnt{  
   position: absolute; 
   cursor: pointer;
   left: 50%; 
   top: 100%; 
-  transform: translate(50%, -50%);     background: rgba(255,255,255,0.3);     width: 60px; 
+  transform: translate(50%, -50%);     
+  background: rgba(255,255,255,0.3);     
+  width: 60px; 
   height: 60px;  
   border-radius: 50%;
   text-align: center;
@@ -79,29 +92,47 @@ a {
 .like-btn{
   color: #fff;
 }
- 
+		  
+  /* 이미지 영역 사이즈 조절 */
+    .swiper {
+        width: 900px;
+        height: 300px;
+    }
+
+    /* 이미지 사이즈 조절 */
+    .swiper-slide>img {
+        width : 100%;
+        height : 100%;
+    }
+
+    /* 화살표 버튼색 변경 (기본색은 파란색) */
+    	div[class^=swiper-button] {
+        color : white;
+        /* display : none; */ /* 아니면 안보이게 숨기기도 가능 */
+    }
+
     
   </style>
-
 </head>
 
-
-
 <body>
-  <!-- boardHeader 인클루드-->
- <%@ include file="/views/common/boardHeader.jsp" %> 
-  
-  
+
+<!-- boardHeader 인클루드-->
+
+<%@ include file="/views/common/boardHeader.jsp" %>
   
   <main id="main">
+
+    
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/breadcrumbs-bg.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
         <h2>게시글 조회</h2>
         <ol>
           <li><a href="index.html">메인 페이지</a></li>
-          <li>게시판</li>
+          <li><%=b.getCgNo() %>게시판</li>
         </ol>
 
       </div>
@@ -110,13 +141,14 @@ a {
     <!-- ======= Services Section ======= -->
     <section id="services" class="section-bg">
       <div class="container" data-aos="fade-up">
+
         <div class="content_detail">
 
           <br>
           <h2 align="center">게시글 상세보기</h2>
           <br>
   
-          <table>
+        <table  align="center" >
             <thead>
             <tr>
                 <th>제목</th>
@@ -124,77 +156,123 @@ a {
             </tr>
 
             <tr>
-                <th style="width :10%;">작성자</th>
-                <td style="width :40%;"><%= b.getMemberNo() %></td>
-                <th style="width :10%;">작성일</th>
-                <td style="width :40%; text-align: right; padding-right: 50px;"><%= b.getCreateDate() %></td>
+                <th style="width : 10%;">작성자</th>
+                <td style="width : 40%;"><%= b.getMemberId() %></td>
+                <th style="width : 10%;">작성일</th>
+                <td style="width : 40%;" text-align: right; padding-right: 50px;"><%= b.getCreateDate() %></td>
             </tr>
           </thead>
           <tbody>
+          	<tr>
+          	<tr>
+              <th>
+                사진
+              </th>
+                <td colspan="3"">
+                    <div id="content_1" class="board-content">
+                        <!-- Slider main container -->
+                        <div class="swiper">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                <% for(int i = 0; i < list.size(); i++) { %>
+                   
+                                <% if(list.get(i).getImgLevel() == 1) { %>
+                                <div class="swiper-slide"><img src="<%= contextPath %>/<%= list.get(i).getImgPath() + list.get(i).getChangeName() %> "></div>
+                            	
+                            	<% } else if(list.get(i).getImgLevel() == 2) { %>
+                            	<div class="swiper-slide"><img src="<%= contextPath %>/<%= list.get(i).getImgPath() + list.get(i).getChangeName() %> "></div>
+								
+								<% } %>
+								
+                            <% } %>
+                            </div>
+                        
+                            <!-- If we need pagination -->
+                            <div class="swiper-pagination"></div>
+                        
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        
+                            <!-- If we need scrollbar -->
+                            <div class="swiper-scrollbar"></div>
+                        </div>
+                    </div>
+                </td>
+          	</tr>
+          		<script>
+          	                    // 슬라이더 동작 정의
+                    const swiper = new Swiper('.swiper', {
+
+          
+                        slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
+                        pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
+                            el: '.swiper-pagination',
+                            clickable: true
+                        },
+                        navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
+                            prevEl: '.swiper-button-prev',
+                            nextEl: '.swiper-button-next'
+                        }
+                    }); 
+          	                    </script>
             <tr>
-                <td>내용</td>
-                <td colspan="3">
+                <th>내용</th>
+                <td colspan="3" class="board-content">
                   <%= b.getBoardContent() %>
                 </td>
-            </tr>
-            <tr>
-              <td>첨부파일</td>
-              <td colspan="3">
-              	<% if(img == null) { %>
-	              	첨부파일이 없습니다
-              	<% } else { %>
-              		<a download="<%= img.getOriginalName() %>" href="<%= contextPath %>/<%= img.getImgPath() + img.getChangeName() %>">
-              			<%= img.getOriginalName() %>
-              		</a>
-              	<% } %> 
-              </td>
-            </tr>
-            <tr>
-            	<td colspan="4">
-	            	<button id="reco" class="btn btn-warning">추천</button>
-				  	<input type="hidden"  name="boardNo" value=<%= b.getBoardNo() %>>
-				  	
-				  	<script>
-				  	
-				  	$(function() {
-	                	  $("#reco").click(function() {
-	                		  
-	                		  location.href = "<%= contextPath %>/recommend.bo?bno=<%= b.getBoardNo() %>&cg=<%=b.getCgNo()%>";
-	                	  });
-			           });
-				  	
-				  	</script>
-				  	
-				</td>
+              
             </tr>
             <tr>
               <td colspan="4" style="text-align: right;">
                 <span>조회수 : <%= b.getCount() %></span>
-                <br>
                 <span>추천  : <%= b.getRecommend() %></span>
               </td>
             </tr>
             </tbody>  
         </table>
-        
+        <br>
+        <button id="reco" class="btn btn-warning">추천</button>
+         <input type="hidden" name="boardNo" value=<%= b.getBoardNo() %>>
           <br><br>
   
+    		<script>
+                
+                	$(function() {
+                		$("#reco").click(function(){
+                			
+                			location.href = "<%= contextPath %>/recommend.bo?bno=<%= b.getBoardNo() %>&cg=<%=cgNo%>";
+                		});
+                		
+                	});
+                    
+                
+                </script>
+                
           <div style="padding-right: 7px;" align="right">
-            <a href="<%= contextPath %>/list.bo?cg=<%=b.getCgNo() %>&currentPage=1" class="btn btn-sm">목록가기</a>
-            <% if((loginUser != null && loginUser.getMemberId().equals(b.getMemberNo())) || (loginUser.getMemberNo() == 1)){%>
+            <a href="<%= contextPath %>/imageList.bo?cg=<%=cgNo %>&currentPage=1" class="btn btn-sm" >목록가기</a>
+            <input type="hidden" name="memberNo" value=<%= b.getMemberNo() %>>
+            
+            <% if(loginUser != null && loginUser.getMemberId().equals(b.getMemberNo())) { %>
+	           
 	            <!-- 로그인한 사용자가 게시글 작성자일 경우에만 보여지게끔 -->
-	            <a href="<%= contextPath %>/updateForm.bo?bno=<%= b.getBoardNo() %>&cg=<%=b.getCgNo() %>" class="btn btn-sm">수정하기</a>
-	            <a href="<%= contextPath %>/delete.bo?bno=<%= b.getBoardNo() %>&cg=<%=b.getCgNo() %>" class="btn btn-sm">삭제하기</a>
+	            <a href="<%= contextPath %>/imageUpdateForm.bo?cg=<%=cgNo %>&bno=<%= b.getBoardNo() %>" class="btn btn-sm">수정하기</a>
+	 			<a href="<%= contextPath %>/imageDelete.bo?cg=<%=cgNo %>&bno=<%= b.getBoardNo() %>" class="btn btn-sm">삭제하기</a>
             <% } %>
             <br><br>
           </div>
         </div>
         <hr>
-        <table align="center" style="border-bottom: 1px solid black;" id="reply-area">
-          
-        </table>
         
-        <script>
+ 
+        
+        
+        <table align="center" style="border-bottom: 1px solid black;" id="reply-area">
+         
+         </table>
+         
+             <script>
         	$(function() {
         		
         		// 댓글 리스트 조회용 함수 호출
@@ -204,7 +282,7 @@ a {
         	});
         	
         	function insertReply() {
-        		
+        			
         		$.ajax({
         			url : "rinsert.bo",
         			type : "post",
@@ -218,6 +296,7 @@ a {
 							selectReplyList();
 							
 							$("#replyContent").val("");
+ 								
         				}
         			},
         			error : function() {
@@ -236,19 +315,20 @@ a {
 					data : {rno : result},
 					success : function(result) {
         				
+						
+						
         			},
 					error : function() {
 						
 						console.log("댓글 삭제 실패")
-					}
-				
+					}		
 				})        		
 				// 갱신된 댓글리스트를 다시 조회
 				selectReplyList();
         	}
         	
         	function selectReplyList() {
-        		
+        		var bno = "<%= b.getBoardNo() %>";
         		$.ajax({
 	       			url : "rlist.bo",
 	       			type : "get",
@@ -329,6 +409,8 @@ a {
         </div>
 
 
+
+
       </div>
     </section><!-- End Services Section -->
 
@@ -338,13 +420,10 @@ a {
 
   </main><!-- End #main -->
   
-
- 
-
+  
 
   <!-- 푸터 인클루드-->
- <%@ include file="/views/common/boardFooter.jsp" %>  
-
+  <%@ include file="/views/common/boardFooter.jsp" %>
 
 </body>
 

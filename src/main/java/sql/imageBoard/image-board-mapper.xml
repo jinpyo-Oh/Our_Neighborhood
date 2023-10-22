@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectListCount">
+	SELECT COUNT(*) COUNT
+		  FROM BOARD
+		  JOIN IMAGE USING (BOARD_NO)
+		 WHERE BOARD_STATUS = 'Y'
+		   AND BOARD_TYPE = 2
+		   AND IMG_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectList">	
+         SELECT *
+		  FROM (
+		    SELECT ROWNUM RNUM, A.*
+		      FROM (
+		        SELECT BOARD_NO
+				     , BOARD_TITLE
+				     , COUNT
+				     , I.IMG_PATH || I.CHANGE_NAME "TITLEIMG"
+		             , CG_NO
+		             , RECOMMEND
+		             , CREATE_DATE
+		             , M.MEMBER_ID
+		  FROM BOARD B
+		  JOIN IMAGE I USING (BOARD_NO)
+          JOIN MEMBER M USING (MEMBER_NO)
+		 WHERE BOARD_TYPE = 2
+		   AND BOARD_STATUS = 'Y'
+		   AND IMG_LEVEL = 1
+		   AND IMG_STATUS = 'Y'
+		   AND CG_NO = ?
+		 ORDER BY CREATE_DATE DESC
+		            ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	
+	<entry key="insertImageBoard">
+		INSERT INTO BOARD(BOARD_NO
+		                , BOARD_TYPE
+		                , BOARD_TITLE
+		                , BOARD_CONTENT
+		                , MEMBER_NO
+		                , CG_NO)
+		           VALUES(BOARD_SEQ.NEXTVAL
+		                , 2
+		                , ?
+		                , ?
+		                , ?
+		                , ?)
+	</entry>
+	
+	
+	<entry key="insertImageList">
+		INSERT INTO IMAGE(IMG_NO
+		                     , BOARD_NO
+		                     , ORIGINAL_NAME
+		                     , CHANGE_NAME
+		                     , IMG_PATH
+		                     , IMG_LEVEL)
+		                VALUES(IMAGE_SEQ.NEXTVAL
+		                     , BOARD_SEQ.CURRVAL
+		                     , ?
+		                     , ?
+		                     , ?
+		                     , ?)
+	</entry>
+	
+	<entry key="selectBoard">
+		SELECT BOARD_NO
+			 , CG_NAME
+		     , BOARD_TITLE
+		     , BOARD_CONTENT
+		     , COUNT
+		     , RECOMMEND
+		     , MEMBER_ID
+		     , MEMBER_NO
+		     , CREATE_DATE 
+		  FROM BOARD B
+		  LEFT JOIN CATEGORY USING (CG_NO)
+		  	   JOIN MEMBER USING (MEMBER_NO)
+		 WHERE BOARD_NO = ?
+		   AND CG_NO = ?
+		   AND BOARD_STATUS = ?
+	</entry>
+
+	<entry key="increaseCount">
+		UPDATE BOARD
+		   SET COUNT = COUNT + 1
+		 WHERE BOARD_NO = ?
+		   AND BOARD_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectImageList">
+	SELECT IMG_NO
+		     , ORIGINAL_NAME
+		     , CHANGE_NAME
+		     , IMG_LEVEL
+		     , IMG_PATH
+		  FROM IMAGE
+		  JOIN BOARD USING (BOARD_NO)
+		 WHERE BOARD_NO = ?
+		   AND IMG_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectRecommend">
+		SELECT BOARD_NO
+		  FROM RECOMMEND
+		 WHERE MEMBER_NO = ?
+	</entry>
+	
+	<entry key="increaseRecommend">
+				UPDATE BOARD
+		   SET RECOMMEND = RECOMMEND + 1
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="insertRecommend">
+			INSERT INTO RECOMMEND
+			 VALUES(?
+			 	  , ?)
+	</entry>
+	
+	<entry key="updateLost">
+		UPDATE BOARD
+		   SET BOARD_TITLE = ?
+		     , BOARD_CONTENT = ?
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="updateImage">
+	UPDATE IMAGE
+		   SET ORIGINAL_NAME = ?
+		     , CHANGE_NAME = ?
+		     , IMG_PATH = ?
+		     , UPLOAD_DATE = SYSDATE
+		 WHERE IMG_NO = ?
+	</entry>
+	
+	<entry key="insertNewImage">
+		INSERT INTO IMAGE(IMG_NO
+		                     , BOARD_NO
+		                     , ORIGINAL_NAME
+		                     , CHANGE_NAME
+		                     , IMG_PATH)
+		                VALUES(IMAGE_SEQ.NEXTVAL
+		                     , ?
+		                     , ?
+		                     , ?
+		                     , ?)
+	</entry>
+	
+	<entry key="selectCategoryList">
+			SELECT CG_NO
+			 , CG_NAME
+		  FROM CATEGORY
+	</entry>
+	
+	<entry key="selectAttachment">
+			SELECT IMG_NO
+		     , ORIGINAL_NAME
+		     , CHANGE_NAME
+		     , IMG_PATH
+		 
+		  FROM IMAGE
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="updateBoard">
+		UPDATE BOARD
+		   SET BOARD_TITLE = ?
+		     , BOARD_CONTENT = ?
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="updateAttachmentList">
+			INSERT INTO IMAGE(IMG_NO
+		                     , BOARD_NO
+		                     , ORIGINAL_NAME
+		                     , CHANGE_NAME
+		                     , IMG_PATH
+		                     , IMG_LEVEL
+		                     )
+		                VALUES(IMAGE_SEQ.NEXTVAL
+		                     , ?
+		                     , ?
+		                     , ?
+		                     , ?
+		                     , ? )
+	</entry>
+	
+	<entry key="updatedeleteList">
+		UPDATE IMAGE 
+        SET IMG_STATUS = 'N'
+        WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="deleteBoard">
+		UPDATE BOARD
+		   SET BOARD_STATUS = 'N'
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="insertReply">
+			INSERT INTO REPLY(REPLY_NO
+		                , REPLY_CONTENT
+		                , BOARD_NO
+		                , MEMBER_NO)
+		           VALUES(REPLY_SEQ.NEXTVAL
+		                , ?
+		                , ?
+		                , ?)
+	</entry>
+	
+	<entry key="selectReplyList">
+		SELECT REPLY_NO
+		     , REPLY_CONTENT
+		     , MEMBER_ID
+		     , TO_CHAR(CREATE_DATE, 'YY/MM/DD HH:MI:SS') CREATE_DATE
+		  FROM REPLY
+		  JOIN MEMBER USING (MEMBER_NO)
+		 WHERE REPLY_STATUS = 'Y'
+		   AND BOARD_NO = ?
+		 ORDER BY REPLY_NO DESC
+	</entry>
+	
+	<entry key="deleteReply_lost">
+		UPDATE REPLY
+		   SET REPLY_STATUS = 'N'
+	 	 WHERE REPLY_NO = ?
+	</entry>
+	
+</properties>

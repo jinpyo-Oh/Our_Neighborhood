@@ -3,11 +3,14 @@ package com.kh.member.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.board_1.model.vo.Board;
 import com.kh.common.JDBCTemplate;
 import com.kh.member.model.vo.Cost;
 import com.kh.member.model.vo.Member;
@@ -373,6 +376,51 @@ public class MemberDao {
 		
 		return cost;		
 	}
+	
+	public ArrayList<Board> wroteList(Connection conn, int memberNo){
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("wroteList");
+		ArrayList<Board> list = new ArrayList<>();
+		Board b = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,memberNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				b = new Board(
+						rset.getInt("BOARD_NO"),
+						rset.getString("CG_NAME"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("MEMBER_ID"),
+						rset.getInt("COUNT"),
+						rset.getInt("RECOMMEND"),
+						rset.getDate("CREATE_DATE")										
+						);
+				list.add(b);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+				
+		
+		
+	
+		
+		
+	}
+	
 }	
 	
 

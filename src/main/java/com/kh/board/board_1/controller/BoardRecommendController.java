@@ -47,6 +47,10 @@ public class BoardRecommendController extends HttpServlet {
 		
 		int result = new BoardService().increaseRecommend(boardNo, memberNo);
 		
+		
+		
+		if(cgNo==1||cgNo==2||cgNo==3||cgNo==4||cgNo==7||cgNo==10) { // 일반게시글 용
+		
 		if(result > 0) {			// 응답데이터로 각각 넘기고 포워딩
 			
 			request.getSession().setAttribute("alertMsg", "추천되었습니다. 다시는 취소할수없습니다. 감사합니다.");
@@ -60,6 +64,22 @@ public class BoardRecommendController extends HttpServlet {
 			request.getSession().setAttribute("alertMsg", "이미 추천한 게시글입니다..");
 			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + boardNo+"&cg="+cgNo);
 			
+		}
+		}else { // 사진 게시글용
+			if(result > 0) {			// 응답데이터로 각각 넘기고 포워딩
+				
+				request.getSession().setAttribute("alertMsg", "추천되었습니다. 다시는 취소할수없습니다. 감사합니다.");
+				response.sendRedirect(request.getContextPath() + "/imageDetail.bo?bno=" + boardNo+"&cg="+cgNo);
+				
+			} else {
+				
+				// 상세조회 실패처리
+				
+				// 에러문구를 담아서 에러페이지로 포워딩
+				request.getSession().setAttribute("alertMsg", "이미 추천한 게시글입니다..");
+				response.sendRedirect(request.getContextPath() + "/imageDetail.bo?bno=" + boardNo+"&cg="+cgNo);
+				
+			}
 		}
 
 	}

@@ -144,7 +144,7 @@ button[type="submit"] {
           <div class="nav-area" align="auto">
             <div class="menu"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
             <div class="menu"><a href="<%= contextPath %>/cost.me">관리비 조회</a></div>
-            <div class="menu"><a href="bbq.html">바베큐 예약/취소</a></div>
+            <div class="menu"><a href="<%= contextPath %>/wrote.me">내가 작성한 글</a></div>
             <div class="menu"><a href="<%= contextPath %>/views/member/memberDeleteForm.jsp">회원탈퇴</a></div>
           </div>
 
