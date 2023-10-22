@@ -473,7 +473,7 @@ pageEncoding="UTF-8"%>
             },
             error: function () {
               console.log("fail");
-            },
+            }
           });
         });
       });

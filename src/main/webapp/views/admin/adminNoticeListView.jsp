@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <% 
+ 	String cg = 
+ 
+ %>   
+    
+    
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -169,7 +175,7 @@
                       // => 대놓고 쿼리스트링을 직접 입력하는 방식 
                       
                       // /jsp/detail.no?nno=클릭했을때의글번호
-                    location.href = "<%= contextPath %>/detail.no?nno=" + nno;
+                    location.href = "<%=contextPath %>/detail.no?nno=" + nno;
                       
                     });
                   });

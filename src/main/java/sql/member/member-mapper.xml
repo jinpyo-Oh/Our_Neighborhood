@@ -79,4 +79,46 @@
 		  FROM MEMBER
 		 WHERE MEMBER_ID = ? 
 	</entry>
+	
+	<entry key="selectCostSub">
+		SELECT *
+		FROM (
+		    SELECT
+		        COST_DATE,
+		       CUR_COM - BEFORE_COM AS RES_COM,
+		       CUR_ELE - BEFORE_ELE AS RES_ELE,
+		       CUR_WAT - BEFORE_WAT AS RES_WAT,
+		       CUR_HEA - BEFORE_HEA AS RES_HEA,
+		        ROWNUM AS RN
+		    FROM (
+		        SELECT
+		            COST_DATE,
+		            COMMON_BILL AS CUR_COM,
+		            LAG(COMMON_BILL) OVER (ORDER BY COST_DATE) AS BEFORE_COM,
+		            ELECTRICITY_BILL AS CUR_ELE,
+		            LAG(ELECTRICITY_BILL) OVER (ORDER BY COST_DATE) AS BEFORE_ELE,
+		            WATER_BILL AS CUR_WAT,
+		            LAG(WATER_BILL) OVER (ORDER BY COST_DATE) AS BEFORE_WAT,
+		            HEATING_BILL AS CUR_HEA,
+		            LAG(HEATING_BILL) OVER (ORDER BY COST_DATE) AS BEFORE_HEA
+		        FROM
+		            COST
+		        WHERE
+		            MEMBER_NO = ?
+		            AND COST_DATE IN ('?','?')
+		        ORDER BY COST_DATE
+		    )
+		)
+		WHERE RN > 1
+			
+	</entry>
+	
+	<entry key="selectCost">
+		SELECT COST_DATE,COMMON_BILL,ELECTRICITY_BILL,WATER_BILL,HEATING_BILL
+		FROM COST 
+		WHERE COST_DATE IN ?
+		AND MEMBER_NO = ?
+
+	</entry>
+	
 </properties>

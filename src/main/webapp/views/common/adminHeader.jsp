@@ -150,11 +150,11 @@ if(msg != "null"){
                                 1단지
                             </a>
                            
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#complex2" aria-expanded="false" aria-controls="complex2">
+                            <a class="nav-link collapsed" href=""<%=contextPath%>/list.ad?cg=2"  data-bs-target="#complex2" aria-expanded="false" aria-controls="complex2">
                                 2단지
                             </a>
                             
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#complex3" aria-expanded="false" aria-controls="complex3">
+                            <a class="nav-link collapsed" href=""<%=contextPath%>/list.ad?cg=3"  data-bs-target="#complex3" aria-expanded="false" aria-controls="complex3">
                                 3단지
                             </a>
                         

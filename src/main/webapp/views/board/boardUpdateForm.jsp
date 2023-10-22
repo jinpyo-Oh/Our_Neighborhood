@@ -156,10 +156,14 @@
 					 		<%= img.getOriginalName() %>
 							<input type="file" name="upfile">
 					 		<!-- 기존 첨부파일의 수정명도 같이 넘길것 (삭제시 필요) -->
-					 	<% } %>
-					</div>
-			 		<input type="hidden" name="originFileNo" value="<%= img.getImgNo() %>">
-			 		<input type="hidden" name="originFileName" value="<%= img.getChangeName() %>"> 
+					 	
+							</div>
+							<input type="hidden" name="originFileNo" value="<%= img.getImgNo() %>">
+					 		<input type="hidden" name="originFileName" value="<%= img.getChangeName() %>"> 
+						<% } else {%>
+							</div>
+						<% } %>
+			 		
 					<br><br>
 					<script>
 	

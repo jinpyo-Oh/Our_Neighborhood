@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
+import com.kh.member.model.vo.Cost;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -336,6 +337,42 @@ public class MemberDao {
 		
 	}
 	
+	public Cost selectCost(Connection conn, String month, int memberNo) {
+	
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCost");
+		Cost cost = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,month);
+			pstmt.setInt(2, memberNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				cost = new Cost(
+						rset.getString("COST_DATE"),
+						rset.getInt("COMMON_BILL"),
+						rset.getInt("ELECTRICITY_BILL"),
+						rset.getInt("WATER_BILL"),
+						rset.getInt("HEATING_BILL")
+						);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return cost;		
+	}
 }	
 	
 

@@ -68,6 +68,8 @@ public class BoardUpdateController extends HttpServlet {
 			
 			// case 2. 기존 첨부파일 x, 새 첨부파일 o
 			
+			// case 3. 기존 o 새 x
+			
 			// 공통적으로 수행
 			int boardNo = Integer.parseInt(multiRequest.getParameter("boardNo"));
 			String boardTitle = multiRequest.getParameter("title");

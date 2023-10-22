@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Cost"%>
+    
+ <%
+ Cost month= (Cost)request.getAttribute("month");
+ Cost beforeMonth = (Cost)request.getAttribute("beforeMonth");
+
+
+ %>
+ 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,19 +176,158 @@
                       <input type="text" name="address" disabled value="<%= address %>">
                     </td>
                     <td>
-                      <form>
 					  <input type='month' id='currnetMonth'>
-					  </form>
 					
 					  <script>
-					  document.getElementById('currnetMonth').value= new Date().toISOString().slice(0, 7);
+					  
+					  
+					  $(function(){	
+						  
+						  var comBill = <%=month.getCommonBill()%>					 
+						  var eleBill = <%=month.getElectricityBill()%>
+						  var watBill = <%=month.getWaterBill()%>
+						  var hetBill = <%=month.getHeatingBill()%>						  
+						  var comBillBe = <%=beforeMonth.getCommonBill()%>
+						  var eleBillBe = <%=beforeMonth.getElectricityBill()%>
+						  var watBillBe = <%=beforeMonth.getWaterBill()%>
+						  var hetBillBe = <%=beforeMonth.getHeatingBill()%>
+						  
+						  document.getElementById('currnetMonth').value= "<%=month.getCostDate()%>";
+						  	 					  				 
+						  $("#currnetMonth").change(function () {   
+				    			console.log("ok");
+				    			
+				    				$.ajax({
+				    					url:"<%=contextPath%>/cost.me",
+				    					type:"get",
+				    					async:false,
+				    					data:{
+				    						month : $("#currnetMonth").val()    						
+				    					},
+				    					success: function(result){
+	
+				    					   var comBill = result[0].commonBill;				 
+				    					   var eleBill = result[0].electricityBill;
+				    					   var watBill = result[0].waterBill;
+				    					   var hetBill = result[0].heatingBill;				    						  
+				    					   var comBillBe = result[1].commonBill;	
+				    					   var eleBillBe = result[1].electricityBill;
+				    					   var watBillBe = result[1].waterBill;
+				    					   var hetBillBe = result[1].heatingBill;
+			    						   
+				    					   
+				    					   
+			    						   $("#comBill").text(comBill);
+			    						   $("#comBillBe").text(comBillBe);
+			    						   $("#comSub").text(comBill-comBillBe);
+			    						   if((comBill-comBillBe)>0){
+			    							   $("#comSub").css('color','red');
+			    						   }else if((comBill-comBillBe)==0){
+			    							   $("#comSub").css('color','gray');
+			    						   }else{
+			    							   $("#comSub").css('color','blue');
+			    						   }
+			    						   
+			    							
+										   $("#eleBill").text(eleBill);
+										   $("#eleBillBe").text(eleBillBe);
+									       $("#eleSub").text(eleBill-eleBillBe);
+										   if((eleBill-eleBillBe)>0){
+			    							   $("#eleSub").css('color','red');
+			    						   }else if((comBill-comBillBe)==0){
+			    							   $("#eleSub").css('color','gray');
+			    						   }else{
+			    							   $("#eleSub").css('color','blue');
+			    						   }
+			    							
+										   $("#watBill").text(watBill);
+										   $("#watBillBe").text(watBillBe);
+										   $("#watSub").text(watBill-watBillBe);
+										   if((watBill-watBillBe)>0){
+			    							   $("#watSub").css('color','red');
+			    						   }else if((comBill-comBillBe)==0){
+			    							   $("#watSub").css('color','gray');
+			    						   }else{
+			    							   $("#watSub").css('color','blue');
+			    						   }
+										   
+										   $("#hetBill").text(hetBill);
+									  	   $("#hetBillBe").text(hetBillBe);
+										   $("#hetSub").text(hetBill-hetBillBe);
+										   if((hetBill-hetBillBe)>0){
+			    							   $("#hetSub").css('color','red');
+			    						   }else if((comBill-comBillBe)==0){
+			    							   $("#hetSub").css('color','gray');
+			    						   }else{
+			    							   $("#hetSub").css('color','blue');
+			    						   }
+										   
+										   $("#sum").text(comBill+eleBill+watBill+hetBill);
+			    								    						  				    						
+				    					},
+				    					   error: function () {
+				    			              	console.log("fail");
+				    		            }    					   					    					
+				    				}); 
+								    			    		
+				    			
+						  });
+						  
+						  $("#comBill").text(comBill);
+						   $("#comBillBe").text(comBillBe);
+						   $("#comSub").text(comBill-comBillBe);
+						   if((comBill-comBillBe)>0){
+							   $("#comSub").css('color','red');
+						   }else if((comBill-comBillBe)==0){
+							   $("#comSub").css('color','gray');
+						   }else{
+							   $("#comSub").css('color','blue');
+						   }
+						   
+							
+						   $("#eleBill").text(eleBill);
+						   $("#eleBillBe").text(eleBillBe);
+					       $("#eleSub").text(eleBill-eleBillBe);
+						   if((eleBill-eleBillBe)>0){
+							   $("#eleSub").css('color','red');
+						   }else if((comBill-comBillBe)==0){
+							   $("#eleSub").css('color','gray');
+						   }else{
+							   $("#eleSub").css('color','blue');
+						   }
+							
+						   $("#watBill").text(watBill);
+						   $("#watBillBe").text(watBillBe);
+						   $("#watSub").text(watBill-watBillBe);
+						   if((watBill-watBillBe)>0){
+							   $("#watSub").css('color','red');
+						   }else if((comBill-comBillBe)==0){
+							   $("#watSub").css('color','gray');
+						   }else{
+							   $("#watSub").css('color','blue');
+						   }
+						   
+						   $("#hetBill").text(hetBill);
+					  	   $("#hetBillBe").text(hetBillBe);
+						   $("#hetSub").text(hetBill-hetBillBe);
+						   if((hetBill-hetBillBe)>0){
+							   $("#hetSub").css('color','red');
+						   }else if((comBill-comBillBe)==0){
+							   $("#hetSub").css('color','gray');
+						   }else{
+							   $("#hetSub").css('color','blue');
+						   }
+						   
+						   $("#sum").text(comBill+eleBill+watBill+hetBill+"원");
+			  
+					  })
+	
 					  </script>
                     </td>
                   </tr>
                   </tbody>
               </table>
             <br><br>
-
               <table id="table2" align="left">
                 <tbody>
                   <tr>
@@ -190,33 +338,34 @@
                   </tr>
                   <tr>
                     <td>공동관리비</td>
-                    <td>87,640</td>
-                    <td>87,200</td>
-                    <td style="color:red">▲440</td>
+                    <td id="comBill"></td>
+                    <td id="comBillBe"></td>
+                    <td id="comSub"></td>               
                   </tr>
                   <tr>
                     <td>세대전기료</td>
-                    <td>2,000</td>
-                    <td>1,800</td>
-                    <td style="color:red">▲200</td>
+                    <td id="eleBill"></td>
+                    <td id="eleBillBe"></td>
+                    <td id="eleSub"></td>  
                   </tr>
                   <tr>
                     <td>세대수도료</td>
-                    <td>12,600</td>
-                    <td>12,300</td>
-                    <td style="color:red">▲300</td>
+                    <td id="watBill"></td>
+                    <td id="watBillBe"></td>
+                   	<td id="watSub"></td>
                   </tr>
                   <tr>
                     <td>세대난방비</td>
-                    <td>20,900</td>
-                    <td>18,560</td>
-                    <td style="color:red">▲2,340</td>
+                    <td id="hetBill"></td>
+                    <td id="hetBillBe"></td>
+                    <td id="hetSub"></td>   
                   </tr>
+
                   <tr>
                     <th></th>
                     <th></th>
                     <th>총 합계</th>
-                    <th>112,230</th>
+                    <th id="sum"></th>
                   </tr>
                   </tbody>
               </table>
@@ -251,15 +400,18 @@
                   </tr>
                 </tbody>
               </table>
-    
-
+        
           </div>
 
         </div>
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
-
+  <script>
+		
+	
+	
+	</script>
  
 
       <!-- 푸터 인클루드-->

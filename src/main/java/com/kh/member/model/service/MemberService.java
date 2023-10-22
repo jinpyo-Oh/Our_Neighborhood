@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.member.model.dao.MemberDao;
+import com.kh.member.model.vo.Cost;
 import com.kh.member.model.vo.Member;
 
 public class MemberService {
@@ -125,5 +126,17 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return foundPwd;
+	}
+	
+	public Cost selectCost(String month, int memberNo) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Cost cost = new MemberDao().selectCost(conn,month,memberNo); 
+		
+		JDBCTemplate.close(conn);
+		
+		return cost;
+		
 	}
 }
