@@ -227,6 +227,25 @@ public class BoardService {
 		// 6) 리턴
 		return result1 * result2;
 	}
+		
+	public int deleteImage(int boardNo) {
+		
+		// Connection 객체 생성
+		Connection conn = getConnection();
+		
+		// 전달값 넘기고 결과받기
+		int result = new BoardDao().deleteImage(conn, boardNo);
+		
+		// 트랜잭션처리
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 	public int deleteBoard(int boardNo) {
 		

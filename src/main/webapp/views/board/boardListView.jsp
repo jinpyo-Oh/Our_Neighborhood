@@ -18,7 +18,9 @@
 	case "5" : cgName="사진"; break;
 	case "6" : cgName="중고거래"; break;
 	case "7" : cgName="건의사항"; break;
-	case "8" : cgName="분실물"; break;
+	case "8" : cgName="홍보"; break;
+	case "9" : cgName="분실물"; break;
+	case "10" : cgName="공지사항"; break;
 	}
 	
 	
@@ -220,7 +222,7 @@ section.notice {
 	width : 120px;
 }
 
-tbody tr:hover{
+tbody #table-content:hover{
 	background-color : lightgray;
 	cursor: pointer;
 }
@@ -277,13 +279,13 @@ tbody tr:hover{
                       <tbody>
 						<% if(list.isEmpty()) { %>
 							<tr>
-								<td coslpan="7">
+								<td colspan="7">
 									조회된 리스트가 없습니다.
 								</td>
 							</tr>
 						<% } else { %>
 	                      	<% for(Board b : list) {%>
-	                      		<tr>
+	                      		<tr id="table-content">
 	                      			<td><%= b.getBoardNo() %></td>
 	                      			<td style="text-align : left; padding-left : 100px; padding-right : 100px">
 	                      				<%= b.getBoardTitle() %> </td>	               
@@ -298,7 +300,7 @@ tbody tr:hover{
                   </table>
                   <script>
 		              $(function() {
-	                	  $(".board-table>tbody>tr").click(function() {
+                    $(".board-table>tbody>#table-content").click(function() {
 	                		  let bno = $(this).children().eq(0).text();
 	                		  console.log(bno);
 	                		  location.href = "<%= contextPath %>/detail.bo?cg=<%=cgNo%>&bno=" + bno;
@@ -310,23 +312,28 @@ tbody tr:hover{
                   <br><br>
                   <div align="right">
                   	<% if(loginUser != null) { %>
-                   		<a href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
+	                  		<%if(Integer.parseInt(cgNo) == 10 && loginUser.getMemberId().equals("admin")) { %>
+	                   		<a href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
+	                   		<% } %>
+                   			<%if(Integer.parseInt(cgNo) != 10) { %>
+                   			<a href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
+                   			<% } %>
                    	<% } %>
                 	</div>
                 <!-- 페이징바 -->
                 <div class="pageing-area" align="center">
                 <% if(currentPage != 1) { %>
-					<button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo?currentPage=<%= currentPage - 1 %>';">&lt;</button>
+                  <button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo?cg=<%= cgNo %>&currentPage=<%= currentPage - 1 %>';">&lt;</button>
 				<% } %>
                   <% for(int p = startPage; p <= endPage; p++) { %>
                   	<% if(p != currentPage) { %>
-                  		<button class="paging-btn" onclick="location.href ='<%= contextPath %>/list.bo?currentPage=<%= p %>'"><%= p %></button>
+                  		<button class="paging-btn" onclick="location.href ='<%= contextPath %>/list.bo?cg=<%= cgNo %>&currentPage=<%= p %>'"><%= p %></button>
                   	<% } else { %>
                   		<button class="paging-dis" disabled><%= p %></button>
                   	<% } %>
                   <% } %>
                 <% if(currentPage != maxPage) { %>  
-					<button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo?currentPage=<%= currentPage + 1 %>';">&gt;</button>
+                  <button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo?cg=<%= cgNo %>&currentPage=<%= currentPage + 1 %>';">&gt;</button>
 				<% } %>
                 </div>
               </div>

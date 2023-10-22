@@ -450,6 +450,35 @@ public class BoardDao {
 		// 결과 리턴
 		return result;
 	}
+
+	public int deleteImage(Connection conn, int boardNo) {
+		
+		// 변수 셋팅
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		// SQL문
+		String sql = prop.getProperty("deleteImage");
+		
+		try {
+			// PreparedStatement 셋팅
+			pstmt = conn.prepareStatement(sql);
+			
+			// SQL문 완성
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// 자원반납
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
 	
 	public int updateImage(Connection conn, Image img) {
 		

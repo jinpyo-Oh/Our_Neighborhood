@@ -73,15 +73,15 @@ if(msg != "null"){
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="index.jsp">Home</a></li>
-          <li><a href="">공지사항</a></li>
+          <li><a href="<%=contextPath%>/list.bo?cg=10&currentPage=1"">공지사항</a></li>
           <li class="dropdown"><a href="#"><span>통합 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="<%=contextPath%>/list.bo?cg=4&currentPage=1">자유게시판</a></li>
-              <li><a href="#">사진게시판</a></li>
-              <li><a href="#">중고거래 게시판</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=5&currentPage=1"">사진게시판</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=6&currentPage=1"">중고거래 게시판</a></li>
               <li><a href="<%=contextPath%>/list.bo?cg=7&currentPage=1">건의사항 게시판</a></li>
-              <li><a href="#">홍보 게시판</a></li>
-              <li><a href="#">분실물 게시판</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=8&currentPage=1"">홍보 게시판</a></li>
+              <li><a href="<%=contextPath%>/list.bo?cg=9&currentPage=1"">분실물 게시판</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>단지 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -93,7 +93,7 @@ if(msg != "null"){
           </li>
           <li class="dropdown"><a href="#"><span>등록/예약</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">차량</a></li>
+              <li><a href="<%=contextPath%>/list.ca">차량</a></li>
               <li><a href="<%=contextPath%>/resEnrollForm.bq">바베큐</a></li>
             </ul>
           </li>

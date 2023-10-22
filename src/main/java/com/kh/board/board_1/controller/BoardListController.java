@@ -93,14 +93,23 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("cgNo", cgNo);
 		
-		
-//		if(m != null && (m.getAddress2() == 1 || m.getMemberNo() == 1)) {
+		if(Integer.parseInt(cgNo) < 4) {
+			if(m != null){
+				if(m.getAddress2() == Integer.parseInt(cgNo) || m.getMemberNo() == 1) {
+					// 포워딩
+					request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
+				} else {
+					request.getSession().setAttribute("alertMsg", cgNo + "단지 주민이 아닙니다.");
+					response.sendRedirect(request.getContextPath());
+				}
+			}else {
+				request.getSession().setAttribute("alertMsg", "로그인 후 이용가능합니다.");
+				response.sendRedirect(request.getContextPath());
+			}
+		} else {
 			// 포워딩
 			request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
-//		} else {
-//			request.getSession().setAttribute("alertMsg", "1단지 주민이 아닙니다.");
-//			response.sendRedirect(request.getContextPath());
-//		}
+	}
 	}
 
 	/**

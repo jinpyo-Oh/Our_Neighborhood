@@ -119,7 +119,7 @@
 		 WHERE IMG_NO = ?
 	</entry>
 	<entry key="insertNewImage">
-		INSERT INTO ATTACHMENT(IMG_NO
+		INSERT INTO IMAGE(IMG_NO
 		                     , BOARD_NO
 		                     , ORIGINAL_NAME
 		                     , CHANGE_NAME
@@ -129,6 +129,10 @@
 		                     , ?
 		                     , ?
 		                     , ?)
+	</entry>
+	<entry key="deleteImage">
+		DELETE FROM IMAGE
+		 WHERE BOARD_NO = ?
 	</entry>
 	<entry key="deleteBoard">
 		UPDATE BOARD

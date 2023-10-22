@@ -116,6 +116,11 @@ public class BoardUpdateController extends HttpServlet {
 					// - case 2 인 경우
 					img.setBoardNo(boardNo);
 				}
+				} else {
+				// 기존 첨부파일을 삭제
+				String originFileName = multiRequest.getParameter("originFileName");
+				new File(savePath + originFileName).delete();
+				int result = new BoardService().deleteImage(boardNo);
 			}
 			// 트랜잭션 처리는 다같이
 			int result = new BoardService().updateBoard(b, img);

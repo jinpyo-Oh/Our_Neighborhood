@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	 <entry key="selectCar">
+	 	SELECT CAR_RES_NO,
+		       CAR_OWNER,
+		       CAR_TYPE
+		  FROM CAR
+		 WHERE MEMBER_NO = ?
+	 </entry>
+	<entry key="insertCar">
+		INSERT INTO CAR VALUES(CAR_SEQ.NEXTVAL,
+		                       ?, 
+		                       ?, 
+		                       ?, 
+		                       ?)
+	</entry>
+	<entry key="deleteCar">
+		DELETE FROM CAR
+  			  WHERE CAR_RES_NO = ?
+	</entry>
+</properties>
