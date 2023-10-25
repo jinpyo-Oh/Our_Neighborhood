@@ -58,7 +58,8 @@
 	<entry key="deleteMember">
 		UPDATE MEMBER
 		   SET MEMBER_STATUS = 'N'
-		 WHERE MEMBER_PWD = ?
+		  WHERE MEMBER_ID = ?
+		   AND MEMBER_PWD = ?
 	</entry>
 	
 	<entry key="idCheck">
@@ -71,6 +72,8 @@
 		SELECT MEMBER_ID
 		  FROM MEMBER
 		 WHERE MEMBER_NAME = ? 
+		  AND MEMBER_ADDRESS2 = ?
+		   AND MEMBER_ADDRESS = ?
 		   AND MEMBER_PHONE = ?
 	</entry>
 	
@@ -119,6 +122,30 @@
 		WHERE COST_DATE IN ?
 		AND MEMBER_NO = ?
 
+	</entry>
+	
+	<entry key="wroteList">
+	SELECT *
+		  FROM (
+		    SELECT ROWNUM RNUM, A.*
+		      FROM (
+		
+		SELECT BOARD_NO, CG_NAME
+		             , BOARD_TITLE
+		             , MEMBER_ID
+		             , COUNT
+		             , CREATE_DATE
+		             , RECOMMEND
+		             , CG_NO
+		          FROM BOARD B
+		          JOIN CATEGORY USING (CG_NO)
+		          JOIN MEMBER USING (MEMBER_NO)
+		         WHERE B.BOARD_STATUS = 'Y'
+		         AND MEMBER_NO=?		
+	 ) A
+		  )
+		 WHERE RNUM BETWEEN ? AND ?
+	
 	</entry>
 	
 </properties>

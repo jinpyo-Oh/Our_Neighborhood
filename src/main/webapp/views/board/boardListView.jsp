@@ -237,10 +237,10 @@ tbody #table-content:hover{
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/breadcrumbs-bg.jpg');">
+     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
-        <h2><%=cgName %> 게시글 조회</h2>
+        <h2><%=cgName %> 게시판</h2>
         <ol>
           <li><a href="<%= contextPath %>">메인 페이지</a></li>
           <li><%=cgName %> 게시판</li>
@@ -253,11 +253,6 @@ tbody #table-content:hover{
     <section id="services" class="section-bg">
       
       <section class="notice">
-        <div class="page-title">
-              <div class="container">
-                  <h3><%=cgName %> 게시판</h3>
-              </div>
-          </div>
         
         <!-- board list area -->
           <div id="board-list">
@@ -313,10 +308,10 @@ tbody #table-content:hover{
                   <div align="right">
                   	<% if(loginUser != null) { %>
 	                  		<%if(Integer.parseInt(cgNo) == 10 && loginUser.getMemberId().equals("admin")) { %>
-	                   		<a href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
+	                   		<a class="btn btn-warning btn-sm" href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
 	                   		<% } %>
                    			<%if(Integer.parseInt(cgNo) != 10) { %>
-                   			<a href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
+                   			<a class="btn btn-warning btn-sm" href="<%= contextPath %>/enrollForm.bo?cg=<%=cgNo%>">글 작성</a>
                    			<% } %>
                    	<% } %>
                 	</div>

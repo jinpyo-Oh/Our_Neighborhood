@@ -16,6 +16,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+
+  /* div { border: 1px solid black;} */
+
     .wrap {
       width: 1200px;
       height: 800px;
@@ -25,15 +28,15 @@
 
     .nav-area {
       background-color: #f4c005;
-      width: 1200px;
+      width: 100%;
     }
 
     .menu {
-      width: 1200px;
-      height:15px;
-      display : inline;
-      padding-left: 100px;
-      padding-right: 50px;
+      width: 24%;
+      height: 98%;
+      display : inline-block;
+      margin-left: 7px;
+      text-align: center;
     }
 
     .menu a {
@@ -41,9 +44,9 @@
       color : white;
       font-size : 20px;
       font-weight : bold;
-      width : 100%;    
+      box-sizing: border-box;  
     }
-      
+
     .menu a:hover { 
       background-color : darkgray; 
     }
@@ -133,7 +136,7 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('<%= contextPath %>/resources/img/chuncheonlakecity_940x350.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>관리비 조회</h2>
         <ol>
@@ -146,10 +149,10 @@
     <section id="contact" class="contact">
         <div class="wrap">
           <div class="nav-area" align="auto">
-            <div class="menu"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
-            <div class="menu"><a href="<%= contextPath %>/views/member/memberCostView.jsp">관리비 조회</a></div>
-            <div class="menu"><a href="bbq.html">바베큐 예약/취소</a></div>
-            <div class="menu"><a href="<%= contextPath %>/views/member/memberDeleteForm.jsp">회원탈퇴</a></div>
+            <div class="menu" id="test1"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
+            <div class="menu" id="test2"><a href="<%= contextPath %>/cost.me">관리비 조회</a></div>
+            <div class="menu" id="test3"><a href="<%= contextPath %>/wrote.me?currentPage=1">내가 작성한 글</a></div>
+            <div class="menu" id="test4"><a href="<%= contextPath %>/deleteForm.me">회원탈퇴</a></div>
           </div>
 
           <div class="container" data-aos="fade-up" data-aos-delay="100">

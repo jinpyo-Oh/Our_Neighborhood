@@ -63,9 +63,11 @@ public class Member {
 	}
 	
 	// 아이디 찾기용 생성자
-	public Member(String memberName, String phone) {
+	public Member(String memberName,int address2, String address, String phone) {
 		super();
 		this.memberName = memberName;
+		this.address2 = address2;
+		this.address = address;
 		this.phone = phone;
 	}
 	// admin 회원 정보 수정용

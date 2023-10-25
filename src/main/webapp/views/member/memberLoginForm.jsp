@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
+    <%
 
+	Cookie[] cookies = request.getCookies();
+	
+	String saveId = "";
+	
+	if(cookies != null) {
+		
+		for(int i = 0; i < cookies.length; i++) {
+			
+			if(cookies[i].getName().equals("saveId")) {
+				
+				saveId = cookies[i].getValue();
+				break;
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +29,7 @@
         .wrap {
         width : 1200px;
         height : 500px;
-        margin-top : 120px;
-        border : 1px solid lightgray;
+    	margin : auto;
     }
 
     .loginForm {
@@ -20,6 +37,7 @@
         margin : auto;
         margin-top : 0px;
         padding-top : 30px;
+        
     }
 
     .loginForm_1 {
@@ -90,11 +108,23 @@
   <!-- boardHeader 인클루드-->
 
   <%@ include file="../common/boardHeader.jsp" %>
+  <script>
+    $(function() {
+        
+        let saveId = "<%= saveId %>";
+        
+        if(saveId != "") {
+            
+            $(".loginForm_2 input[name=memberId]").val(saveId);
+            $("#saveId").attr("checked", true);
+        }
+    });
+</script>
   
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/chuncheonlakecity_940x350.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>로그인</h2>
         <ol>

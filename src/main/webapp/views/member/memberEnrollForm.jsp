@@ -110,7 +110,7 @@ button[type="button"] {
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/chuncheonlakecity_940x350.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>회원가입</h2>
         <ol>

@@ -52,9 +52,23 @@
 	<entry key="selectBoardChart">
 		SELECT COUNT(*)
 		  FROM BOARD
-		 WHERE FLOOR(MONTHS_BETWEEN(SYSDATE, CREATE_DATE)) &lt; = ?
+		 WHERE FLOOR(MONTHS_BETWEEN(SYSDATE, CREATE_DATE)) = ?
 		 GROUP BY TO_CHAR(CREATE_DATE, 'YYYY-MM')
 		 ORDER BY TO_CHAR(CREATE_DATE, 'YYYY-MM') ASC		 
+	</entry>
+	
+	<entry key="selectBoardAllList">
+		SELECT BOARD_NO
+		     , BOARD_TITLE
+		     , BOARD_CONTENT
+		     , CREATE_DATE
+		     , COUNT
+		     , M.MEMBER_NAME
+             , CG_NO
+		  FROM BOARD B
+		  JOIN MEMBER M USING (MEMBER_NO)
+		 WHERE BOARD_STATUS = 'Y'
+		 ORDER BY CREATE_DATE DESC
 	</entry>
 	
 	<entry key="selectBoardList">
@@ -64,12 +78,60 @@
 		     , CREATE_DATE
 		     , COUNT
 		     , M.MEMBER_NAME
-             , CG_NAME
+             , CG_NO
 		  FROM BOARD B
 		  JOIN MEMBER M USING (MEMBER_NO)
-          JOIN CATEGORY C USING (CG_NO)
 		 WHERE BOARD_STATUS = 'Y'
+		   AND Cg_NO = ?
 		 ORDER BY CREATE_DATE DESC
+	</entry>
+	
+	<entry key="selectBoard">
+		SELECT BOARD_NO
+		     , BOARD_TITLE
+		     , BOARD_CONTENT
+		     , CREATE_DATE
+		     , COUNT
+		     , RECOMMEND
+		     , MEMBER_ID
+             , CG_NO
+		  FROM BOARD B
+		  JOIN MEMBER M USING (MEMBER_NO)
+		 WHERE BOARD_STATUS = 'Y'
+		   AND BOARD_NO = ?
+		 ORDER BY CREATE_DATE DESC
+	</entry>
+	
+	<entry key="BoardCheckDelete">
+		UPDATE BOARD
+		   SET BOARD_STATUS = 'N'
+		 WHERE BOARD_NO = ?	
+	</entry>
+	
+	<entry key="countMemberAll">
+		SELECT COUNT(MEMBER_NO)
+		  FROM MEMBER
+		 WHERE MEMBER_STATUS = 'Y'
+	</entry>
+	
+	<entry key="countMemberMonth">
+		SELECT COUNT(MEMBER_NO)
+		  FROM MEMBER
+		 WHERE MEMBER_STATUS = 'Y'
+		   AND FLOOR(MONTHS_BETWEEN(SYSDATE, MEMBER_ENROLLDATE)) = 0
+	</entry>
+
+	<entry key="countBoardAll">
+		SELECT COUNT(BOARD_NO)
+		  FROM BOARD
+		 WHERE BOARD_STATUS = 'Y'
+	</entry>
+	
+	<entry key="countBoardMonth">
+		SELECT COUNT(BOARD_NO)
+		  FROM BOARD
+		 WHERE BOARD_STATUS = 'Y'
+		   AND FLOOR(MONTHS_BETWEEN(SYSDATE, CREATE_DATE)) = 0
 	</entry>
 
 	<entry key="adminBbqResSelect">
@@ -97,10 +159,35 @@
 	</entry>
 	
 	<entry key="adminBbqResDelete">
-		UPDATE BBQ_RV
-		   SET RES_STATEMENT = 'N'
-		 WHERE RES_NO = ?	
+		 DELETE FROM BBQ_RV
+		 WHERE RES_NO = ?
 	</entry>
+	
+	<entry key="selectCarList">
+		SELECT *
+  		  FROM CAR
+	</entry>
+	
+	<entry key="CarCheckDelete">
+		DELETE FROM CAR
+  			  WHERE CAR_NO = ?	
+	</entry>
+	
+	<entry key="insertCar">
+		INSERT INTO CAR VALUES(CAR_SEQ.NEXTVAL
+							 , ? 
+		                     , ? 
+		                     , ? 
+		                     , ?)
+	</entry>
+	
+	<entry key="selectCar">
+	 	SELECT CAR_RES_NO,
+		       CAR_OWNER,
+		       CAR_TYPE
+		  FROM CAR
+		 WHERE MEMBER_NO = ?
+	 </entry>
 	
 
 

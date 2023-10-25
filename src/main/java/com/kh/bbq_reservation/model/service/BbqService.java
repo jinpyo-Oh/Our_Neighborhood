@@ -42,6 +42,32 @@ public class BbqService {
 		return result;
 	}
 	
+	public BbqReservation bbqSelectOne(int memberNo) {
+		Connection conn = getConnection();
+		
+		BbqReservation bbq = new BbqDao().bbqSelectOne(conn, memberNo);
+		
+		close(conn);
+		
+		return bbq;
+	}
+	
+	public int bbqDelete(int resNo) {
+		Connection conn = getConnection();
+		
+		int result = new BbqDao().bbqDelete(conn, resNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	
 	
 

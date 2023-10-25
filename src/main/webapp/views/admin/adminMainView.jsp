@@ -1,15 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.admin.model.vo.Chart, 
-    java.time.LocalDate, com.kh.admin.model.vo.Board, java.util.ArrayList"%>
+    java.time.LocalDate, com.kh.admin.model.vo.Board, 
+    java.util.ArrayList, java.time.format.DateTimeFormatter"%>
 <%
 	Chart chart = (Chart)request.getAttribute("chart");
 	
 	LocalDate currentDate = LocalDate.now();
 	
+	LocalDate fiveMonthsAgo = currentDate.minusMonths(5);
+    LocalDate fourMonthsAgo = currentDate.minusMonths(4);
+    LocalDate threeMonthsAgo = currentDate.minusMonths(3);
+    LocalDate twoMonthsAgo = currentDate.minusMonths(2);
+    LocalDate oneMonthAgo = currentDate.minusMonths(1);
+    
+    DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MM");
+    String fiveMonthsAgoMonth = fiveMonthsAgo.format(monthFormatter);
+    String fourMonthsAgoMonth = fourMonthsAgo.format(monthFormatter);
+    String threeMonthsAgoMonth = threeMonthsAgo.format(monthFormatter);
+    String twoMonthsAgoMonth = twoMonthsAgo.format(monthFormatter);
+    String oneMonthAgoMonth = oneMonthAgo.format(monthFormatter);
+	
 	// 현재 월을 가져옴
 	int currentMonth = currentDate.getMonthValue();
 	
 	ArrayList<Board> board = (ArrayList<Board>)request.getAttribute("list");
+	
+	
+	Chart comm = (Chart)request.getAttribute("comm");
 %>    
     
 <!DOCTYPE html>
@@ -151,19 +168,19 @@
                                     
                                     // Set data
                                     var data = [{
-                                      country: <%= (currentMonth - 5) %> + "월",
+                                      country: <%= fiveMonthsAgoMonth %> + "월",
                                       value: <%= chart.getChart1() %>
                                     }, {
-                                      country: <%= (currentMonth - 4) %> + "월",
+                                      country: <%= fourMonthsAgoMonth %> + "월",
                                       value: <%= chart.getChart2() %>
                                     }, {
-                                      country: <%= (currentMonth - 3) %> + "월",
+                                      country: <%= threeMonthsAgoMonth %> + "월",
                                       value: <%= chart.getChart3() %>
                                     }, {
-                                      country: <%= (currentMonth - 2) %> + "월",
+                                      country: <%= twoMonthsAgoMonth %> + "월",
                                       value: <%= chart.getChart4() %>
                                     }, {
-                                      country: <%= (currentMonth - 1) %> + "월",
+                                      country: <%= oneMonthAgoMonth %> + "월",
                                       value: <%= chart.getChart5() %>
                                     }, {
                                       country: <%= currentMonth %> + "월",
@@ -207,28 +224,28 @@
                                    			<tbody>
                                    				<tr>
 													<td style="width:160px;">현재 회원 수 : </td>
-													<td> 1300 명</td>
+													<td> <%= comm.getChart1() %>명</td>
                                    				</tr>
                                    				<tr>
                                    					<td colspan="2" style="height:5px;"></td>
                                    				</tr>
                                    				<tr>
 													<td style="width:160px;">이번 달 가입회원 수 : </td>
-													<td> 30 명</td>
+													<td> <%= comm.getChart2() %>명</td>
                                    				</tr>
                                    				<tr>
                                    					<td colspan="2" style="height:5px;"></td>
                                    				</tr>
                                    				<tr>
 													<td style="width:160px;">전체 게시글 수 : </td>
-													<td> 1300 개</td>
+													<td> <%= comm.getChart3() %>개</td>
                                    				</tr>
                                    				<tr>
                                    					<td colspan="2" style="height:5px;"></td>
                                    				</tr>
                                    				<tr>
 													<td style="width:160px;">이번 달 게시글 수 : </td>
-													<td> 200 개</td>
+													<td><%= comm.getChart4() %>개</td>
                                    				</tr>
                                    			</tbody>
                                    		</table>
@@ -237,7 +254,7 @@
                                 </div>
     
                             </div>
-                            
+                           </div> 
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -273,7 +290,7 @@
 		                                            <td><%= b.getCreateDate() %></td>
 		                                            <td><%= b.getMemberName() %></td>
 		                                            <td><%= b.getBoardTitle() %></td>
-		                                            <td><%= b.getCgName() %></td>
+		                                            <td><%= b.getCgNo() %></td>
 		                                            <td><%= b.getBoardNo() %></td>
 		                                            <td><%= b.getCount() %></td>
 		                                        </tr>
@@ -289,23 +306,28 @@
 	                            		
 	                            		$(".newest-area>tbody>tr").click(function(){
 	                            			
-	                            			let bno = $(this).children().eq(0).text();
-	                            			
-	                            			// console.log(mno);
-	                            			
-	                            			location.href = "<%= contextPath %>/detail.bo?bno=" + bno;           
+	                            			let bno = $(this).children().eq(4).text();
+	                            			let cgNo = $(this).children().eq(3).text();
+										                            			
+	                            			if(cgNo == 5 ||cgNo == 6 ||cgNo == 8 ||cgNo == 9){
+	                            				location.href = "<%= contextPath %>/imageDetail.ad?bno=" + bno + "&cgNo=" + cgNo;
+	                            			}else{
+	                            				location.href = "<%= contextPath %>/boardDetail.ad?bno=" + bno + "&cgNo=" + cgNo;	
+	                            			}
+	                            			          
 	                            			
 	                            		});
-	                            		 
+	                            		
 	                            	});
 	                            
 	                            </script>
                                 
                             </div>
                         </div>
+                       </div>
                         
                         
-                    </div>
+                    
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

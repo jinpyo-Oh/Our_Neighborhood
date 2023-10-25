@@ -45,12 +45,10 @@ public class MemberCostController extends HttpServlet {
         
         
         if(request.getParameter("month")!=null) {
-        	 month = request.getParameter("month");
-        	 System.out.println("ajax");
+        	 month = request.getParameter("month");        	
         	 status = 1;
         }else {
-        	 month = fm.format(new Date());	
-        	 System.out.println("servlet");
+        	 month = fm.format(new Date());	       	 
         }
         
        

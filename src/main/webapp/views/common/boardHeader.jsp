@@ -4,8 +4,11 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	String contextPath = request.getContextPath();
+	
 
 %>
+
+
 <!DOCTYPE html>
 
 <head>
@@ -56,32 +59,43 @@ if(msg != "null"){
 	%>
 }
 
+
 </script>
+
+
   
   <!-- ======= Header ======= -->
+ 
+ 
   <header id="header" class="header d-flex align-items-center">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between" >
+
+
+      <a href="index.jsp" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <img src="../../resources/img/logo.png" width="100px" height="10%">
+        <img src="./resources/img/logo.png" width="100px" height="10%">
       </a>
+
+
+
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="index.jsp">Home</a></li>
-          <li><a href="<%=contextPath%>/list.bo?cg=10&currentPage=1"">공지사항</a></li>
+          <li><a href="<%=contextPath%>/list.bo?cg=10&currentPage=1">공지사항</a></li>
           <li class="dropdown"><a href="#"><span>통합 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="<%=contextPath%>/list.bo?cg=4&currentPage=1">자유게시판</a></li>
-              <li><a href="<%=contextPath%>/list.bo?cg=5&currentPage=1"">사진게시판</a></li>
-              <li><a href="<%=contextPath%>/list.bo?cg=6&currentPage=1"">중고거래 게시판</a></li>
+              <li><a href="<%=contextPath%>/imageList.bo?cg=5&currentPage=1">사진게시판</a></li>
+              <li><a href="<%=contextPath%>/imageList.bo?cg=6&currentPage=1">중고거래 게시판</a></li>
               <li><a href="<%=contextPath%>/list.bo?cg=7&currentPage=1">건의사항 게시판</a></li>
-              <li><a href="<%=contextPath%>/list.bo?cg=8&currentPage=1"">홍보 게시판</a></li>
-              <li><a href="<%=contextPath%>/list.bo?cg=9&currentPage=1"">분실물 게시판</a></li>
+              <li><a href="<%=contextPath%>/imageList.bo?cg=8&currentPage=1">홍보 게시판</a></li>
+              <li><a href="<%=contextPath%>/imageList.bo?cg=9&currentPage=1">분실물 게시판</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>단지 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -97,7 +111,7 @@ if(msg != "null"){
               <li><a href="<%=contextPath%>/resEnrollForm.bq">바베큐</a></li>
             </ul>
           </li>
-          <li><a href="contact.html">오시는길</a></li>
+          <li><a href="<%= contextPath %>/#contact">오시는길</a></li>
 
         <% if(loginUser != null ){ %>
           
@@ -125,6 +139,7 @@ if(msg != "null"){
       </nav><!-- .navbar -->
 
     </div>
+
   </header><!-- End Header -->
 
 </body>

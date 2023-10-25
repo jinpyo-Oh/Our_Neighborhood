@@ -4,6 +4,23 @@
 	Board b = (Board)request.getAttribute("b");
 	Image img  = (Image)request.getAttribute("img");
 	Reply r = (Reply)request.getAttribute("r");
+	
+	int categoryNo =Integer.parseInt(b.getCgNo());
+	   
+	   String cgName = null;
+		switch(categoryNo){
+		case 1 : cgName="1단지"; break;
+		case 2 : cgName="2단지"; break;
+		case 3 : cgName="3단지"; break;
+		case 4 : cgName="자유"; break;
+		case 5 : cgName="사진"; break;
+		case 6 : cgName="중고거래"; break;
+		case 7 : cgName="건의사항"; break;
+		case 8 : cgName="분실물"; break;
+		case 9 : cgName="홍보"; break;
+		case 10 : cgName="공지사항"; break;
+		}
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,12 +113,12 @@ a {
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/breadcrumbs-bg.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>게시글 조회</h2>
         <ol>
           <li><a href="index.html">메인 페이지</a></li>
-          <li>1단지게시판</li>
+          <li><%=cgName%> 게시판</li>
         </ol>
 
       </div>
@@ -132,13 +149,13 @@ a {
           </thead>
           <tbody>
             <tr>
-                <td>내용</td>
+                <td style="background-color: #73685d; color : white;">내용</td>
                 <td colspan="3">
                   <%= b.getBoardContent() %>
                 </td>
             </tr>
             <tr>
-              <td>첨부파일</td>
+              <td style="background-color: #73685d; color : white;">첨부파일</td>
               <td colspan="3">
               	<% if(img == null) { %>
 	              	첨부파일이 없습니다
@@ -151,7 +168,7 @@ a {
             </tr>
             <tr>
             	<td colspan="4">
-	            	<button id="reco" class="btn btn-warning">추천</button>
+	            	<button id="reco" class="btn btn-warning" style="float:right;">추천</button>
 				  	<input type="hidden"  name="boardNo" value=<%= b.getBoardNo() %>>
 				  	
 				  	<script>
@@ -190,6 +207,35 @@ a {
           </div>
         </div>
         <hr>
+        
+              <div align="center">
+          <br><br><br>
+      
+          <table id="reply-insert-area">
+          	<% if(!b.getCgNo().equals("10")) { %>
+          	
+          		<tr>
+	              <th>댓글쓰기</th>
+	            </tr>
+	            <tr>
+	              <td>
+	                <textarea id="replyContent"style="resize: none; width : 100%;" placeholder="댓글 내용을 입력해주세요."></textarea>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td align="right">
+	                <button type="submit" class="btn btn-sm" onclick="insertReply();">
+	                	작성하기
+	                </button>
+	              </td>
+	            </tr>
+	           
+            <%} %>
+          </table>
+
+        </div>
+        
+        <br>
         <table align="center" style="border-bottom: 1px solid black;" id="reply-area">
           
         </table>
@@ -261,8 +307,8 @@ a {
       						
       						resultStr += "<tr style='border-bottom: 1px dotted lightgray; border-top: 1px solid black;'>"
       								   + "<input type='hidden' name='replyNo' value='"+list[i].replyNo+"'>"
-				      			       +     "<td style='width : 150px;'>" + list[i].memberId + "</td>"
-				      			       +     "<td>" + list[i].createDate + "</td>"
+				      			       +     "<td style='width : 150px; height : 25px;'>" + '작성자 : ' + "<b>" +list[i].memberId + "</b>" + "</td>"
+				      			       +     "<td>" +'작성일 : ' +list[i].createDate + "</td>"
 				      			       +     "<td>"
 				      			       +       "<div align='right'>";
 				      			       
@@ -289,28 +335,7 @@ a {
         	}
         </script>
         
-        <div align="center">
-          <br><br><br>
-          <table id="reply-insert-area">
-          	
-          		<tr>
-	              <th>댓글쓰기</th>
-	            </tr>
-	            <tr>
-	              <td>
-	                <textarea id="replyContent"style="resize: none; width : 100%;" placeholder="댓글 내용을 입력해주세요."></textarea>
-	              </td>
-	            </tr>
-	            <tr>
-	              <td align="right">
-	                <button type="submit" class="btn btn-sm" onclick="insertReply();">
-	                	작성하기
-	                </button>
-	              </td>
-	            </tr>
-          </table>
-
-        </div>
+  
 
 
       </div>

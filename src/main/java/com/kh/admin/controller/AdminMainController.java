@@ -43,15 +43,20 @@ public class AdminMainController extends HttpServlet {
 			
 		Chart chart = new Chart(c1, c2, c3, c4, c5, c6);
 		
-		ArrayList<Board> list = new AdminService().selectBoardList();
+		ArrayList<Board> list = new AdminService().selectBoardAllList();
 		
 		// int mca = new ChartService().
+		int cs1 = new AdminService().countMemberAll();
+		int cs2 = new AdminService().countMemberMonth();
+		int cs3 = new AdminService().countBoardAll();
+		int cs4 = new AdminService().countBoardMonth();
 		
+		Chart comm = new Chart(cs1, cs2, cs3, cs4); 
 		
-		
+			
 		request.setAttribute("chart", chart);
 		request.setAttribute("list", list);
-		
+		request.setAttribute("comm", comm);
 		
 		request.getRequestDispatcher("views/admin/adminMainView.jsp").forward(request, response);
 	}

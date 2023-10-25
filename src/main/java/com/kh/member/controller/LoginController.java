@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 		// 아이디 저장 기능
 		String saveId = request.getParameter("saveId");
 		
-		if(saveId != null && saveId.equals("Y")) {
+		if(saveId != null && saveId.equals("y")) {
 			
 			Cookie cookie = new Cookie("saveId", memberId);
 			

@@ -9,13 +9,14 @@
   <style>
     .wrap {
     width : 1200px;
-    height : 600px;
+    height : 800px;
     margin : auto;
     border : 1px solid lightgray;
 }
 
 .findForm {
     width : 800px;
+height : 500px;
     margin : auto;
     margin-top : 0px;
     padding-top : 30px;
@@ -86,7 +87,7 @@ button[type="submit"] {
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/chuncheonlakecity_940x350.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>아이디 찾기</h2>
         <ol>
@@ -114,7 +115,21 @@ button[type="submit"] {
                                     id="name" name="name">
                     </div>
                     <br>
-                    
+                    <div class="form-group">
+                      <label for="address2">* 단지:</label>
+                      <select class="form-control" name="address2" id="address2">
+                        <option value=1>1단지</option>
+                        <option value=2>2단지</option>
+                        <option value=3>3단지</option>
+                      </select>
+                    </div>
+                     <br>
+                    <div class="form-group">
+                      <label for="address">* 동-호수:</label>
+                      <input type="text" class="form-control" 
+                                   id="address" name="address" placeholder="-포함 입력">
+                    </div>
+                    <br>
                     <div class="form-group">
                       <label for="phone">* 핸드폰 번호:</label>
                       <input type="text" class="form-control" 

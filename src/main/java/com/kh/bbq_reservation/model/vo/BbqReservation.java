@@ -61,7 +61,11 @@ public class BbqReservation {
 		this.resName = resName;
 		this.resMsg = resMsg;
 	}
+	
+	
 
+	// bbq 한개만 조회
+	
 	public int getResNo() {
 		return resNo;
 	}

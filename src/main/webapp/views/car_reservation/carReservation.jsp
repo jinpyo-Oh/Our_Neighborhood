@@ -17,22 +17,62 @@
   <title>Document</title>
 
   <style>
-    
+
     .contetn_detail textarea, 
     .contetn_detail input {
       box-sizing: border-box;
     }
 
+    #services {
+      background-color : white;
+    }
     
     #car_info input {
-      width : 100%;
+      width : 300px;
+      border : 1px solid lightgray;
+      padding : 10px;
+      font-size : 16px;
+      margin-bottom: 10px;
+      border-radius : 5px;
     }
 
-    #content1,
-    #content2,
-    #content3  {
-      border : 1px solid black
+    #content1 {
+      border-top: 1px solid lightgray;
+      border-left: 1px solid lightgray;
+      border-right: 1px solid lightgray ;
+     }
+    #content2 {
+      border-top: 1px solid white;
+      border-left: 1px solid lightgray;
+      border-right: 1px solid white;
+      border-bottom: 1px solid lightgray;
+      height: 400px;
+      padding-top: 0px;
+      padding-right: 100px;
+      padding-left: 200px;
     }
+    #content3  {
+      border-top : 1px solid white;
+      border-right: 1px solid lightgray;
+      border-left: 1px solid white;
+      border-bottom: 1px solid lightgray;
+      height: 400px;
+      padding-left: 40px;
+      padding-right: 50px;
+      padding-top: 20px;
+      padding-bottom: 120px;
+      margin:50px;
+    }
+
+    .wrap {
+      border : 1px solid lightgray;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+ 
+    
+
+
 
   </style>
 </head>
@@ -47,13 +87,13 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/breadcrumbs-bg.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
-        <h2>게시글 작성</h2>
+        <h2>차량</h2>
         <ol>
           <li><a href="index.html">메인 페이지</a></li>
-          <li>~~게시판</li>
+          <li>차량등록</li>
           
         </ol>
 
@@ -67,19 +107,19 @@
           <input type="hidden" name="memberNo" value="<%= loginUser.getMemberNo() %>">
         <div class="outer">
 
-          <table id="content" style="width : 100%; height: 500px;" align="center">
+          <table id="content" style="width : 100%;" align="center">
             <tr>
-              <td id="content1" colspan="2" style="height : 100%;">
-                <h1>이용안내</h1>
+              <td id="content1" colspan="2" style="height : 200px;">
+                <h1 align="center">이용안내</h1>
                 <br>
-                <h5>차량은 각 가구당 최대 2대까지 등록이 가능합니다.</h5>
+                <h5 align="center">* 차량은 각 가구당 최대 2대까지 등록이 가능합니다.</h5>
               </td>
             </tr>
             <tr>
-            <td id="content2" style="width : 70%;">
+            <td id="content2">
               <h3>차량 등록</h3>
               <br>
-              <table id="car_info"style="width : 100%; border-bottom : 1px solid black;">
+              <table id="car_info">
                 <tr>
                   <td>차량번호</td>
                   <td>
@@ -99,43 +139,41 @@
 	               	</td>
                 </tr>
               </table>
-              <div align="right">
-                <button type="submit" class="btn btn-secondary btn-sm">등록하기</button>
-                <button type="reset" class="btn btn-warning btn-sm"
+              <div align="right" style="padding-right: 45px;">
+                <button type="reset" class="btn btn-secondary btn-sm"
                         onclick="history.back();">뒤로가기</button>
+                <button type="submit" class="btn btn-warning btn-sm">등록하기</button>
                 <!-- history.back() : 이전 페이지로 돌아가게 해주는 함수-->
               </div>
           	</td>
-              <td id="content3" style="width : 30%;">
+              <td id="content3" style="width : 45%;">
                 <h3>등록된 차량</h3>
-                  <table style="width : 100%;">
+                <br>
+                  
                   <% if(list.isEmpty()) { %>
-                  	<tr>
-                  		<td>
+                    <div>
                   			<h5>등록된 차량이 없습니다.</h5>
-                  		</td>
-                  	</tr> 	
+                      </div>	
                   <% } else { %>
                   	<% for(Car c : list) { %>
-	                    <tr>
-		                    <td><%= c.getCarResNo() %></td>
-		                    <td><%= c.getCarType() %></td>
-	                    </tr>
-	                    <tr>
-	                      <td colspan="2"><%= c.getCarOwner() %></td>
-	                    </tr>
-	                    <tr>
-	                      <td colspan="2"><%= m.getPhone()%></td>
-	                    </tr>
-	                    <tr>
-	                      <td><div><%= m.getAddress() %></div>
-	                      <td><a href="delete.ca?rno=<%= c.getCarResNo() %>"class="btn btn-danger" align="right">삭제하기</a></td>
-	                    </tr>
+                      
+	                    <div class="wrap">
+		                    <b>차량번호 </b><%= c.getCarResNo() %>
+                        <br>
+                        <b>차종 </b><%= c.getCarType() %>
+                        <br>
+                        <b>세대주 </b><%= c.getCarOwner() %>
+                        <br>
+                        <b>핸드폰 번호 </b><%= m.getPhone()%>
+                        <br>
+                        <div><b>동-호수 </b><%= m.getAddress() %></div>
+                        <a href="delete.ca?rno=<%= c.getCarResNo() %>" class="btn btn-secondary btn-sm" style="text-align: right;">삭제하기</a>
+                      </div>                      
+                    
                     <%} %>
                   <% } %>
-                  </table>
+                
               </td>
-            </tr>
           </table>
 
         

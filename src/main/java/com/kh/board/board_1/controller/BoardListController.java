@@ -25,8 +25,6 @@ public class BoardListController extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public BoardListController() {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -34,8 +32,13 @@ public class BoardListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		Member m = (Member)request.getSession().getAttribute("loginUser");	
 		String cgNo = request.getParameter("cg");
+		
+
+		if(m != null) {
+		
 				
 		// 페이징 처리
 		int listCount;	 // 현재 총 게시글의 갯수
@@ -93,23 +96,17 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("cgNo", cgNo);
 		
-		if(Integer.parseInt(cgNo) < 4) {
-			if(m != null){
-				if(m.getAddress2() == Integer.parseInt(cgNo) || m.getMemberNo() == 1) {
-					// 포워딩
-					request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
-				} else {
-					request.getSession().setAttribute("alertMsg", cgNo + "단지 주민이 아닙니다.");
-					response.sendRedirect(request.getContextPath());
-				}
-			}else {
-				request.getSession().setAttribute("alertMsg", "로그인 후 이용가능합니다.");
-				response.sendRedirect(request.getContextPath());
-			}
-		} else {
-			// 포워딩
-			request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
-	}
+		
+		System.out.println(cgNo);
+		System.out.println(currentPage);
+			
+			
+		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
+	
+		}else {
+			request.getSession().setAttribute("alertMsg", "로그인 후 이용가능합니다.");
+			response.sendRedirect(request.getContextPath());
+		}
 	}
 
 	/**

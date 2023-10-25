@@ -34,19 +34,15 @@ String memberId   = (String)request.getAttribute("foundId");
     
 }
 
-.findForm_2 table {
-    width : 100%;
-}
-
-.findForm_2 table input,
-.findForm_2 table button {
+.findForm_2 input,
+.findForm_2 button {
     width : 100%;
     height : 40px;
     box-sizing : border-box;
-    border-radius : 5px;
+    border-radius : 8px;
 }
 
-.findForm_2 table input {
+.findForm_2 input {
     border : 1px solid lightgray;
     padding : 10px;
     font-size : 16px;
@@ -66,6 +62,18 @@ String memberId   = (String)request.getAttribute("foundId");
     color: #f4c005;
 }
 
+button {
+        border : 0px;
+        color : white;
+        font-size : 18px;
+        font-weight : 700;
+        margin-top: 20px;
+        background-color : #f4c005;
+        width : 100%;
+        height : 40px;
+        box-sizing : border-box;
+        border-radius : 8px;
+    }
 
 </style>
 </head>
@@ -80,7 +88,7 @@ String memberId   = (String)request.getAttribute("foundId");
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/chuncheonlakecity_940x350.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>아이디 찾기</h2>
         <ol>
@@ -96,7 +104,7 @@ String memberId   = (String)request.getAttribute("foundId");
         <div class="wrap">
          
         <div align="center">
-          <br><br><br><br>
+          <br><br>
           <img src="<%= contextPath %>/resources/img/ONlogo-yellow.png" width="200px" height="200px">
           </div>
           <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -110,6 +118,8 @@ String memberId   = (String)request.getAttribute("foundId");
                       <br><br>
                       <input type="text" class="form-control" 
                              id="memberId" name="memberId"  readonly value="<%= memberId %>">
+<br><br>
+                      <button type="button" onclick = "location.href = '<%= contextPath %>/views/member/memberLoginForm.jsp'">로그인하기</button>
                   </form>
                 </div>
                 

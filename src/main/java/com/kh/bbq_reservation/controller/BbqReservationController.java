@@ -36,6 +36,10 @@ public class BbqReservationController extends HttpServlet {
 		HttpSession session =request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
+		if(!request.getParameter("resPlace").equals("")) {
+			
+		
+		
 		int resPlace = Integer.parseInt(request.getParameter("resPlace"));
 		
 		String resDate = request.getParameter("resDate");
@@ -61,7 +65,10 @@ public class BbqReservationController extends HttpServlet {
 			System.out.println("fail");
 		}
 		
-		
+		}else {
+			request.getSession().setAttribute("alertMsg", "자리를 선택해주세요.");
+			response.sendRedirect(request.getContextPath()+"/resEnrollForm.bq");
+		}
 		
 		
 		

@@ -36,9 +36,7 @@
                     <div class="container-fluid px-4">
                         <div style="height: 20px;"></div>
                         <h1 class="mt-4">회원 관리</h1>
-                        <ol class="breadcrumb mb-4">
-                            <div></div>
-                        </ol>
+                        <br>
                         <div class="card mb-4">
                             <div class="card-body">
                                 KH 아파트 ON 커뮤니티에 현재 가입한 전체 회원의 정보입니다.
@@ -76,16 +74,7 @@
                                 
                                     <tbody>
                                         
-                                        <% if(list.isEmpty()) { %>
-                                        	
-                                        	<tr>
-                                        		<td colspan="8">
-                                        			조회된 멤버정보가 없습니다.
-                                        		</td>
-                                        	</tr>
-                                        	
-                                        	
-                                        <% } else { %>
+                                        <% if(list != null) { %>
 
 											<% for(Member m : list){ %>
 												

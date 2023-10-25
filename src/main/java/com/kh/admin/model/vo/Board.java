@@ -47,7 +47,7 @@ public class Board {
 			this.boardContent = boardContent;
 		}
 		
-		public Board(int boardNo, String boardTitle, String boardContent, Date createDate, int count, String memberName, String cgName) {
+		public Board(int boardNo, String boardTitle, String boardContent, Date createDate, int count, String memberName, int cgNo) {
 			
 			this.boardNo = boardNo;
 			this.boardTitle = boardTitle;
@@ -55,11 +55,23 @@ public class Board {
 			this.createDate = createDate;
 			this.count = count;
 			this.memberName = memberName;
-			this.cgName = cgName;
+			this.cgNo = cgNo;
 		}
-	     
+	    
 		
-		
+		public Board(int boardNo, Date createDate, int count, int cgNo, int recommend, String memberId,
+				String boardTitle, String boardContent) {
+			super();
+			this.boardNo = boardNo;
+			this.createDate = createDate;
+			this.count = count;
+			this.cgNo = cgNo;
+			this.recommend = recommend;
+			this.memberId = memberId;
+			this.boardTitle = boardTitle;
+			this.boardContent = boardContent;
+		}
+
 		public String getCgName() {
 			return cgName;
 		}

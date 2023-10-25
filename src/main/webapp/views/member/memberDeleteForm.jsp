@@ -12,7 +12,6 @@
             width : 1200px;
             height : 600px;
             margin : auto;
-            border : 1px solid lightgray;
         }
 
         .joinForm {
@@ -70,9 +69,9 @@
               font-weight: 700;
               width : 100px;
               height : 35px;
-              float: right;
+              float: center;
               border-radius: 8px;
-              background-color: gray;
+
               }
   
       #login-form, #user-info { float : right; }
@@ -85,21 +84,22 @@
 
       .nav-area { 
           background-color : #f4c005; 
-          width : 1200px;
+          width : 100%;
         }
       .menu {
-          width: 1200px;
-          height:15px;
-          display : inline;
-          padding-left: 100px;
-          padding-right: 50px;
+          width: 24%;
+          height: 98%;
+          display : inline-block;
+          margin-left: 7px;
+          text-align : center;
       }
       .menu a {
           text-decoration : none;
           color : white;
           font-size : 20px;
           font-weight : bold;
-          width : 100%;
+          box-sizing: border-box;  
+          
           
       }
       .menu a:hover { background-color : darkgray; }
@@ -116,7 +116,7 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/chuncheonlakecity_940x350.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>회원 탈퇴</h2>
         <ol>
@@ -130,11 +130,11 @@
       
       
         <div class="wrap">
-          <div class="nav-area" align="auto">
-            <div class="menu"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
-            <div class="menu"><a href="cost.html">관리비 조회</a></div>
-            <div class="menu"><a href="bbq.html">바베큐 예약/취소</a></div>
-            <div class="menu"><a href="<%= contextPath %>/views/member/memberDeleteForm.jsp">회원탈퇴</a></div>
+           <div class="nav-area" align="auto">
+            <div class="menu"><a href="<%= contextPath %>/myPage.me">회원정보수정</a></div>
+            <div class="menu"><a href="<%= contextPath %>/cost.me">관리비 조회</a></div>
+            <div class="menu"><a href="<%= contextPath %>/wrote.me?currentPage=1">내가 작성한 글</a></div>
+            <div class="menu"><a href="<%= contextPath %>/deleteForm.me">회원탈퇴</a></div>
           </div>
         <div align="center">
           <img src="<%= contextPath %>/resources/img/ONlogo-yellow.png" width="200px" height="200px">
@@ -145,17 +145,18 @@
 
                 <div class="joinForm_2">
                   <form action="<%= contextPath %>/delete.me" method="post">
-                    <div class="joinForm_2">
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>탈퇴 후 복구가 불가능합니다.</b><br>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>정말로 탈퇴 하시겠습니까?</b><br><br><br><br>
-                      <label for="memberPwd">비밀번호: </label>
+                    <div class="joinForm_2" align="center">
+                    <b>탈퇴 후 복구가 불가능합니다.</b><br><br>
+                    <b>정말로 탈퇴 하시겠습니까?</b><br><br>
+                      <label for="memberPwd"><b>비밀번호를 입력하세요</b></label>
+                      <br><br>
                       <input type="password" class="form-control" 
                              id="memberPwd" name="memberPwd">
                     <br>
                    
                     <br><br>
                     <div class="joinForm_2">
-                          <button type="submit">회원 탈퇴</button>
+                          <button class="btn btn-danger btn-sm" type="submit">회원 탈퇴</button>
                     </div>
                   </form>
                 </div>

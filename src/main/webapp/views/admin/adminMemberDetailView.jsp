@@ -50,15 +50,13 @@
                     <div class="container-fluid px-4">
                         <div style="height: 20px;"></div>
                         <h1 class="mt-4">회원 상세 조회</h1>
-                        <ol class="breadcrumb mb-4">
-                            <div></div>
-                        </ol>
+						<br>
                         <div class="card mb-4">
                             <div class="card-body">
                                 KH 아파트 ON 커뮤니티에 가입한 해당 회원의 상세 정보를 확인할 수 있습니다.
                                 <br><br>
                                 회원번호, 가입일자를 제외한 회원의 정보를 수정 가능합니다. <br>
-                                <hr>
+                                
                             </div>
                         </div>
                         <hr>

@@ -1,8 +1,11 @@
 package com.kh.member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
+import com.kh.board.board_1.model.vo.Board;
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Cost;
 import com.kh.member.model.vo.Member;
@@ -137,6 +140,16 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return cost;
+		
+	}
+	
+	public ArrayList<Board> wroteList(int memberNo,PageInfo pi){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Board> list = new MemberDao().wroteList(conn,memberNo,pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
 		
 	}
 }

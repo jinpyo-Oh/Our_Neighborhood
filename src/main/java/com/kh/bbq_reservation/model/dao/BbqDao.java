@@ -85,6 +85,59 @@ public class BbqDao {
 			
 	}
 	
+	public BbqReservation bbqSelectOne(Connection conn, int memberNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("bbqSelectOne");
+		BbqReservation bbq = null;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				bbq = new BbqReservation(
+						rset.getInt("RES_NO"),
+						rset.getInt("RES_PLACE"),
+						rset.getString("RES_DATE"),
+						rset.getInt("RES_PEOPLE"),
+						rset.getString("RES_NAME"),
+						rset.getString("RES_MSG")
+						) ;
+			}			
+								
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+		
+		return bbq;
+		
+	}
+	
+	public int bbqDelete(Connection conn, int resNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("bbqDelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
 	
 	
 

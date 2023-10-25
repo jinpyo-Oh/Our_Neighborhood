@@ -21,6 +21,14 @@ public class Chart {
 		this.chart6 = chart6;
 	}
 	
+	public Chart(int chart1, int chart2, int chart3, int chart4) {
+		super();
+		this.chart1 = chart1;
+		this.chart2 = chart2;
+		this.chart3 = chart3;
+		this.chart4 = chart4;
+	}
+	
 	public Chart(int chart1) {
 		this.chart1 = chart1;
 	}

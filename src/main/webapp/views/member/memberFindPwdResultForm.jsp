@@ -35,19 +35,15 @@ String memberPwd   = (String)request.getAttribute("foundPwd");
     
 }
 
-.findForm_2 table {
-    width : 100%;
-}
-
-.findForm_2 table input,
-.findForm_2 table button {
+.findForm_2 input,
+.findForm_2 button {
     width : 100%;
     height : 40px;
     box-sizing : border-box;
-    border-radius : 5px;
+    border-radius : 8px;
 }
 
-.findForm_2 table input {
+.findForm_2 input {
     border : 1px solid lightgray;
     padding : 10px;
     font-size : 16px;
@@ -67,6 +63,18 @@ String memberPwd   = (String)request.getAttribute("foundPwd");
     color: #f4c005;
 }
 
+button {
+        border : 0px;
+        color : white;
+        font-size : 18px;
+        font-weight : 700;
+        margin-top: 20px;
+        background-color : #f4c005;
+        width : 100%;
+        height : 40px;
+        box-sizing : border-box;
+        border-radius : 8px;
+    }
 
 </style>
 </head>
@@ -81,7 +89,7 @@ String memberPwd   = (String)request.getAttribute("foundPwd");
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/chuncheonlakecity_940x350.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>비밀번호 찾기</h2>
         <ol>
@@ -97,7 +105,7 @@ String memberPwd   = (String)request.getAttribute("foundPwd");
         <div class="wrap">
           
             <div align="center">
-                <br><br><br><br>
+                <br><br>
                 <img src="<%= contextPath %>/resources/img/ONlogo-yellow.png" width="200px" height="200px">
                 </div>
                 <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -110,7 +118,8 @@ String memberPwd   = (String)request.getAttribute("foundPwd");
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>회원님의 정보와 일치하는 비밀번호입니다.</b><br>
                             <br><br>
                             <input type="text" class="form-control" 
-                                   id="memberPwd" name="memberPwd"  readonly value="<%= memberPwd %>">
+                                   id="memberPwd" name="memberPwd"  readonly value="<%= memberPwd %>"><br><br>
+                                   <button type="button" onclick = "location.href = '<%= contextPath %>/views/member/memberLoginForm.jsp'">로그인하기</button>
                         </form>
                       </div>
                       

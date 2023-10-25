@@ -28,6 +28,24 @@
 	                  , ?)	
 	</entry>
 	
+	<entry key="bbqSelectOne">	
+				        
+		SELECT *
+		FROM (
+		    SELECT *
+		    FROM BBQ_RV
+		    WHERE MEMBER_NO=?
+		    ORDER BY RES_DATE DESC
+		)
+		WHERE ROWNUM = 1
+	</entry>
+	
+	<entry key="bbqDelete">
+	DELETE
+	FROM BBQ_RV
+	WHERE RES_NO = ?
+	</entry>
+	
 	
 
 	

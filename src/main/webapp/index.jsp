@@ -30,8 +30,8 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2 data-aos="fade-down">Our <span>Neighborhood</span></h2>
-            <p data-aos="fade-up">아파트 입주민들만을 대상으로 입주민의 스마트 라이프를 위한 생활편의 <br> 서비스와 관리사무소의 안정적인 업무처리를 돕는 스마트 웹페이지</p>
+            <h2 data-aos="fade-down">KH아파트 <span>주민 커뮤니티</span></h2>
+            <p data-aos="fade-up">Our Neighborhood</p>
             <a data-aos="fade-up" data-aos-delay="200" href="#features" class="btn-get-started">소개</a>
           </div>
         </div>
@@ -121,8 +121,10 @@
                 <h3>위치</h3>
 
                 <ul>
-                  <li><i class="bi bi-check2-all"></i> 양화대교와 국회의사당이 탁 트인 뷰 </li>
-                  <li><i class="bi bi-check2-all"></i> 걸어서 5분거리에 위치한 양화한강공원</li>
+                  <li><i class="bi bi-check2-all"></i> 양화대교, 국회의사당과 인접</li>
+                  <li><i class="bi bi-check2-all"></i> 걸어서 5분거리에 위치한 여의도한강공원</li>
+                  <li><i class="bi bi-check2-all"></i> 서울 서부 교통의 중심지</li>
+                  <li><i class="bi bi-check2-all"></i> 2호선, 9호선 더블역세권</li>
                 </ul>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
@@ -136,7 +138,7 @@
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
                 <h3>바베큐장</h3>
                 <ul>
-                  <li><i class="bi bi-check2-all"></i>kh아파트 주민만이 이용할 수 있는 바베큐장</li>
+                  <li><i class="bi bi-check2-all"></i> kh아파트 주민만이 이용할 수 있는 바베큐장</li>
                   <li><i class="bi bi-check2-all"></i> 최대 9가구가 이용가능한 최신 캠핑용 바베큐장</li>
                   <li><i class="bi bi-check2-all"></i> 예약 시 예약메세지에서 요구 할 수 있는 참숯 및 각종 조미료 요청 가능! </li>
                   <li><i class="bi bi-check2-all"></i> <b>선착순</b>으로 예약되는 자유로운 바베큐장 이용 </li>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8" import="com.kh.bbq_reservation.model.vo.BbqReservation"%>
+<%
+BbqReservation bbq = (BbqReservation)request.getAttribute("bbq");
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +15,7 @@ pageEncoding="UTF-8"%>
     <style>
       .outer {
         width: 600px;
-        height: 1000px;
+        height: 600px;
         margin: auto;
       }
 
@@ -51,7 +54,7 @@ pageEncoding="UTF-8"%>
       }
 
       .selectedSeatIcon {
-        background-color: #6feaf6;
+        background-color: #f4c005;
         width: 15px;
         height: 12px;
         border-radius: 3px;
@@ -98,7 +101,7 @@ pageEncoding="UTF-8"%>
       }
 
       .selectedSeat {
-        background-color: #6feaf6;
+        background-color: #f4c005;
         color: white;
         text-align: center;
         border-radius: 8px;
@@ -107,7 +110,8 @@ pageEncoding="UTF-8"%>
 
       #usingInfo {
         width: 100%;
-        height: 100px;
+        height: 220px;
+        padding: 20px;
         background-color: #777;
         background: rgba(0, 0, 0, 0.1);
         border-radius: 5px;
@@ -158,11 +162,22 @@ pageEncoding="UTF-8"%>
       .form-box {
         padding: 10px;
         width: 200px;
+        height: 480px;
         border: 1px solid;
         border-radius: 8px;
         position: relative;
-        bottom: 650px;
-        left: 1100px;
+        bottom: 250px;
+        left: 1400px;
+      }
+      .resPresent {
+        padding: 10px;
+        width: 200px;
+        height: 480px;
+        border: 1px solid;
+        border-radius: 8px;
+        position: relative;
+        bottom: 730px;
+        left: 100px;
       }
       .form-box > form {
         box-sizing: border-box;
@@ -171,6 +186,34 @@ pageEncoding="UTF-8"%>
       #form-name {
         border: 0px;
       }
+
+      button[type="submit"] {
+       border: 0px;
+       color: white;
+       font-size: 18px;
+       font-weight: 500;
+       width : 70px;
+       height : 35px;
+       float: right;
+       border-radius: 8px;
+       background-color: #f4c005;
+       margin-left: 10px;
+       margin-top: 10px;
+       }
+
+       button[type="reset"] {
+       border: 0px;
+       color: white;
+       font-size: 18px;
+       font-weight: 500;
+       width : 70px;
+       height : 35px;
+       float: right;
+       border-radius: 8px;
+       background-color: gray;
+       margin-top: 10px;
+       }
+       
     </style>
   </head>
   <body>
@@ -181,16 +224,16 @@ pageEncoding="UTF-8"%>
     <!-- ======= Breadcrumbs ======= -->
     <div
       class="breadcrumbs d-flex align-items-center"
-      style="background-image: url('assets/img/breadcrumbs-bg.jpg')"
+      style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg')"
     >
       <div
         class="container position-relative d-flex flex-column align-items-center"
         data-aos="fade"
       >
-        <h2>게시글 작성</h2>
+        <h2>바베큐장 예약</h2>
         <ol>
           <li><a href="index.html">메인 페이지</a></li>
-          <li>~~게시판</li>
+          <li>바베큐장</li>
         </ol>
       </div>
     </div>
@@ -199,7 +242,10 @@ pageEncoding="UTF-8"%>
     <div class="outer">
       <div id="usingInfo">
         <h3 align="center">이용안내</h3>
-        <p>대충</p>
+        <br>
+        <p>* 예약인원 외의 방문객은 입장불가입니다.</p>
+        <p>* 불꽃놀이, 풍등 날리기 등의 화재위험이 있는 행위는 금지합니다.</p>
+        <p>* 미성년자는 보호자 동반 없이 이용 할 수 없습니다.</p></p>
       </div>
 
       <div id="area-menu">
@@ -214,15 +260,15 @@ pageEncoding="UTF-8"%>
       <ul class="showcase">
         <li>
           <div class="availableSeat"></div>
-          <small class="small">선택가능</small>
+          <small class="small">&nbsp;&nbsp;선택가능</small>
         </li>
         <li>
           <div class="selectedSeatIcon"></div>
-          <small class="small">선택</small>
+          <small class="small">&nbsp;&nbsp;선택</small>
         </li>
         <li>
           <div class="occupiedSeat"></div>
-          <small class="small">사용중</small>
+          <small class="small">&nbsp;&nbsp;예약됨</small>
         </li>
       </ul>
 
@@ -299,7 +345,25 @@ pageEncoding="UTF-8"%>
     </div>
 
     <div class="form-box">
-      <form action="<%=contextPath %>/reservation.bq" method="post">
+      <form action="<%=contextPath %>/reservation.bq" method="post" onsubmit="return vaildateRes()">
+        <script>
+
+          var bbqStatus = "<%=bbq%>";
+          console.log(bbqStatus);
+         function vaildateRes(){	
+           
+         
+           if(bbqStatus=='null'){
+             return true;
+           }else{
+             alert("이미 예약하셨습니다. 다음에 에약해주세요.");
+             return false;
+           }
+           
+                       
+         }
+         
+         </script>
         <input
           type="text"
           id="form-name"
@@ -307,10 +371,10 @@ pageEncoding="UTF-8"%>
           readonly
           placeholder="자리를 선택해주세요."
           required
-        />
+        >
 
-        <br />
-        <p>* 예약 날짜</p>
+        <br><br>
+        <p><b>* 예약 날짜</b></p>
 
         <input
           type="date"
@@ -333,24 +397,45 @@ pageEncoding="UTF-8"%>
 
         <br />
         <br />
-        * 예약인 성함
-        <input type="text" name="resName" required />
+        <b>* 예약인 성함</b>
+        <br>
+        <input type="text" name="resName" required style="width: 180px;"><br><br>
 
-        <p>* 예약 인원</p>
+        <p><b>* 예약 인원</b></p>
         <select name="resPeople" id="reservation_person" required>
-          <option>==선택==</option>
           <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
         </select>
-        명<br />
+        명<br><br>
 
-        <p>예약 메세지</p>
-        <textarea name="resMsg" style="resize: none"> </textarea>
+        <p><b>예약 메세지</b></p>
+        <textarea name="resMsg" style="width: 180px;  resize:none;"> </textarea>
         <button type="submit" class="formSubmit">예약</button>
         <button type="reset">초기화</button>
       </form>
+    </div>
+    <div class="resPresent" style="height:450px;">
+      <h2>예약 현황</h2>
+      <br>
+      <div class="resResult">
+      <br>
+      
+      <%if(bbq!=null){%>
+        이름  &nbsp;&nbsp;<input type="text" name="resName" value="<%=bbq.getResName()%>" style="width:120px;" readonly><br><br>
+        날짜  &nbsp;&nbsp;<input type="date" name="resDate" value="<%=bbq.getResDate()%>" style="width:120px;" readonly><br><br>
+        좌석  &nbsp;&nbsp;<input type="text" name="resSeat" value="<%=bbq.getResPlace()%>" style="width:120px;" readonly><br><br>
+        인원  &nbsp;&nbsp;<input type="text" name="resPeople" value="<%=bbq.getResPeople()%>" style="width:120px;" readonly><br><br>
+        예약 메세지:<br>
+        <textarea name="resMsg" style="width:170px; resize:none;" readonly ><%=bbq.getResMsg() %></textarea><br><br>
+        <button class="btn btn-secondary btn-sm" style="float:right;" onclick="location.href='<%=contextPath%>/resDelete.bbq?bbq=<%=bbq.getResNo()%>';">예약 취소</button>
+      <%}else{%>
+      	<h4>조회된 예약이 <br> 없습니다.</h4>
+      <%} %>
+      </div>
+      
+		
     </div>
 
     <script>

@@ -3,12 +3,16 @@ package com.kh.member.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.board_1.model.vo.Board;
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Cost;
 import com.kh.member.model.vo.Member;
 
@@ -48,6 +52,7 @@ public class MemberDao {
 									   rset.getString("MEMBER_ID"),
 									   rset.getString("MEMBER_PWD"),
 									   rset.getString("MEMBER_NAME"),
+									   
 									   rset.getString("MEMBER_ADDRESS"),
 									   rset.getInt("MEMBER_ADDRESS2"),
 									   rset.getString("MEMBER_EMAIL"),
@@ -211,7 +216,8 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 		
-			pstmt.setString(1, m.getMemberPwd());
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPwd());
 			
 			result = pstmt.executeUpdate();
 		
@@ -274,7 +280,9 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, m.getMemberName());
-			pstmt.setString(2, m.getPhone());
+			pstmt.setInt(2, m.getAddress2());
+			pstmt.setString(3, m.getAddress());
+			pstmt.setString(4, m.getPhone());
 			
 			rset = pstmt.executeQuery();
 			
@@ -373,6 +381,61 @@ public class MemberDao {
 		
 		return cost;		
 	}
+	
+	public ArrayList<Board> wroteList(Connection conn, int memberNo,PageInfo pi){
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("wroteList");
+		ArrayList<Board> list = new ArrayList<>();
+		Board b = null;
+		
+		// 쿼리문 완성
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow  + pi.getBoardLimit() - 1;
+			
+
+			pstmt.setInt(1,memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				b = new Board(
+						rset.getInt("BOARD_NO"),
+						rset.getString("CG_NAME"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("MEMBER_ID"),
+						rset.getInt("COUNT"),
+						rset.getInt("RECOMMEND"),
+						rset.getDate("CREATE_DATE")										
+						);
+				list.add(b);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+				
+		
+		
+	
+		
+		
+	}
+	
 }	
 	
 

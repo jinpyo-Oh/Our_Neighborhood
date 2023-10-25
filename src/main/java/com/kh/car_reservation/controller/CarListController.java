@@ -32,20 +32,24 @@ public class CarListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		if(m==null) {
+			request.getSession().setAttribute("alertMsg", "로그인 후 이용해 주세요.");
+			response.sendRedirect(request.getContextPath());
+			
+		}else {
+		
+		
 		ArrayList<Car> list = new CarService().selectCar(m);
-		// 차량 접근권한 부분
-		if(m != null) {
 			request.setAttribute("list", list);
 			request.setAttribute("m", m);
 		
 		
 			request.getRequestDispatcher("views/car_reservation/carReservation.jsp").forward(request, response);
-		} else {
-			request.setAttribute("errorMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath()+"/list.ca");
 		}
-
+		
 	}	
 
 	/**

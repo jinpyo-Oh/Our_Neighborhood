@@ -24,9 +24,11 @@ public class FindIdController extends HttpServlet {
     	request.setCharacterEncoding("UTF-8");
     	
     	String memberName = request.getParameter("name");
+        int address2 = Integer.parseInt(request.getParameter("address2"));
+    	String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         
-        Member m = new Member(memberName, phone);
+       Member m = new Member(memberName, address2, address, phone);
         
         MemberService memberService = new MemberService();
         String foundId = memberService.findId(m);

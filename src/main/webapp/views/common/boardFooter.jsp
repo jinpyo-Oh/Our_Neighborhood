@@ -15,46 +15,14 @@
                 <div class="footer-info">
                   <h3>Our Neighborhood</h3>
                   <p>
-                    주소 입력 부탁<br><br>
-                    <strong>Phone:</strong> 핸드폰 번호 입력 부탁<br>
-                    <strong>Email:</strong> 이메일 입력 부탁<br>
+                    서울 영등포구 선유동2로 57 로얄아파트 <br><br>
+                    <strong>Phone:</strong> 010-4569-5955<br>
+                    <strong>Email:</strong> royal-our @ naver.com<br>
                   </p>
                   
                 </div>
               </div><!-- End footer info column-->
     
-              <div class="col-lg-2 col-md-3 footer-links">
-                <h4>리스트1</h4>
-                <ul>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                </ul>
-              </div><!-- End footer links column-->
-
-              <div class="col-lg-2 col-md-3 footer-links">
-                <h4>리스트2</h4>
-                <ul>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                </ul>
-              </div><!-- End footer links column-->
-
-              <div class="col-lg-2 col-md-3 footer-links">
-                <h4>리스트3</h4>
-                <ul>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                </ul>
-              </div><!-- End footer links column-->
     
               
             </div>

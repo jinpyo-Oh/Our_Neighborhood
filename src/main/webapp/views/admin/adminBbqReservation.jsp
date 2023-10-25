@@ -221,18 +221,18 @@ ArrayList<BbqReservation> list =  (ArrayList<BbqReservation>)request.getAttribut
           <div style="height: 50px;"></div>    
           
       
-          <button onClick="location.href='<%=contextPath%>/resSelect.ad?today=<%=today%>'">금일 예약 목록</button>
-          <button onClick="location.href='<%=contextPath%>/resSelect.ad'">전체 예약 목록</button>
-
+          <button class="btn btn-secondary btn-sm" onClick="location.href='<%=contextPath%>/resSelect.ad?today=<%=today%>'">금일 예약 목록</button>
+          <button class="btn btn-secondary btn-sm" onClick="location.href='<%=contextPath%>/resSelect.ad'">전체 예약 목록</button>
+			<br>
+			<br>
           <div class="card mb-4">  
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                최신 게시글
+                바베큐장 예약 리스트
             </div>
             <div class="card-body">
               
                 <form action="<%=contextPath%>/resDelete.ad" method="post">
-                  <button type="submit">선택 삭제</button>
                   
                 <table id="datatablesSimple">
                     <thead>
@@ -266,6 +266,9 @@ ArrayList<BbqReservation> list =  (ArrayList<BbqReservation>)request.getAttribut
                   
                     </tbody>
                 </table>
+                <div align="right" style="margin-top:20px;">
+         			<button type="submit" class="btn btn-danger btn-sm" style="align:right">선택 삭제</button>
+        		</div>
               </form>
               <script>
 

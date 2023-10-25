@@ -1,16 +1,21 @@
 package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.admin.model.service.AdminService;
+import com.kh.admin.model.vo.Board;
+
 /**
  * Servlet implementation class AdminBoardListController
  */
-@WebServlet("/list.ad")
+@WebServlet("/boardList.ad")
 public class AdminBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,10 +31,16 @@ public class AdminBoardListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String cgNo = request.getParameter("cg");
-		request.getRequestDispatcher("views/admin/adminBoardList.jsp").forward(request, response);
+
+		int cgNo = Integer.parseInt(request.getParameter("cg"));
 		
+		ArrayList<Board> list = new AdminService().selectBoardList(cgNo);
+	
+		request.setAttribute("list", list);
+		request.setAttribute("cgNo", cgNo);
+		
+		request.getRequestDispatcher("views/admin/adminBoardListView.jsp").forward(request, response);
+
 	}
 
 	/**

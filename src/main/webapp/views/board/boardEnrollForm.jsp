@@ -107,7 +107,7 @@
       <main id="main">
     
         <!-- ======= Breadcrumbs ======= -->
-        <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/365738.jpg');">
+        <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
           <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
     
             <h2>게시글 작성</h2>
