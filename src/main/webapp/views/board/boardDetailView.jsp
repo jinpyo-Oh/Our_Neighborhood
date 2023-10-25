@@ -118,7 +118,11 @@ a {
         <h2>게시글 조회</h2>
         <ol>
           <li><a href="index.html">메인 페이지</a></li>
+<<<<<<< HEAD
           <li><%=cgName%> 게시판</li>
+=======
+          <li>게시판</li>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
         </ol>
 
       </div>
@@ -335,7 +339,48 @@ a {
         	}
         </script>
         
+<<<<<<< HEAD
   
+=======
+        <div align="center">
+          <br><br><br>
+          <table id="reply-insert-area">
+          	<% if(loginUser != null) { %>
+          		<tr>
+	              <th>댓글쓰기</th>
+	            </tr>
+	            <tr>
+	              <td>
+	                <textarea id="replyContent"style="resize: none; width : 100%;" placeholder="댓글 내용을 입력해주세요."></textarea>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td align="right">
+	                <button type="submit" class="btn btn-sm" onclick="insertReply();">
+	                	작성하기
+	                </button>
+	              </td>
+	            </tr>
+	           
+            <% } else { %>
+            	 <tr>
+	              <th>댓글쓰기</th>
+	            </tr>
+	            <tr>
+	              <td>
+	                <textarea style="resize: none; width : 100%;" readonly> 로그인 후 이용 가능한 서비스입니다.</textarea>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td align="right">
+	                <button type="submit" class="btn btn-sm" disabled>작성하기</button>
+	              </td>
+	            </tr>
+            <% } %>
+          </table>
+
+        </div>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 
 
       </div>

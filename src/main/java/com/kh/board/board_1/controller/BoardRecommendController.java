@@ -68,7 +68,11 @@ public class BoardRecommendController extends HttpServlet {
 		}else { // 사진 게시글용
 			if(result > 0) {			// 응답데이터로 각각 넘기고 포워딩
 				
+<<<<<<< HEAD
 				request.getSession().setAttribute("alertMsg", "추천되었습니다.");
+=======
+				request.getSession().setAttribute("alertMsg", "추천되었습니다. 다시는 취소할수없습니다. 감사합니다.");
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 				response.sendRedirect(request.getContextPath() + "/imageDetail.bo?bno=" + boardNo+"&cg="+cgNo);
 				
 			} else {

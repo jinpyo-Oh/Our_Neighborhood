@@ -125,10 +125,13 @@
 	</entry>
 	
 	<entry key="wroteList">
+<<<<<<< HEAD
 	SELECT *
 		  FROM (
 		    SELECT ROWNUM RNUM, A.*
 		      FROM (
+=======
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 		
 		SELECT BOARD_NO, CG_NAME
 		             , BOARD_TITLE
@@ -142,9 +145,13 @@
 		          JOIN MEMBER USING (MEMBER_NO)
 		         WHERE B.BOARD_STATUS = 'Y'
 		         AND MEMBER_NO=?		
+<<<<<<< HEAD
 	 ) A
 		  )
 		 WHERE RNUM BETWEEN ? AND ?
+=======
+	
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 	
 	</entry>
 	

@@ -103,7 +103,10 @@ public class ImageBoardInsertController extends HttpServlet {
 							String originName = multiRequest.getOriginalFileName(key);
 							String changeName = multiRequest.getFilesystemName(key);
 							String filePath = "resources/img/board/imageBoard_upfiles/";
+<<<<<<< HEAD
 							
+=======
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 							int fileLevel = 0;
 							// file level
 							if(i == 1) { // 대표이미지일 경우

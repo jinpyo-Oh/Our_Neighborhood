@@ -58,7 +58,11 @@ public class ImageBoardUpdateController extends HttpServlet {
 			// 1_2. 전달된 파일을 저장시킬 서버의 경로 (String savePath)
 			// application scope 객체로부터 알아내기
 			// 배포되는 webapp 폴더를 기준으로 경로를 제시해서 알아내기
+<<<<<<< HEAD
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/img/board/imageBoard_upfiles/");
+=======
+			String savePath = request.getSession().getServletContext().getRealPath("/resources//");
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 			
 			// 2. MultipartRequest 객체 생성하기
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
@@ -133,7 +137,11 @@ public class ImageBoardUpdateController extends HttpServlet {
 				// (새로 넘어온 파일의 원본명, 수정명, 저장경로)
 				String originName = multiRequest.getOriginalFileName(key);
 				String changeName = multiRequest.getFilesystemName(key);
+<<<<<<< HEAD
 				String filePath = "resources/img/board/imageBoard_upfiles/";
+=======
+				String filePath = "resources/upfiles/lost_board_upfiles/";
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 				
 				int fileLevel = 0;
 				// file level
@@ -166,7 +174,11 @@ public class ImageBoardUpdateController extends HttpServlet {
 				// 1회성 알람문구를 담아
 				// 해당 게시글의 상세조회 페이지로 url 재요청
 				request.getSession().setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
+<<<<<<< HEAD
 				response.sendRedirect(request.getContextPath() + "/imageList.bo?bno=" + boardNo+"&cg=" +cgNo + "&currentPage=1");
+=======
+				response.sendRedirect(request.getContextPath() + "/lost.th?bno=" + boardNo+"&cg=" +cgNo);
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 			} else { // 실패
 				
 				// 에러문구를 담아

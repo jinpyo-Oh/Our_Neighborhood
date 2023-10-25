@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
     pageEncoding="UTF-8" import="com.kh.board.board_1.model.vo.Board,com.kh.common.model.vo.PageInfo,
 				 java.util.ArrayList"%>
 <%
@@ -9,6 +10,12 @@ int currentPage = pi.getCurrentPage();
 int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 int maxPage = pi.getMaxPage();
+=======
+    pageEncoding="UTF-8" import="com.kh.board.board_1.model.vo.Board,
+				 java.util.ArrayList"%>
+<%
+ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");	
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 %>
 <!DOCTYPE html>
 <html>
@@ -18,8 +25,14 @@ int maxPage = pi.getMaxPage();
 <style>
     .wrap {
     width : 1200px;
+<<<<<<< HEAD
     height : 800px;
     margin : auto;
+=======
+    height : 1000px;
+    margin : auto;
+    border : 1px solid lightgray;
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 }
 
 .eidtForm {
@@ -90,6 +103,7 @@ button[type="submit"] {
   font-size : 12px;
 }
 
+<<<<<<< HEAD
     .nav-area {
       background-color: #f4c005;
       width: 100%;
@@ -111,6 +125,27 @@ button[type="submit"] {
       box-sizing: border-box;  
     }
 
+=======
+.nav-area { 
+  background-color : #f4c005; 
+  width : 1200px;
+}
+.menu {
+  width: 1200px;
+  height:15px;
+  display : inline;
+  padding-left: 100px;
+  padding-right: 50px;
+}
+.menu a {
+  text-decoration : none;
+  color : white;
+  font-size : 20px;
+  font-weight : bold;
+  width : 100%;
+  
+}
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 .menu a:hover { background-color : darkgray; }
  table {
   border-collapse: collapse;
@@ -302,7 +337,11 @@ tbody #table-content:hover{
  <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
+<<<<<<< HEAD
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
+=======
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/chuncheonlakecity_940x350.jpg');">
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
         <h2>마이페이지</h2>
         <ol>
@@ -317,17 +356,31 @@ tbody #table-content:hover{
           <div class="nav-area" align="auto">
             <div class="menu"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
             <div class="menu"><a href="<%= contextPath %>/cost.me">관리비 조회</a></div>
+<<<<<<< HEAD
             <div class="menu"><a href="<%= contextPath %>/wrote.me?currentPage=1">내가 작성한 글</a></div>
             <div class="menu"><a href="<%= contextPath %>/deleteForm.me">회원탈퇴</a></div>
+=======
+            <div class="menu"><a href="<%= contextPath %>/wrote.me">내가 작성한 글</a></div>
+            <div class="menu"><a href="<%= contextPath %>/views/member/memberDeleteForm.jsp">회원탈퇴</a></div>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
           </div>
 
           <div class="container" data-aos="fade-up" data-aos-delay="100">
             
+<<<<<<< HEAD
         
             
              <!-- board list area -->
           <div id="board-list">
           	<br><br><br>
+=======
+          <div class="eidtForm">
+            <div class="eidtForm_2">
+            
+            
+             <!-- board list area -->
+          <div id="board-list">
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
               <div class="container">
                   <table class="board-table">
                       <thead>
@@ -341,13 +394,20 @@ tbody #table-content:hover{
                           <th scope="col" class="th-date">등록일</th>
                           <th scope="col" class="th-count">조회수</th>
                           <th scope="col" class="th-recommend">추천</th>
+<<<<<<< HEAD
                           <th scope="col" class="th-category">카테고리</th>
+=======
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
                       </tr>
                       </thead>
                       <tbody>
 						<% if(list.isEmpty()) { %>
 							<tr>
+<<<<<<< HEAD
 								<td colspan="8">
+=======
+								<td colspan="7">
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 									조회된 리스트가 없습니다.
 								</td>
 							</tr>
@@ -361,7 +421,10 @@ tbody #table-content:hover{
 	                      			<td><%= b.getCreateDate() %></td>
 	                      			<td><%= b.getCount() %></td>
 	                      			<td><%= b.getRecommend() %></td>
+<<<<<<< HEAD
 	                      			<td><%= b.getCgNo() %></td>
+=======
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 	                      		</tr>
 	                      	<% } %>
 						<% } %>
@@ -369,6 +432,7 @@ tbody #table-content:hover{
                   </table>
                   <script>
 		              $(function() {
+<<<<<<< HEAD
 		            	  
                     	$(".board-table>tbody>#table-content").click(function() {
                     		 
@@ -401,6 +465,12 @@ tbody #table-content:hover{
 	                		 
 	                		  
 	                		 
+=======
+                    $(".board-table>tbody>#table-content").click(function() {
+	                		  let bno = $(this).children().eq(0).text();
+	                		  console.log(bno);
+	                		  location.href = "<%= contextPath %>/#";
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 	                	  });
 			           });
 		              
@@ -408,6 +478,7 @@ tbody #table-content:hover{
 		            
                   <br><br>
                   
+<<<<<<< HEAD
                 
                 <div class="pageing-area" align="center">
                 <% if(currentPage != 1) { %>
@@ -416,15 +487,35 @@ tbody #table-content:hover{
                   <% for(int p = startPage; p <= endPage; p++) { %>
                   	<% if(p != currentPage) { %>
                   		<button class="paging-btn" onclick="location.href ='<%= contextPath %>/wrote.me?currentPage=<%= p %>'"></button>
+=======
+                <!-- 페이징바  
+                <div class="pageing-area" align="center">
+                <% if(currentPage != 1) { %>
+                  <button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo?cg=<%= cgNo %>&currentPage=<%= currentPage - 1 %>';">&lt;</button>
+				<% } %>
+                  <% for(int p = startPage; p <= endPage; p++) { %>
+                  	<% if(p != currentPage) { %>
+                  		<button class="paging-btn" onclick="location.href ='<%= contextPath %>/list.bo?cg=<%= cgNo %>&currentPage=<%= p %>'"><%= p %></button>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
                   	<% } else { %>
                   		<button class="paging-dis" disabled><%= p %></button>
                   	<% } %>
                   <% } %>
                 <% if(currentPage != maxPage) { %>  
+<<<<<<< HEAD
                   <button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/wrote.me?currentPage=<%= currentPage + 1 %>';">&gt;</button>
 				<% } %>
                 </div>
               
+=======
+                  <button class="paging-btn paging-arrow" onclick="location.href = '<%= contextPath %>/list.bo?cg=<%= cgNo %>&currentPage=<%= currentPage + 1 %>';">&gt;</button>
+				<% } %>
+                </div>
+                -->
+              </div>
+          </div> 
+             
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
              
              
              

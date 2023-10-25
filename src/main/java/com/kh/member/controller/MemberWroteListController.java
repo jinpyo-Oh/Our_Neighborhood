@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import com.kh.board.board_1.model.service.BoardService;
 import com.kh.board.board_1.model.vo.Board;
 import com.kh.common.model.vo.PageInfo;
+=======
+import com.kh.board.board_1.model.vo.Board;
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -35,6 +39,7 @@ public class MemberWroteListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+<<<<<<< HEAD
 		
 		int listCount;	 // 현재 총 게시글의 갯수
 		int currentPage; // 현재 페이지 (즉, 사용자가 요청한 페이지)
@@ -81,6 +86,12 @@ public class MemberWroteListController extends HttpServlet {
 		ArrayList<Board> list = new MemberService().wroteList(memberNo,pi);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
+=======
+		int memberNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+		ArrayList<Board> list = new MemberService().wroteList(memberNo);
+		request.setAttribute("list", list);
+		
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 		request.getRequestDispatcher("/views/member/myWroteList.jsp").forward(request, response);
 		
 		

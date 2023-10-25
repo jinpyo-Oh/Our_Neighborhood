@@ -46,7 +46,11 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
+<<<<<<< HEAD
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
+=======
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url(배경사진);">
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
         <h2><%=cgName %> 게시판</h2>

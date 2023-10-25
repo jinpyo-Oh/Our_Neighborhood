@@ -146,8 +146,13 @@ button[type="submit"] {
           <div class="nav-area" align="auto">
             <div class="menu"><a href="<%= contextPath %>/views/member/mypageView.jsp">회원정보수정</a></div>
             <div class="menu"><a href="<%= contextPath %>/cost.me">관리비 조회</a></div>
+<<<<<<< HEAD
             <div class="menu"><a href="<%= contextPath %>/wrote.me?currentPage=1">내가 작성한 글</a></div>
             <div class="menu"><a href="<%= contextPath %>/deleteForm.me">회원탈퇴</a></div>
+=======
+            <div class="menu"><a href="<%= contextPath %>/wrote.me">내가 작성한 글</a></div>
+            <div class="menu"><a href="<%= contextPath %>/views/member/memberDeleteForm.jsp">회원탈퇴</a></div>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
           </div>
 
           <div class="container" data-aos="fade-up" data-aos-delay="100">

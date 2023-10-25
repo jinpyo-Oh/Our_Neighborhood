@@ -37,10 +37,13 @@ public class ImageBoardListController extends HttpServlet {
 		
 				Member m = (Member)request.getSession().getAttribute("loginUser");
 				
+<<<<<<< HEAD
 				if(m!=null) {
 					
 				
 				
+=======
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 				String cgNo = request.getParameter("cg");
 		
 				// 페이징 처리
@@ -94,10 +97,13 @@ public class ImageBoardListController extends HttpServlet {
 				// 사진게시판 리스트 화면 포워딩
 				request.getRequestDispatcher("views/imageBoard/imageListView.jsp").forward(request, response);
 				
+<<<<<<< HEAD
 				}else{
 					response.sendRedirect(request.getContextPath());
 					request.getSession().setAttribute("alertMsg", "로그인 후 이용가능합니다.");
 				}
+=======
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 				
 				
 			}

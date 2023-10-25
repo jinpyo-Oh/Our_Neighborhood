@@ -382,7 +382,11 @@ public class MemberDao {
 		return cost;		
 	}
 	
+<<<<<<< HEAD
 	public ArrayList<Board> wroteList(Connection conn, int memberNo,PageInfo pi){
+=======
+	public ArrayList<Board> wroteList(Connection conn, int memberNo){
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -390,6 +394,7 @@ public class MemberDao {
 		ArrayList<Board> list = new ArrayList<>();
 		Board b = null;
 		
+<<<<<<< HEAD
 		// 쿼리문 완성
 		
 		
@@ -403,6 +408,11 @@ public class MemberDao {
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 			
+=======
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,memberNo);
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

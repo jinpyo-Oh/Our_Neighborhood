@@ -50,8 +50,13 @@ thead {
 }
 
 
+<<<<<<< HEAD
 thead th, thead td, tbody th, tbody td {
   border-bottom: 1px solid rgb(226, 220, 220);
+=======
+thead th, thead td {
+  border-bottom: 1px dotted lightgray;
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 }
   
  thead td, thead th {
@@ -95,7 +100,11 @@ a {
 		  
   /* 이미지 영역 사이즈 조절 */
     .swiper {
+<<<<<<< HEAD
         width: 500px;
+=======
+        width: 900px;
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
         height: 300px;
     }
 
@@ -126,7 +135,11 @@ a {
     
 
     <!-- ======= Breadcrumbs ======= -->
+<<<<<<< HEAD
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('./resources/img/board/apartmentpic/apartmentpic.jpg');">
+=======
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/breadcrumbs-bg.jpg');">
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
         <h2>게시글 조회</h2>
@@ -151,6 +164,7 @@ a {
         <table  align="center" >
             <thead>
             <tr>
+<<<<<<< HEAD
                 <th style="text-align : center;" >제목</th>
                 <td colspan="3"><h3><%= b.getBoardTitle() %></h3></td>
             </tr>
@@ -159,14 +173,28 @@ a {
                 <th style="width : 10%; text-align : center;">작성자</th>
                 <td style="width : 40%;"><%= b.getMemberNo() %></td>
                 <th style="width : 10%; text-align : center;">작성일</th>
+=======
+                <th>제목</th>
+                <td colspan="3"><%= b.getBoardTitle() %></td>
+            </tr>
+
+            <tr>
+                <th style="width : 10%;">작성자</th>
+                <td style="width : 40%;"><%= b.getMemberId() %></td>
+                <th style="width : 10%;">작성일</th>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
                 <td style="width : 40%;" text-align: right; padding-right: 50px;"><%= b.getCreateDate() %></td>
             </tr>
           </thead>
           <tbody>
           	<tr>
           	<tr>
+<<<<<<< HEAD
               <th style="text-align : center; background-color: #73685d;">
               
+=======
+              <th>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
                 사진
               </th>
                 <td colspan="3"">
@@ -219,6 +247,7 @@ a {
                     }); 
           	                    </script>
             <tr>
+<<<<<<< HEAD
                 <th style="text-align : center; height : 300px; background-color : #73685d">내용</th>
                 <td colspan="3" class="board-content">
                   <%= b.getBoardContent() %>
@@ -240,6 +269,24 @@ a {
           <div style="float : right; padding-right : 180px; ">
           <button id="reco" class="btn btn-warning" >👍</button>
           </div>
+=======
+                <th>내용</th>
+                <td colspan="3" class="board-content">
+                  <%= b.getBoardContent() %>
+                </td>
+              
+            </tr>
+            <tr>
+              <td colspan="4" style="text-align: right;">
+                <span>조회수 : <%= b.getCount() %></span>
+                <span>추천  : <%= b.getRecommend() %></span>
+              </td>
+            </tr>
+            </tbody>  
+        </table>
+        <br>
+        <button id="reco" class="btn btn-warning">추천</button>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
          <input type="hidden" name="boardNo" value=<%= b.getBoardNo() %>>
           <br><br>
   
@@ -256,7 +303,11 @@ a {
                 
                 </script>
                 
+<<<<<<< HEAD
           <div style="padding-right: 7px;" align="center">
+=======
+          <div style="padding-right: 7px;" align="right">
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
             <a href="<%= contextPath %>/imageList.bo?cg=<%=cgNo %>&currentPage=1" class="btn btn-sm" >목록가기</a>
             <input type="hidden" name="memberNo" value=<%= b.getMemberNo() %>>
             
@@ -271,6 +322,7 @@ a {
         </div>
         <hr>
         
+<<<<<<< HEAD
         <div align="center">
           <br><br><br>
           <table id="reply-insert-area">
@@ -311,6 +363,9 @@ a {
         </div>
 
         <br>
+=======
+ 
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
         
         
         <table align="center" style="border-bottom: 1px solid black;" id="reply-area">
@@ -386,6 +441,7 @@ a {
       						
       						resultStr += "<tr style='border-bottom: 1px dotted lightgray; border-top: 1px solid black;'>"
       								   + "<input type='hidden' name='replyNo' value='"+list[i].replyNo+"'>"
+<<<<<<< HEAD
 				      			       +     "<td style='width : 150px;'>" + '작성자 : '+"<b>"+list[i].memberId+"</b>" + "</td>"
 				      			       +     "<td>" + '작성일 : '+list[i].createDate + "</td>"
 				      			       +     "<td>"
@@ -403,6 +459,23 @@ a {
 				      			       +   "</tr>"
 				      			       +   "<tr>"
 				      			       +     "<td colspan='3' style='height : 50px' >"+ list[i].replyContent + "</td>"
+=======
+				      			       +     "<td style='width : 150px;'>" + list[i].memberId + "</td>"
+				      			       +     "<td>" + list[i].createDate + "</td>"
+				      			       +     "<td>"
+				      			       +       "<div align='right'>";
+				      			       
+				      			       // 자바스크립트의 if문
+				      			       if((<%= loginUser.getMemberNo() %> == list[i].memberNo) || (<%= loginUser.getMemberNo() %> == 1)) { 
+      			    		resultStr +=  "<a onclick='deleteReply("+list[i].replyNo+");' class='btn btn-sm'>삭제하기</a>"
+				      			       }
+				      			       
+				      		resultStr +=       "</div>"
+				      			       +     "</td>"
+				      			       +   "</tr>"
+				      			       +   "<tr>"
+				      			       +     "<td colspan='3'>" + list[i].replyContent + "</td>"
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 				      			       +   "</tr>";
       					}	
       					$("#reply-area").html(resultStr)
@@ -416,7 +489,48 @@ a {
         	}
         </script>
         
+<<<<<<< HEAD
 
+=======
+        <div align="center">
+          <br><br><br>
+          <table id="reply-insert-area">
+          	<% if(loginUser != null) { %>
+          		<tr>
+	              <th>댓글쓰기</th>
+	            </tr>
+	            <tr>
+	              <td>
+	                <textarea id="replyContent"style="resize: none; width : 100%;" placeholder="댓글 내용을 입력해주세요."></textarea>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td align="right">
+	                <button type="submit" class="btn btn-sm" onclick="insertReply();">
+	                	작성하기
+	                </button>
+	              </td>
+	            </tr>
+	           
+            <% } else { %>
+            	 <tr>
+	              <th>댓글쓰기</th>
+	            </tr>
+	            <tr>
+	              <td>
+	                <textarea style="resize: none; width : 100%;" readonly> 로그인 후 이용 가능한 서비스입니다.</textarea>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td align="right">
+	                <button type="submit" class="btn btn-sm" disabled>작성하기</button>
+	              </td>
+	            </tr>
+            <% } %>
+          </table>
+
+        </div>
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 
 
 

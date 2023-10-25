@@ -143,9 +143,15 @@ public class MemberService {
 		
 	}
 	
+<<<<<<< HEAD
 	public ArrayList<Board> wroteList(int memberNo,PageInfo pi){
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Board> list = new MemberDao().wroteList(conn,memberNo,pi);
+=======
+	public ArrayList<Board> wroteList(int memberNo){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Board> list = new MemberDao().wroteList(conn,memberNo);
+>>>>>>> 9b89578e342d56ee19ead93eafe361e9ea685d52
 		
 		JDBCTemplate.close(conn);
 		
