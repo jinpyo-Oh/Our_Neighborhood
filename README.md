@@ -79,14 +79,14 @@ Java, Jsp, MyBatis, Oracle, Javascript, JQuery
 <br>
 <br>
 
-**로그인화면**
+**로그인화면** <br>
 ![login](https://github.com/Afdddd/Our_Neighborhood/assets/109032883/5152ee3e-28e8-48fd-8ab5-afb2a982aa20)
 
 
 <br>
 <br>
 
-**바베큐장 시설 예약, 개인 조회, 삭제, 선택한 날짜 예약 조회**
+**바베큐장 시설 예약, 개인 조회, 삭제, 선택한 날짜 예약 조회** <br>
 ![Untitled 1](https://github.com/Afdddd/Our_Neighborhood/assets/109032883/8b12d4dd-d998-45c9-904a-a93e9737d150)
 
 
