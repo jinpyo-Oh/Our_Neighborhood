@@ -38,7 +38,7 @@ Java, Jsp, MyBatis, Oracle, Javascript, JQuery
 <br>
 <br>
 
-# 💡아키텍쳐 / ERD
+# 💡ERD
 ---
 ![erd](https://github.com/Afdddd/Our_Neighborhood/assets/109032883/c0d5ced2-dec9-4ed1-a35a-479fe8a4b0c4)
 
