@@ -10,10 +10,7 @@
 ![neighborhood](https://github.com/Afdddd/Our_Neighborhood/assets/109032883/28674f29-8cfe-4e16-be66-02f808e3e9fc)
 
 
-# 📖 프로젝트 소개
-
-<br>
-
+# 📖 프로젝트 소개 | Project Introduction
 ## Our Neighborhood
 ✅ 입주민의 스마트 라이프를 위한 생활편의 서비스와 관리사무소의 업무처리를 돕는 스마트 웹페이지
 
