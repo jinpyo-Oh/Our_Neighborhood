@@ -11,7 +11,7 @@
 
 
 # 📖 프로젝트 소개 | Project Introduction
-## Our Neighborhood
+<h2>Our Neighborhood</h2> 
 ✅ 입주민의 스마트 라이프를 위한 생활편의 서비스와 관리사무소의 업무처리를 돕는 스마트 웹페이지
 
 ## Our Neighborhood의 핵심서비스
