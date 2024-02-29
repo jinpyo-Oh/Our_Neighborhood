@@ -12,7 +12,6 @@
 
 # 📖 프로젝트 소개
 
----
 <br>
 
 ## Our Neighborhood
