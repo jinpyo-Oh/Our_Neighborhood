@@ -6,8 +6,6 @@
 
 <br>
 
----
-
 ![neighborhood](https://github.com/Afdddd/Our_Neighborhood/assets/109032883/28674f29-8cfe-4e16-be66-02f808e3e9fc)
 
 
