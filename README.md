@@ -26,12 +26,16 @@
 ## 🙂 팀원 | Member
 ### 팀장 오진표 | 팀원 김인엽 | 팀원 한영욱 | 팀원 전희재 | 팀원 정은지 
 <br><br>
+
 # 🛠 기술스택
 <br><br>
 ---
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
 <img src="https://img.shields.io/badge/jsp-004027?style=for-the-badge&logo=jameson&logoColor=white">
-Java, Jsp, MyBatis, Oracle, Javascript, JQuery
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+<img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
+<img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"> 
+<img src="https://img.shields.io/badge/mybatis-0C0C0E?style=for-the-badge&logo=bookmyshow&logoColor=white">
 
 <br>
 <br>
