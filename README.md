@@ -28,17 +28,27 @@
 <br><br>
 
 # 🛠 기술스택
-<br><br>
+<br>
 ---
+기술스택
 <div>
   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
   <img src="https://img.shields.io/badge/jsp-004027?style=for-the-badge&logo=jameson&logoColor=white">
   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
   <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
   <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"> 
-  <img src="https://img.shields.io/badge/mybatis-0C0C0E?style=for-the-badge&logo=bookmyshow&logoColor=white">    
+  <img src="https://img.shields.io/badge/mybatis-0C0C0E?style=for-the-badge&logo=bookmyshow&logoColor=white">
+  <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
+  <img src="https://img.shields.io/badge/jsp-004027?style=for-the-badge&logo=jameson&logoColor=white">
 </div>
 <br>
+개발환경
+<div>
+  <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white">
+  <img src="https://img.shields.io/badge/eclipseide-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white">
+  <img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">
+</div>
 <br>
 
 # 💡ERD
