@@ -29,7 +29,8 @@
 # 🛠 기술스택
 <br><br>
 ---
-
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/jsp-004027?style=for-the-badge&logo=jameson&logoColor=white">
 Java, Jsp, MyBatis, Oracle, Javascript, JQuery
 
 <br>
