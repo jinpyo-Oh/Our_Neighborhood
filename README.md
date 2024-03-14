@@ -24,9 +24,11 @@
 
 <br><br>
 
+## 🙂 팀원 | Member
+### 팀장 이상현 | 팀원 오진표 | 팀원 이경선 | 팀원 김찬영 | 팀원 천정인 
 # 🛠 기술스택
 ---
-
+<br><br>
 
 Java, Jsp, MyBatis, Oracle, Javascript, JQuery
 
